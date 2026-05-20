@@ -9,6 +9,7 @@ import { ProcessSection } from "@/components/sections/process";
 import { CtaFinal } from "@/components/sections/cta-final";
 import { BackgroundOrbs } from "@/components/backgrounds/orbs";
 import { ParticleField } from "@/components/backgrounds/particle-field";
+import { CenterVignette } from "@/components/backgrounds/center-vignette";
 import { StickyCta } from "@/components/sticky-cta";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
     <>
       <ParticleField count={140} />
       <BackgroundOrbs />
+      <CenterVignette />
       <Nav />
       <StickyCta />
 

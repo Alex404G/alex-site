@@ -167,8 +167,15 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
           </div>
 
           <div
-            className="mt-8 font-display text-[clamp(72px,12vw,180px)] font-black leading-[0.85] tracking-[-0.05em]"
-            style={{ color: `rgb(${pillar.rgb})` }}
+            className={`mt-8 font-display font-black leading-[0.88] tracking-[-0.045em] whitespace-nowrap ${
+              pillar.big.raw
+                ? "text-[clamp(48px,7.2vw,108px)]"
+                : "text-[clamp(72px,11vw,168px)]"
+            }`}
+            style={{
+              color: `rgb(${pillar.rgb})`,
+              textShadow: `0 0 80px rgba(${pillar.rgb}, 0.35)`,
+            }}
           >
             {pillar.big.raw ? (
               <span>{pillar.big.raw}</span>

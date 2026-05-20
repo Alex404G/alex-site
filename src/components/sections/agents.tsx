@@ -33,7 +33,7 @@ export function AgentsSection() {
       id="agents"
       ref={sectionRef}
       className="relative w-full"
-      style={{ height: `${AGENTS.length * 28 + 80}vh` }}
+      style={{ height: `${AGENTS.length * 19 + 70}vh` }}
     >
       <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden">
         {/* Header */}
