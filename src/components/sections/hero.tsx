@@ -22,20 +22,35 @@ export function Hero() {
       {/* Background shader */}
       <div className="absolute inset-0 -z-10">
         <MeshShader className="relative h-full w-full" />
-        {/* Dark mask at bottom to blend into next section */}
+
+        {/* Central darkening — keeps bloom at edges, reads the title */}
         <div
           aria-hidden
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at center, transparent 0%, rgba(2,3,10,0.35) 55%, rgba(2,3,10,0.92) 100%)",
+              "radial-gradient(ellipse 70% 55% at 50% 48%, rgba(2,3,10,0.78) 0%, rgba(2,3,10,0.55) 35%, rgba(2,3,10,0.18) 70%, transparent 100%)",
           }}
         />
+
+        {/* Soft horizontal void band behind the title block */}
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 h-40"
+          className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[58%]"
           style={{
-            background: "linear-gradient(to bottom, transparent, var(--void-0))",
+            background:
+              "radial-gradient(ellipse 60% 100% at 50% 50%, rgba(2,3,10,0.55) 0%, transparent 75%)",
+            filter: "blur(20px)",
+          }}
+        />
+
+        {/* Bottom blend into next section */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-56"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, rgba(2,3,10,0.6) 50%, var(--void-0) 100%)",
           }}
         />
       </div>

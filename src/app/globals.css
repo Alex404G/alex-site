@@ -104,12 +104,24 @@ body {
 .font-mono { font-family: var(--font-mono); letter-spacing: 0; }
 
 .text-gradient-sig {
-  background: var(--grad-signature);
+  /* White luminance peak in the middle → readable on bright AND dark BG */
+  background: linear-gradient(
+    115deg,
+    #5B6BFF 0%,
+    #B6BFFF 24%,
+    #FFFFFF 46%,
+    #FFFFFF 54%,
+    #D5A8FF 74%,
+    #B845E8 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradient-shift 12s linear infinite;
+  background-size: 220% 220%;
+  animation: gradient-shift 14s linear infinite;
+  /* Soft halo to lift the text off any bloom behind it */
+  filter: drop-shadow(0 0 28px rgba(91, 107, 255, 0.35))
+          drop-shadow(0 4px 18px rgba(2, 3, 10, 0.55));
 }
 
 @keyframes gradient-shift {
