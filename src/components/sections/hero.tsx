@@ -58,7 +58,7 @@ export function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <h1 className="h-display mt-8">
+        <h1 className="t-display mt-8">
           {lines.map((line, lineIdx) => (
             <span key={lineIdx} className="block">
               {line.map((word, i) => {
@@ -86,7 +86,7 @@ export function Hero() {
 
         {/* Subtitle */}
         <motion.p
-          className="h-2 mt-7 max-w-3xl text-text-1"
+          className="t-h2 mt-8 max-w-3xl text-text-1"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.2 }}
@@ -96,7 +96,7 @@ export function Hero() {
 
         {/* Body */}
         <motion.p
-          className="body-lg mt-6 max-w-xl"
+          className="body-md mt-8 max-w-xl text-[15.5px]"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.4 }}

@@ -39,7 +39,7 @@ export function ConceptionSection() {
           className="max-w-3xl"
         >
           <span className="kicker">03 / Conception de sites</span>
-          <h2 className="h-1 mt-3">
+          <h2 className="t-h1 mt-3">
             <span className="text-gradient-sig">Ce site est la démo.</span>
           </h2>
           <p className="body-lg mt-5 max-w-xl">

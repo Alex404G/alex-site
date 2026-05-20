@@ -53,7 +53,7 @@ export function CtaFinal() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="h-display"
+          className="t-display"
         >
           <span className="text-gradient-sig">On en parle ?</span>
         </motion.h2>

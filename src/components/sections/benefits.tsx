@@ -102,7 +102,7 @@ export function BenefitsSection() {
           className="max-w-3xl"
         >
           <span className="kicker">02 / Bénéfices</span>
-          <h2 className="h-1 mt-3">
+          <h2 className="t-h1 mt-3">
             Du temps. De l'argent.{" "}
             <span className="text-gradient-sig">Des clients.</span>
           </h2>

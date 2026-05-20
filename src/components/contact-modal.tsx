@@ -139,7 +139,7 @@ function ContactModal() {
                 <div className="grid h-14 w-14 place-items-center rounded-full" style={{ background: "var(--grad-signature)" }}>
                   <Check className="h-6 w-6 text-white" strokeWidth={3} />
                 </div>
-                <h3 className="h-3 mt-6 text-text-1">Message envoyé</h3>
+                <h3 className="t-h3 mt-6 text-text-1">Message envoyé</h3>
                 <p className="body-md mt-3 max-w-sm">
                   Je te réponds dans la journée. Si c'est urgent, par mail direct :{" "}
                   <a
@@ -160,7 +160,7 @@ function ContactModal() {
             ) : (
               <>
                 <span className="kicker">Discuter du projet</span>
-                <h3 id="contact-title" className="h-2 mt-2 text-text-1">
+                <h3 id="contact-title" className="t-h2 mt-2 text-text-1">
                   On en parle ?
                 </h3>
                 <p className="body-md mt-3">

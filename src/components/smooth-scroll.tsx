@@ -9,11 +9,11 @@ export function SmoothScroll() {
     if (reduced) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.85,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.4,
+      wheelMultiplier: 1.35,
+      touchMultiplier: 1.6,
     });
 
     function raf(time: number) {

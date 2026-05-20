@@ -17,7 +17,7 @@ export function MarqueeSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="h-2 max-w-3xl mx-auto"
+          className="t-h2 max-w-3xl mx-auto"
         >
           Et <span className="text-gradient-sig">des milliers d'autres</span> possibilités —
         </motion.h3>
