@@ -105,206 +105,87 @@ export function AgentsSection() {
 }
 
 /* ============================================================
-   Card — 4 layout variants cycling, each with a unique
-   decorative pattern in its signature color.
+   Card — minimaliste : un seul accent coloré, typographie nette.
    ============================================================ */
 
 function Card({ agent, index }: { agent: AgentCard; index: number }) {
   const Icon =
     (Lucide as unknown as Record<
       string,
-      React.ComponentType<{ className?: string; strokeWidth?: number }>
+      React.ComponentType<{ className?: string; strokeWidth?: number; style?: React.CSSProperties }>
     >)[agent.icon] || Lucide.Sparkles;
   const sigColor = SIG_COLORS[agent.sig - 1];
   const rgb = SIG_RGB[agent.sig];
-  const variant = index % 4;
 
   return (
     <motion.article
-      className="group relative flex h-[440px] w-[320px] flex-shrink-0 flex-col overflow-hidden rounded-[28px] p-6 md:h-[460px] md:w-[360px]"
-      whileHover={{ y: -8 }}
+      className="group relative flex h-[420px] w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[24px] p-6 md:h-[440px] md:w-[340px]"
+      whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 240, damping: 22 }}
       style={{
-        background:
-          "linear-gradient(165deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 60%)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        backdropFilter: "blur(28px) saturate(140%)",
-        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.08), 0 30px 80px -20px rgba(${rgb}, 0.42)`,
+        background: "rgba(255,255,255,0.035)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        backdropFilter: "blur(24px) saturate(130%)",
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.05), 0 24px 60px -20px rgba(${rgb}, 0.32)`,
       }}
     >
-      <Decoration variant={variant} rgb={rgb} />
-
-      {/* Inner glow corner */}
+      {/* Single subtle accent — corner glow only */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-24 -top-24 h-60 w-60 rounded-full transition-opacity duration-500 group-hover:opacity-90"
+        className="pointer-events-none absolute -right-28 -top-28 h-64 w-64 rounded-full transition-opacity duration-500 group-hover:opacity-80"
         style={{
-          background: `radial-gradient(closest-side, rgba(${rgb}, 0.45), transparent 70%)`,
-          filter: "blur(24px)",
-          opacity: 0.55,
+          background: `radial-gradient(closest-side, rgba(${rgb}, 0.35), transparent 70%)`,
+          filter: "blur(30px)",
+          opacity: 0.4,
         }}
       />
 
-      {/* Top row */}
+      {/* Top row — category + number */}
       <div className="relative z-10 flex items-center justify-between">
         <span
-          className="rounded-full border px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.16em]"
-          style={{
-            borderColor: `rgba(${rgb}, 0.4)`,
-            background: `rgba(${rgb}, 0.12)`,
-            color: `rgb(${rgb})`,
-          }}
+          className="font-mono text-[10px] font-medium uppercase tracking-[0.18em]"
+          style={{ color: `rgb(${rgb})` }}
         >
           {agent.category}
         </span>
         <span className="font-mono text-[10px] tracking-[0.18em] text-text-3">
-          {String(index + 1).padStart(2, "0")} / {String(AGENTS.length).padStart(2, "0")}
+          {String(index + 1).padStart(2, "0")}
         </span>
       </div>
 
-      {/* Icon */}
-      <div className="relative z-10 mt-7">
-        <div
-          className="relative grid h-14 w-14 place-items-center rounded-2xl"
-          style={{
-            background: `linear-gradient(135deg, rgba(${rgb}, 0.4), rgba(${rgb}, 0.08))`,
-            border: `1px solid rgba(${rgb}, 0.35)`,
-            boxShadow: `0 0 40px -8px rgba(${rgb}, 0.7), inset 0 1px 0 rgba(255,255,255,0.18)`,
-          }}
-        >
-          <Icon className="h-6 w-6 text-white" strokeWidth={1.6} />
-          <span
-            aria-hidden
-            className="absolute -right-1 -top-1 h-2 w-2 rounded-full"
-            style={{
-              background: sigColor,
-              boxShadow: `0 0 12px ${sigColor}`,
-            }}
-          />
-        </div>
+      {/* Icon — minimal, no badge, just the symbol in sig color */}
+      <div className="relative z-10 mt-8">
+        <Icon
+          className="h-8 w-8"
+          strokeWidth={1.4}
+          style={{ color: sigColor }}
+        />
       </div>
 
       {/* Title */}
-      <h3 className="relative z-10 mt-5 font-display text-[22px] font-medium leading-[1.15] tracking-[-0.015em] text-text-1">
+      <h3 className="relative z-10 mt-6 font-display text-[21px] font-medium leading-[1.18] tracking-[-0.015em] text-text-1">
         {agent.title}
       </h3>
 
-      {/* Hook */}
-      <p
-        className="relative z-10 mt-2.5 font-display text-[15px] font-medium italic leading-snug"
-        style={{ color: `rgba(${rgb}, 0.95)` }}
-      >
-        “{agent.hook}”
-      </p>
-
       {/* Utility */}
-      <p className="relative z-10 mt-3 text-[13.5px] leading-[1.5] text-text-2">
+      <p className="relative z-10 mt-3 text-[13.5px] leading-[1.55] text-text-2">
         {agent.utility}
       </p>
 
-      {/* Stat strip */}
-      <div className="relative z-10 mt-auto">
-        <div
-          aria-hidden
-          className="mb-3 h-px w-full"
-          style={{
-            background: `linear-gradient(to right, rgba(${rgb}, 0.5), transparent)`,
-          }}
-        />
-        <div className="flex items-baseline gap-3">
+      {/* Stat strip — bottom */}
+      <div className="relative z-10 mt-auto pt-5">
+        <div className="flex items-baseline gap-2.5">
           <span
-            className="font-display text-[28px] font-bold leading-none tracking-[-0.02em]"
-            style={{ color: sigColor, textShadow: `0 0 24px rgba(${rgb}, 0.5)` }}
+            className="font-display text-[26px] font-bold leading-none tracking-[-0.02em]"
+            style={{ color: sigColor }}
           >
             {agent.statValue}
           </span>
-          <span className="text-[11px] leading-tight text-text-2">
+          <span className="text-[11px] leading-tight text-text-3">
             {agent.statLabel}
           </span>
         </div>
       </div>
     </motion.article>
-  );
-}
-
-/* ============================================================
-   Decoration — 4 patterns
-   ============================================================ */
-
-function Decoration({ variant, rgb }: { variant: number; rgb: string }) {
-  if (variant === 0) {
-    return (
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-60"
-        style={{
-          backgroundImage: `radial-gradient(rgba(${rgb}, 0.55) 1px, transparent 1px)`,
-          backgroundSize: "18px 18px",
-          maskImage:
-            "radial-gradient(ellipse at 100% 0%, black 0%, transparent 60%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at 100% 0%, black 0%, transparent 60%)",
-        }}
-      />
-    );
-  }
-  if (variant === 1) {
-    return (
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-45"
-        style={{
-          backgroundImage: `repeating-linear-gradient(135deg, rgba(${rgb}, 0.3) 0px, rgba(${rgb}, 0.3) 1px, transparent 1px, transparent 14px)`,
-          maskImage: "linear-gradient(180deg, transparent 30%, black 100%)",
-          WebkitMaskImage:
-            "linear-gradient(180deg, transparent 30%, black 100%)",
-        }}
-      />
-    );
-  }
-  if (variant === 2) {
-    return (
-      <svg
-        aria-hidden
-        className="pointer-events-none absolute -right-16 -bottom-16 h-72 w-72 opacity-55"
-        viewBox="0 0 200 200"
-      >
-        {[40, 65, 90, 115, 140].map((r, i) => (
-          <circle
-            key={r}
-            cx="100"
-            cy="100"
-            r={r}
-            fill="none"
-            stroke={`rgba(${rgb}, ${0.55 - i * 0.08})`}
-            strokeWidth="1"
-          />
-        ))}
-      </svg>
-    );
-  }
-  // variant 3 — waveform bars
-  return (
-    <svg
-      aria-hidden
-      className="pointer-events-none absolute -bottom-2 left-6 right-6 h-24 opacity-55"
-      viewBox="0 0 220 100"
-      preserveAspectRatio="none"
-    >
-      {Array.from({ length: 32 }).map((_, i) => {
-        const h = 18 + Math.sin(i * 0.7) * 28 + (i % 3 === 0 ? 18 : 0);
-        return (
-          <rect
-            key={i}
-            x={i * 7}
-            y={100 - h}
-            width="2"
-            height={h}
-            fill={`rgba(${rgb}, ${0.32 + (i % 4) * 0.12})`}
-            rx="1"
-          />
-        );
-      })}
-    </svg>
   );
 }

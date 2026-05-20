@@ -182,14 +182,17 @@ export function CtaFinal() {
       <footer className="mt-32 border-t border-white/5">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-6 py-10 text-sm text-text-3 md:flex-row md:items-center">
           <div className="flex items-center gap-3">
+            <span className="font-display text-base font-bold tracking-[-0.02em] text-text-1">
+              Alex Gil
+            </span>
             <span
               aria-hidden
-              className="grid h-6 w-6 place-items-center rounded-full"
-              style={{ background: "var(--grad-signature)" }}
-            >
-              <span className="font-display text-[10px] font-black text-white">A</span>
-            </span>
-            <span className="font-display text-text-2">Alex Gil</span>
+              className="h-1.5 w-1.5 rounded-full"
+              style={{
+                background: "var(--grad-signature)",
+                boxShadow: "0 0 10px rgba(139,92,246,0.7)",
+              }}
+            />
             <span className="hidden md:inline">·</span>
             <span>Auto-entrepreneur · Languedoc, France</span>
           </div>
