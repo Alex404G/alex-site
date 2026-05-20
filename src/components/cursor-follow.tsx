@@ -32,12 +32,12 @@ export function CursorFollow() {
       {/* Soft radial glow that follows cursor */}
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[55] h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        className="pointer-events-none fixed left-0 top-0 z-[55] h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
           x: sx,
           y: sy,
           background:
-            "radial-gradient(circle, rgba(139,92,246,0.10) 0%, rgba(91,107,255,0.06) 40%, rgba(0,0,0,0) 70%)",
+            "radial-gradient(circle, rgba(139,92,246,0.10) 0%, rgba(91,107,255,0.06) 45%, rgba(0,0,0,0) 75%)",
           mixBlendMode: "screen",
         }}
       />

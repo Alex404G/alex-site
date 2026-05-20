@@ -15,7 +15,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "rh-1",
     category: "RH",
-    title: "Copilote d'entretien",
+    title: "Assistant d'entretien live",
     hook: "Tu écoutes mieux quand tu ne prends pas de notes.",
     utility:
       "Transcription temps réel, relances suggérées au bon moment, récap structuré /20 envoyé à la fin.",
@@ -27,7 +27,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "rh-2",
     category: "RH",
-    title: "Trieur de CV",
+    title: "Sélection auto de CV",
     hook: "Le bon profil ne passe plus à travers.",
     utility:
       "Scoring multi-critères sur tes vrais besoins. Shortlist auto, justification claire candidat par candidat.",
@@ -39,7 +39,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "rh-3",
     category: "RH",
-    title: "Onboarding intelligent",
+    title: "Onboarding automatisé",
     hook: "Le nouveau démarre vraiment lundi.",
     utility:
       "Parcours auto, ressources contextuelles, check-ins J+7 / J+30. Plus jamais oublié dans un coin.",
@@ -53,7 +53,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "compta-1",
     category: "COMPTA",
-    title: "Lecteur de factures",
+    title: "Lecture & tri des factures",
     hook: "Plus jamais de « qui a payé quoi ».",
     utility:
       "OCR multi-format + extraction structurée + routage automatique vers la bonne BAL et le bon dossier.",
@@ -65,7 +65,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "compta-2",
     category: "COMPTA",
-    title: "Relanceur de paiements",
+    title: "Relances de paiements auto",
     hook: "Tes encaissements n'attendent plus.",
     utility:
       "Détection des retards, brouillons mail personnalisés selon l'historique client, escalade graduée.",
@@ -77,7 +77,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "compta-3",
     category: "COMPTA",
-    title: "Générateur de devis & contrats",
+    title: "Devis & contrats automatiques",
     hook: "Le devis est déjà parti pendant qu'ils réfléchissent.",
     utility:
       "Templates dynamiques branchés sur ton CRM, ta grille tarifaire, tes conditions. Tu valides, ça part.",
@@ -91,7 +91,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "com-1",
     category: "COMMERCIAL",
-    title: "Prospecteur multi-canal",
+    title: "Prospection multi-canal",
     hook: "Mail, LinkedIn, téléphone — un seul cerveau.",
     utility:
       "Séquences personnalisées par persona, A/B test natif, suivi unifié des interactions.",
@@ -103,7 +103,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "com-2",
     category: "COMMERCIAL",
-    title: "Suivi pipeline",
+    title: "Suivi commercial automatique",
     hook: "Tu ne perds plus un deal par oubli.",
     utility:
       "Relances intelligentes, alertes blocage, récap hebdo automatique. Le pipe travaille même la nuit.",
@@ -115,8 +115,8 @@ export const AGENTS: AgentCard[] = [
   {
     id: "com-3",
     category: "COMMERCIAL",
-    title: "Chatbot client",
-    hook: "24/7, dans ton ton, sur tes données.",
+    title: "Chatbot service client 24/7",
+    hook: "Dans ton ton, sur tes données, en continu.",
     utility:
       "FAQ contextuelle, recherche dans tes docs, escalade humaine fluide quand c'est nécessaire.",
     statValue: "60%",
@@ -127,7 +127,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "com-4",
     category: "COMMERCIAL",
-    title: "Roue de la fortune avis",
+    title: "Génération d'avis Google",
     hook: "L'avis 5★ devient un cadeau gagné.",
     utility:
       "Mécanique gamifiée multilingue + back-office terrain. Code QR, tirage pondéré, anti-fraude.",
@@ -141,7 +141,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "mkt-1",
     category: "MARKETING",
-    title: "Auto-publication réseaux",
+    title: "Publication auto multi-réseaux",
     hook: "Tu postes une fois, chaque canal s'occupe du reste.",
     utility:
       "Adaptation par plateforme, images générées dans ton univers, planification programmée.",
@@ -153,7 +153,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "mkt-2",
     category: "MARKETING",
-    title: "Veille concurrence",
+    title: "Veille concurrence automatique",
     hook: "Tu sais ce qu'ils font avant qu'ils l'annoncent.",
     utility:
       "Scraping multi-sources (prix, posts, offres, recrutements), récap IA hebdomadaire.",
@@ -165,7 +165,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "mkt-3",
     category: "MARKETING",
-    title: "Rédacteur SEO",
+    title: "Rédaction d'articles SEO",
     hook: "Les articles que Google et les humains aiment.",
     utility:
       "Brief → article structuré + méta + maillage interne + variantes. Ton de la marque préservé.",
@@ -179,7 +179,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "ops-1",
     category: "OPS",
-    title: "Gestionnaire de mails",
+    title: "Tri & réponse de mails",
     hook: "Ta boîte se classe toute seule.",
     utility:
       "Tri par projet, réponses brouillon, classification urgents, alertes contextuelles.",
@@ -191,7 +191,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "ops-2",
     category: "OPS",
-    title: "Rangeur de drive",
+    title: "Classement & recherche Drive",
     hook: "Tu cherches, il trouve. Et il range avant.",
     utility:
       "Classement automatique des PJ et exports, recherche sémantique sur tous tes fichiers.",
@@ -203,7 +203,7 @@ export const AGENTS: AgentCard[] = [
   {
     id: "ops-3",
     category: "OPS",
-    title: "Générateur de docs",
+    title: "Génération de documents",
     hook: "Word, Excel, PDF — à la voix.",
     utility:
       "Templates métier branchés sur tes données. Tu dictes le brief, le doc est dans le bon dossier.",
@@ -216,7 +216,7 @@ export const AGENTS: AgentCard[] = [
     id: "ops-4",
     category: "OPS",
     title: "Dashboard de pilotage",
-    hook: "Tout est sur un écran. Le récap arrive lundi 9h.",
+    hook: "Tout sur un écran. Le récap arrive lundi 9h.",
     utility:
       "Multi-sources (CRM, compta, ventes, satisfaction), alertes seuils, récap IA hebdomadaire.",
     statValue: "30 min",
@@ -229,10 +229,10 @@ export const AGENTS: AgentCard[] = [
   {
     id: "strat-1",
     category: "STRATÉGIE",
-    title: "Assistant IA d'entreprise",
+    title: "Assistant IA connecté à ton SI",
     hook: "Comme ChatGPT, mais il connaît vraiment ta boîte.",
     utility:
-      "Chat connecté à ton SI (Microsoft 365 ou Google Workspace), 15+ outils, mémoire long-terme, agents verticaux.",
+      "Chat connecté à Microsoft 365 ou Google Workspace, 15+ outils, mémoire long-terme, agents verticaux.",
     statValue: "−50%",
     statLabel: "de journée sur les tâches éligibles",
     icon: "Brain",

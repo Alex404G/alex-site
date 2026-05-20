@@ -52,7 +52,7 @@ export function ProcessSection() {
           transition={{ duration: 0.7 }}
           className="max-w-3xl"
         >
-          <span className="kicker">04 / Processus</span>
+          <span className="kicker">03 / Processus</span>
           <h2 className="t-h1 mt-3">
             D'une semaine à huit.{" "}
             <span className="text-gradient-sig">Pas plus.</span>

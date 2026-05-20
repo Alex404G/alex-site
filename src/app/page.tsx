@@ -4,7 +4,6 @@ import { Manifesto } from "@/components/sections/manifesto";
 import { AgentsSection } from "@/components/sections/agents";
 import { MarqueeSection } from "@/components/sections/marquee";
 import { BenefitsSection } from "@/components/sections/benefits";
-import { ConceptionSection } from "@/components/sections/conception";
 import { ProcessSection } from "@/components/sections/process";
 import { CtaFinal } from "@/components/sections/cta-final";
 import { BackgroundOrbs } from "@/components/backgrounds/orbs";
@@ -27,7 +26,6 @@ export default function Home() {
         <AgentsSection />
         <MarqueeSection />
         <BenefitsSection />
-        <ConceptionSection />
         <ProcessSection />
         <CtaFinal />
       </main>

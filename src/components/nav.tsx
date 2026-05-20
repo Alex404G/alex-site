@@ -36,7 +36,6 @@ export function Nav() {
           {[
             { href: "#agents", label: "Agents" },
             { href: "#benefices", label: "Bénéfices" },
-            { href: "#conception", label: "Sites" },
             { href: "#processus", label: "Processus" },
           ].map((l) => (
             <a
