@@ -1,0 +1,23 @@
+# Alexandre GIL
+
+> Création de sites web sur-mesure et visibilité en ligne pour artisans, commerces et PME, en France.
+
+## Activité
+Alexandre GIL est développeur web indépendant. Il conçoit des sites web premium sur-mesure
+(rapides, modernes, optimisés conversion et SEO) et accompagne la visibilité en ligne.
+
+## Prestations
+- Création de site web : design sur-mesure, performance, mobile, optimisation conversion et référencement.
+- Visibilité en ligne : référencement local (SEO), fiche Google Business, avis Google, Google Ads, Meta Ads, suivi des résultats.
+- Bonus : automatisations et outils basés sur l'intelligence artificielle.
+
+## Pages
+- / : présentation et offres
+- /creation-site-web : création de sites web
+- /visibilite-en-ligne : visibilité en ligne (SEO, avis, publicité)
+- /automatisations : automatisations et IA
+- /mentions-legales, /confidentialite : informations légales
+
+## Contact
+Alexandre Gil — Entrepreneur Individuel, basé à Agde (Hérault, 34), France.
+E-mail : marsugil@gmail.com · Téléphone : 07 67 67 77 42 · ou via le formulaire de contact du site.

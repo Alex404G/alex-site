@@ -7,24 +7,23 @@ import { useRef } from "react";
 type Token = { text: string; accent?: boolean };
 const LINES: Token[][] = [
   [
-    { text: "Construire" },
-    { text: "des" },
-    { text: "produits" },
-    { text: "sur-mesure", accent: true },
+    { text: "Un" },
+    { text: "site" },
+    { text: "qui" },
+    { text: "vous" },
+    { text: "ressemble.", accent: true },
   ],
   [
-    { text: "à" },
-    { text: "la" },
-    { text: "vitesse" },
-    { text: "d'un" },
-    { text: "SaaS,", accent: true },
+    { text: "Une" },
+    { text: "visibilité" },
+    { text: "qui" },
+    { text: "travaille.", accent: true },
   ],
   [
-    { text: "avec" },
-    { text: "le" },
+    { text: "Le" },
     { text: "soin" },
     { text: "d'un" },
-    { text: "atelier.", accent: true },
+    { text: "artisan.", accent: true },
   ],
 ];
 
@@ -61,17 +60,11 @@ export function Manifesto() {
           className="h-full w-full"
           style={{
             background:
-              "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(139,92,246,0.32) 0%, rgba(91,107,255,0.18) 40%, transparent 70%)",
+              "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,122,77,0.32) 0%, rgba(255,154,77,0.18) 40%, transparent 70%)",
             filter: "blur(40px)",
           }}
         />
       </motion.div>
-
-      {/* Sparkles / accents */}
-      <Sparkle x="18%" y="22%" delay={0.2} />
-      <Sparkle x="82%" y="34%" delay={0.6} />
-      <Sparkle x="12%" y="72%" delay={1.0} />
-      <Sparkle x="86%" y="78%" delay={1.4} />
 
       <div className="relative mx-auto max-w-5xl text-center">
         {/* Kicker */}
@@ -85,20 +78,19 @@ export function Manifesto() {
           <span
             aria-hidden
             className="block h-px w-10"
-            style={{ background: "linear-gradient(to right, transparent, rgba(139,92,246,0.7))" }}
+            style={{ background: "linear-gradient(to right, transparent, rgba(255,122,77,0.7))" }}
           />
           <span className="kicker">la méthode</span>
           <span
             aria-hidden
             className="block h-px w-10"
-            style={{ background: "linear-gradient(to left, transparent, rgba(139,92,246,0.7))" }}
+            style={{ background: "linear-gradient(to left, transparent, rgba(255,122,77,0.7))" }}
           />
         </motion.div>
 
         {/* Phrase */}
         <p className="font-display font-bold leading-[1.08] tracking-[-0.035em] text-[clamp(28px,4.2vw,60px)]">
           {LINES.map((line, lineIdx) => {
-            // Compute flat word index range for this line
             const offset = LINES.slice(0, lineIdx).reduce((a, l) => a + l.length, 0);
             return (
               <span key={lineIdx} className="block">
@@ -122,7 +114,7 @@ export function Manifesto() {
         {/* Tracer line under the phrase */}
         <div className="relative mx-auto mt-12 h-px w-[60%] max-w-md overflow-hidden bg-white/8">
           <motion.div
-            style={{ width: tracerWidth, background: "var(--grad-signature)" }}
+            style={{ width: tracerWidth, background: "var(--grad-warm)" }}
             className="absolute inset-y-0 left-0"
           />
         </div>
@@ -142,7 +134,6 @@ function Word({
   total: number;
   scrollYProgress: import("framer-motion").MotionValue<number>;
 }) {
-  // Stagger window — each word reveals in 0.05 progress span, overlapping
   const span = 0.7 / total;
   const start = 0.05 + flatIdx * span;
   const end = start + span * 2.4;
@@ -156,44 +147,11 @@ function Word({
     <>
       <motion.span
         style={{ opacity, filter, y }}
-        className={`inline-block ${token.accent ? "text-gradient-sig" : "text-text-1"}`}
+        className={`inline-block ${token.accent ? "text-gradient-warm" : "text-text-1"}`}
       >
         {token.text}
       </motion.span>
       <span>&nbsp;</span>
     </>
-  );
-}
-
-function Sparkle({
-  x,
-  y,
-  delay = 0,
-}: {
-  x: string;
-  y: string;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none absolute h-1.5 w-1.5 rounded-full"
-      style={{
-        left: x,
-        top: y,
-        background: "white",
-        boxShadow: "0 0 12px 2px rgba(255,255,255,0.6), 0 0 24px 6px rgba(139,92,246,0.5)",
-      }}
-      animate={{
-        opacity: [0.2, 1, 0.2],
-        scale: [0.8, 1.4, 0.8],
-      }}
-      transition={{
-        duration: 3.5,
-        repeat: Infinity,
-        delay,
-        ease: "easeInOut",
-      }}
-    />
   );
 }

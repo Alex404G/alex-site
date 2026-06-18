@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { X, Loader2, Check, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -33,8 +33,10 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
 
   return (
     <Ctx.Provider value={{ isOpen, open, close }}>
-      {children}
-      <ContactModal />
+      <MotionConfig reducedMotion="user">
+        {children}
+        <ContactModal />
+      </MotionConfig>
     </Ctx.Provider>
   );
 }
@@ -47,10 +49,62 @@ export function useContactModal() {
 
 type Status = "idle" | "loading" | "success" | "error";
 
+const EMAIL = "marsugil@gmail.com";
+const PHONE = "07 67 67 77 42";
+const PHONE_HREF = "+33767677742";
+
 function ContactModal() {
   const { isOpen, close } = useContactModal();
   const [status, setStatus] = React.useState<Status>("idle");
   const [error, setError] = React.useState<string | null>(null);
+  const dialogRef = React.useRef<HTMLDivElement>(null);
+  const restoreRef = React.useRef<HTMLElement | null>(null);
+  const successRef = React.useRef<HTMLHeadingElement>(null);
+
+  // Gestion du focus clavier : focus initial, piège (trap), restauration à la fermeture
+  React.useEffect(() => {
+    if (!isOpen) return;
+    restoreRef.current = (document.activeElement as HTMLElement) ?? null;
+    setStatus("idle");
+    setError(null);
+
+    const focusFirst = setTimeout(() => {
+      const el = dialogRef.current?.querySelector<HTMLElement>(
+        'input:not([tabindex="-1"]),select,textarea,button,a[href]',
+      );
+      el?.focus();
+    }, 60);
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const nodes = dialogRef.current.querySelectorAll<HTMLElement>(
+        'a[href],button:not([disabled]),input:not([disabled]):not([tabindex="-1"]),select:not([disabled]),textarea:not([disabled])',
+      );
+      const list = Array.from(nodes).filter((el) => el.offsetParent !== null);
+      if (!list.length) return;
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+
+    return () => {
+      clearTimeout(focusFirst);
+      document.removeEventListener("keydown", onKey);
+      restoreRef.current?.focus?.();
+    };
+  }, [isOpen]);
+
+  // Donne le focus au message de succès quand il apparaît (annonce lecteur d'écran)
+  React.useEffect(() => {
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -60,7 +114,6 @@ function ContactModal() {
     const data = Object.fromEntries(new FormData(form).entries());
 
     if (data.website) {
-      // honeypot
       setStatus("success");
       return;
     }
@@ -106,6 +159,7 @@ function ContactModal() {
 
           {/* Modal */}
           <motion.div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-title"
@@ -115,13 +169,13 @@ function ContactModal() {
             exit={{ opacity: 0, y: 8, scale: 0.97 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Glow accent */}
+            {/* Glow accent (chaud) */}
             <div
               aria-hidden
               className="pointer-events-none absolute -top-24 left-1/2 h-48 w-[120%] -translate-x-1/2 rounded-full opacity-50"
               style={{
                 background:
-                  "radial-gradient(closest-side, rgba(139,92,246,0.5), transparent 70%)",
+                  "radial-gradient(closest-side, rgba(255,154,77,0.45), transparent 70%)",
                 filter: "blur(40px)",
               }}
             />
@@ -135,18 +189,27 @@ function ContactModal() {
             </button>
 
             {status === "success" ? (
-              <div className="flex flex-col items-center py-8 text-center">
-                <div className="grid h-14 w-14 place-items-center rounded-full" style={{ background: "var(--grad-signature)" }}>
-                  <Check className="h-6 w-6 text-white" strokeWidth={3} />
+              <div role="status" aria-live="polite" className="flex flex-col items-center py-8 text-center">
+                <div className="grid h-14 w-14 place-items-center rounded-full" style={{ background: "var(--grad-warm)" }}>
+                  <Check className="h-6 w-6 text-void-0" strokeWidth={3} />
                 </div>
-                <h3 className="t-h3 mt-6 text-text-1">Message envoyé</h3>
+                <h3 ref={successRef} tabIndex={-1} className="t-h3 mt-6 text-text-1 outline-none">
+                  Message envoyé
+                </h3>
                 <p className="body-md mt-3 max-w-sm">
-                  Je te réponds dans la journée. Si c'est urgent, par mail direct :{" "}
+                  Je vous réponds dans la journée. Si c&apos;est urgent, par mail direct{" "}
                   <a
-                    href="mailto:alexandre.gil@california.fr"
+                    href={`mailto:${EMAIL}`}
                     className="text-text-1 underline decoration-white/30 underline-offset-2"
                   >
-                    alexandre.gil@california.fr
+                    {EMAIL}
+                  </a>{" "}
+                  ou au{" "}
+                  <a
+                    href={`tel:${PHONE_HREF}`}
+                    className="whitespace-nowrap text-text-1 underline decoration-white/30 underline-offset-2"
+                  >
+                    {PHONE}
                   </a>
                   .
                 </p>
@@ -164,8 +227,8 @@ function ContactModal() {
                   On en parle ?
                 </h3>
                 <p className="body-md mt-3">
-                  Dis-moi en deux lignes ce que tu veux automatiser ou créer. Je te
-                  reviens dans la journée.
+                  Dites-moi votre activité et ce que vous voulez accomplir en ligne.
+                  Je vous réponds dans la journée.
                 </p>
 
                 <form onSubmit={onSubmit} className="mt-7 flex flex-col gap-4">
@@ -190,15 +253,14 @@ function ContactModal() {
                     <span className="text-text-2">Sujet</span>
                     <select
                       name="subject"
-                      defaultValue="Agent IA"
+                      defaultValue="Site web"
                       required
                       className="cursor-pointer rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-text-1 outline-none transition-colors focus:border-white/25"
                     >
-                      <option className="bg-void-2">Agent IA</option>
                       <option className="bg-void-2">Site web</option>
-                      <option className="bg-void-2">Dashboard</option>
-                      <option className="bg-void-2">Automatisation</option>
-                      <option className="bg-void-2">Outil interne</option>
+                      <option className="bg-void-2">Visibilité en ligne</option>
+                      <option className="bg-void-2">Refonte de site</option>
+                      <option className="bg-void-2">Automatisation / IA</option>
                       <option className="bg-void-2">Autre</option>
                     </select>
                   </label>
@@ -211,12 +273,12 @@ function ContactModal() {
                       maxLength={1000}
                       rows={4}
                       className="resize-none rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-text-1 outline-none transition-colors focus:border-white/25"
-                      placeholder="Ce que tu cherches à faire, en deux lignes."
+                      placeholder="Votre activité et ce que vous voulez accomplir en ligne, en deux lignes."
                     />
                   </label>
 
                   {status === "error" && (
-                    <p className="text-sm text-red-300">{error}</p>
+                    <p role="alert" className="text-sm text-red-300">{error}</p>
                   )}
 
                   <button
@@ -224,9 +286,10 @@ function ContactModal() {
                     disabled={status === "loading"}
                     className={cn(
                       "group mt-2 inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all",
-                      "bg-white text-void-0 hover:scale-[1.01] active:scale-[0.99]",
+                      "text-void-0 hover:scale-[1.01] active:scale-[0.99]",
                       "disabled:opacity-60 disabled:hover:scale-100",
                     )}
+                    style={{ background: "var(--grad-warm)" }}
                   >
                     {status === "loading" ? (
                       <>
@@ -241,13 +304,29 @@ function ContactModal() {
                     )}
                   </button>
 
-                  <p className="mt-1 text-center text-xs text-text-3">
-                    Tu peux aussi écrire à{" "}
+                  <p className="text-center text-xs text-text-3">
+                    En envoyant ce message, vous acceptez que vos données soient utilisées pour
+                    traiter votre demande. Voir la{" "}
+                    <a href="/confidentialite" className="text-text-2 underline decoration-white/20 underline-offset-2 hover:text-text-1">
+                      politique de confidentialité
+                    </a>
+                    .
+                  </p>
+
+                  <p className="text-center text-xs text-text-3">
+                    Ou directement{" "}
                     <a
-                      href="mailto:alexandre.gil@california.fr"
+                      href={`mailto:${EMAIL}`}
                       className="text-text-2 underline decoration-white/20 underline-offset-2 hover:text-text-1"
                     >
-                      alexandre.gil@california.fr
+                      {EMAIL}
+                    </a>{" "}
+                    ·{" "}
+                    <a
+                      href={`tel:${PHONE_HREF}`}
+                      className="whitespace-nowrap text-text-2 underline decoration-white/20 underline-offset-2 hover:text-text-1"
+                    >
+                      {PHONE}
                     </a>
                   </p>
                 </form>

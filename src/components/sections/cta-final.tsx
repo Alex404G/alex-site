@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useContactModal } from "@/components/contact-modal";
 import { MeshShader } from "@/components/backgrounds/mesh-shader";
 
-const EMAIL = "alexandre.gil@california.fr";
+const EMAIL = "marsugil@gmail.com";
 
 export function CtaFinal() {
   const { open } = useContactModal();
@@ -183,7 +183,7 @@ export function CtaFinal() {
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-6 py-10 text-sm text-text-3 md:flex-row md:items-center">
           <div className="flex items-center gap-3">
             <span className="font-display text-base font-bold tracking-[-0.02em] text-text-1">
-              Alex Gil
+              Alexandre GIL
             </span>
             <span
               aria-hidden

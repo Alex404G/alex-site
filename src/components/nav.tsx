@@ -1,13 +1,25 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useContactModal } from "./contact-modal";
+
+const LINKS = [
+  { href: "/creation-site-web", label: "Sites web" },
+  { href: "/visibilite-en-ligne", label: "Visibilité" },
+  { href: "/automatisations", label: "Automatisations" },
+];
 
 export function Nav() {
   const { scrollY } = useScroll();
   // Subtle backdrop appears as you scroll past the hero
   const bgOpacity = useTransform(scrollY, [0, 120], [0, 1]);
   const { open } = useContactModal();
+  const pathname = usePathname();
+  const onAuto = pathname.startsWith("/automatisations");
+  const accent = onAuto ? "var(--grad-signature)" : "var(--grad-warm)";
+  const dotShadow = onAuto ? "0 0 10px rgba(139,92,246,0.7)" : "0 0 10px rgba(255,122,77,0.7)";
 
   return (
     <motion.header
@@ -24,40 +36,41 @@ export function Nav() {
       />
 
       <div className="relative mx-auto flex max-w-6xl items-center justify-between px-6 py-5 md:px-8">
-        {/* Wordmark — direct, no pill */}
-        <a
-          href="#hero"
+        {/* Wordmark → accueil */}
+        <Link
+          href="/"
           className="group inline-flex items-baseline gap-2 font-display text-[18px] font-bold tracking-[-0.02em] text-text-1 transition-colors hover:text-white"
         >
-          <span>Alex Gil</span>
+          <span>Alexandre GIL</span>
           <span
             aria-hidden
             className="block h-1.5 w-1.5 translate-y-[-2px] rounded-full transition-transform group-hover:scale-125"
-            style={{
-              background: "var(--grad-signature)",
-              boxShadow: "0 0 10px rgba(139,92,246,0.7)",
-            }}
+            style={{ background: accent, boxShadow: dotShadow }}
           />
-        </a>
+        </Link>
 
-        {/* Center nav links */}
+        {/* Liens (pages) */}
         <nav className="hidden items-center gap-1 md:flex">
-          {[
-            { href: "#agents", label: "Agents" },
-            { href: "#benefices", label: "Bénéfices" },
-            { href: "#processus", label: "Processus" },
-          ].map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="rounded-full px-3 py-1.5 text-sm text-text-2 transition-colors hover:bg-white/5 hover:text-text-1"
-            >
-              {l.label}
-            </a>
-          ))}
+          {LINKS.map((l) => {
+            const active = pathname === l.href;
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={
+                  "rounded-full px-3 py-1.5 text-sm transition-colors " +
+                  (active
+                    ? "bg-white/[0.07] text-text-1"
+                    : "text-text-2 hover:bg-white/5 hover:text-text-1")
+                }
+              >
+                {l.label}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Contact button */}
+        {/* Contact (modal global) */}
         <button
           onClick={open}
           className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-void-0 transition-all hover:scale-[1.02] active:scale-[0.98]"
@@ -66,7 +79,7 @@ export function Nav() {
           <span
             aria-hidden
             className="h-1.5 w-1.5 rounded-full"
-            style={{ background: "var(--grad-signature)" }}
+            style={{ background: accent }}
           />
         </button>
       </div>

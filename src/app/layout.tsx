@@ -2,28 +2,68 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { GrainOverlay } from "@/components/grain-overlay";
-import { CursorFollow } from "@/components/cursor-follow";
 import { ContactModalProvider } from "@/components/contact-modal";
+import { Footer } from "@/components/footer";
+
+const SITE = {
+  name: "Alexandre GIL",
+  url: "https://alexgil.dev",
+  title: "Alexandre GIL — Création de sites web & visibilité en ligne",
+  description:
+    "Création de sites web premium sur-mesure et visibilité en ligne : SEO local, avis Google, fiche Google Business, Google & Meta Ads. Automatisations et IA en bonus.",
+};
 
 export const metadata: Metadata = {
-  title: "Alex Gil — Sur-mesure à 200 %",
-  description:
-    "Logiciels internes, assistants IA, sites, dashboards, automatisations — conçus exclusivement sur ton métier, tes données, ton vocabulaire.",
-  metadataBase: new URL("https://alexgil.dev"),
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: SITE.title,
+    template: "%s",
+  },
+  description: SITE.description,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Alex Gil — Sur-mesure à 200 %",
-    description:
-      "Plus de temps. Plus d'argent. Plus de clients. Outils IA sur-mesure conçus sur ton métier.",
+    title: SITE.title,
+    description: SITE.description,
     type: "website",
     locale: "fr_FR",
+    siteName: SITE.name,
+    url: SITE.url,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alex Gil — Sur-mesure à 200 %",
-    description:
-      "Plus de temps. Plus d'argent. Plus de clients. Outils IA sur-mesure conçus sur ton métier.",
+    title: SITE.title,
+    description: SITE.description,
   },
   robots: { index: true, follow: true },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: SITE.name,
+  description: SITE.description,
+  url: SITE.url,
+  areaServed: "FR",
+  email: "marsugil@gmail.com",
+  telephone: "+33767677742",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "8 rue des Sœurs de Cauvigny",
+    postalCode: "34300",
+    addressLocality: "Agde",
+    addressCountry: "FR",
+  },
+  founder: { "@type": "Person", name: "Alexandre Gil" },
+  knowsAbout: [
+    "Création de site web",
+    "Référencement local (SEO)",
+    "Fiche Google Business",
+    "Avis Google",
+    "Google Ads",
+    "Meta Ads",
+    "Automatisation",
+    "Intelligence artificielle",
+  ],
 };
 
 export default function RootLayout({
@@ -38,12 +78,22 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@600,500,400&f[]=jetbrains-mono@500,400&display=swap"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="relative overflow-x-clip bg-void-0 text-text-1">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-void-0"
+        >
+          Aller au contenu
+        </a>
         <ContactModalProvider>
           <SmoothScroll />
-          <CursorFollow />
           {children}
+          <Footer />
           <GrainOverlay />
         </ContactModalProvider>
       </body>

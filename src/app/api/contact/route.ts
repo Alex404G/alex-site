@@ -33,8 +33,8 @@ export async function POST(req: Request) {
     const { name, email, company, phone, subject, message } = parsed.data;
 
     const apiKey = process.env.RESEND_API_KEY;
-    const dest = process.env.CONTACT_DEST_EMAIL || "alexandre.gil@california.fr";
-    const from = process.env.CONTACT_FROM_EMAIL || "Site Alex Gil <onboarding@resend.dev>";
+    const dest = process.env.CONTACT_DEST_EMAIL || "marsugil@gmail.com";
+    const from = process.env.CONTACT_FROM_EMAIL || "Site Alexandre GIL <onboarding@resend.dev>";
 
     if (!apiKey) {
       console.warn("[contact] RESEND_API_KEY missing — dropping mail", {
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     const resend = new Resend(apiKey);
     const html = `
       <div style="font-family:system-ui,sans-serif;line-height:1.55;color:#0a0a0a">
-        <h2 style="margin:0 0 16px">Nouveau message — site Alex Gil</h2>
+        <h2 style="margin:0 0 16px">Nouveau message — site Alexandre GIL</h2>
         <p><strong>Sujet :</strong> ${escapeHtml(subject)}</p>
         <p><strong>Nom :</strong> ${escapeHtml(name)}</p>
         <p><strong>Email :</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>

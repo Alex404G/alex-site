@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ==========================================================
-   Design tokens — Alex Gil
+   Design tokens — Alexandre GIL
    ========================================================== */
 
 :root {
@@ -25,7 +25,7 @@
   /* Text */
   --text-1: #F4F6FB;
   --text-2: #9CA3B8;
-  --text-3: #5B6478;
+  --text-3: #737D93;
 
   /* Glass */
   --glass-bg: rgba(255, 255, 255, 0.04);
@@ -54,6 +54,11 @@
   --color-sig-2: var(--sig-2);
   --color-sig-3: var(--sig-3);
   --color-sig-4: var(--sig-4);
+
+  --color-warm-1: var(--warm-1);
+  --color-warm-2: var(--warm-2);
+  --color-warm-3: var(--warm-3);
+  --color-warm-4: var(--warm-4);
 
   --color-text-1: var(--text-1);
   --color-text-2: var(--text-2);
@@ -118,7 +123,7 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 220% 220%;
-  animation: gradient-shift 14s linear infinite;
+  animation: none;
   /* Soft halo to lift the text off any bloom behind it */
   filter: drop-shadow(0 0 28px rgba(91, 107, 255, 0.35))
           drop-shadow(0 4px 18px rgba(2, 3, 10, 0.55));
@@ -228,7 +233,6 @@ body {
   50%      { transform: scaleY(1);   opacity: 1;   }
 }
 .pulse-line {
-  animation: pulse-line 2s ease-in-out infinite;
   transform-origin: top;
 }
 
@@ -247,6 +251,51 @@ body {
   will-change: transform;
 }
 .marquee-left  { animation: marquee-left  40s linear infinite; }
+
+/* ==========================================================
+   DA chaude — Création de sites & Visibilité en ligne
+   (distincte de la signature violette réservée aux Automatisations)
+   ========================================================== */
+:root {
+  --warm-1: #FFC178;
+  --warm-2: #FF9A4D;
+  --warm-3: #FF6F61;
+  --warm-4: #F0476B;
+  --grad-warm: linear-gradient(135deg, #FFC178 0%, #FF9A4D 35%, #FF6F61 70%, #F0476B 100%);
+}
+
+.text-gradient-warm {
+  background: linear-gradient(
+    115deg,
+    #FF9A4D 0%,
+    #FFCBA0 24%,
+    #FFFFFF 46%,
+    #FFFFFF 54%,
+    #FFB39E 74%,
+    #FF6F61 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 220% 220%;
+  animation: none;
+  filter: drop-shadow(0 0 28px rgba(255, 122, 77, 0.32))
+          drop-shadow(0 4px 18px rgba(2, 3, 10, 0.55));
+}
+
+.glow-warm {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 30px 100px -20px rgba(255, 122, 77, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Lueur chaude de fond (remplace l'aurora violette sur ces pages) */
+.warm-bloom {
+  background:
+    radial-gradient(ellipse 55% 45% at 22% 12%, rgba(255, 154, 77, 0.20), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 78%, rgba(240, 71, 107, 0.16), transparent 60%);
+}
 .marquee-right { animation: marquee-right 40s linear infinite; }
 
 /* Focus rings */
