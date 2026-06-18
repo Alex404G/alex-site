@@ -10,10 +10,12 @@
  * l'aperçu de partage doit pointer vers le domaine réellement servi.
  */
 function resolveSiteUrl(): string {
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "");
+  // .trim() retire tout espace ou retour chariot parasite (ex. \r ajouté par
+  // certains shells lors de la saisie de la variable d'env) qui casserait new URL().
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, "");
   if (explicit) return explicit;
 
-  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
   if (vercel) return `https://${vercel.replace(/\/+$/, "")}`;
 
   return "http://localhost:3000";
