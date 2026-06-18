@@ -4,10 +4,11 @@ import { SmoothScroll } from "@/components/smooth-scroll";
 import { GrainOverlay } from "@/components/grain-overlay";
 import { ContactModalProvider } from "@/components/contact-modal";
 import { Footer } from "@/components/footer";
+import { SITE_URL } from "@/lib/site";
 
 const SITE = {
   name: "Alexandre GIL",
-  url: "https://alexgil.dev",
+  url: SITE_URL,
   title: "Alexandre GIL — Création de sites web & visibilité en ligne",
   description:
     "Création de sites web premium sur-mesure et visibilité en ligne : SEO local, avis Google, fiche Google Business, Google & Meta Ads. Automatisations et IA en bonus.",

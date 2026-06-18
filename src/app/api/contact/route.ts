@@ -26,8 +26,8 @@ export async function POST(req: Request) {
       );
     }
     if (parsed.data.website) {
-      // Honeypot triggered — silent success
-      return NextResponse.json({ ok: true });
+      // Honeypot triggered — succès silencieux (on ne révèle rien au bot)
+      return NextResponse.json({ delivered: true });
     }
 
     const { name, email, company, phone, subject, message } = parsed.data;
@@ -37,11 +37,12 @@ export async function POST(req: Request) {
     const from = process.env.CONTACT_FROM_EMAIL || "Site Alexandre GIL <onboarding@resend.dev>";
 
     if (!apiKey) {
-      console.warn("[contact] RESEND_API_KEY missing — dropping mail", {
+      // Pas de fournisseur d'e-mail configuré : on NE prétend PAS avoir envoyé.
+      // Le client bascule sur un repli honnête (mail/tél directs + mailto pré-rempli).
+      console.warn("[contact] RESEND_API_KEY manquante — repli direct proposé", {
         name, email, subject,
       });
-      // In dev / preview without key: act as success so the UX doesn't break.
-      return NextResponse.json({ ok: true, dev: true });
+      return NextResponse.json({ delivered: false, reason: "unconfigured" });
     }
 
     const resend = new Resend(apiKey);
@@ -70,7 +71,7 @@ export async function POST(req: Request) {
       console.error("[contact] resend error", r.error);
       return NextResponse.json({ error: "Envoi impossible" }, { status: 500 });
     }
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ delivered: true });
   } catch (e) {
     console.error("[contact] error", e);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });

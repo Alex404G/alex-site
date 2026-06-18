@@ -227,15 +227,6 @@ body {
   background-size: 32px 32px;
 }
 
-/* Animation: pulse line scroll indicator */
-@keyframes pulse-line {
-  0%, 100% { transform: scaleY(0.3); opacity: 0.4; }
-  50%      { transform: scaleY(1);   opacity: 1;   }
-}
-.pulse-line {
-  transform-origin: top;
-}
-
 /* Marquee */
 @keyframes marquee-left {
   from { transform: translateX(0); }
@@ -300,9 +291,10 @@ body {
 
 /* Focus rings */
 :focus-visible {
+  /* L'outline suit le border-radius de l'élément sur les navigateurs modernes —
+     pas de border-radius forcé ici (ça déformerait les boutons ronds au focus). */
   outline: 2px solid var(--sig-3);
   outline-offset: 3px;
-  border-radius: 4px;
 }
 
 /* prefers-reduced-motion */

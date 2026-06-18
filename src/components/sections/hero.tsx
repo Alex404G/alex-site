@@ -154,7 +154,7 @@ export function Hero() {
         style={{ opacity: contentOpacity }}
       >
         <span className="kicker text-[10px]">scroll</span>
-        <span className="pulse-line block h-10 w-px bg-gradient-to-b from-white/50 to-transparent" />
+        <span className="block h-10 w-px bg-gradient-to-b from-white/50 to-transparent" />
       </motion.div>
     </section>
   );

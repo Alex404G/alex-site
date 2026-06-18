@@ -47,7 +47,7 @@ export function useContactModal() {
   return ctx;
 }
 
-type Status = "idle" | "loading" | "success" | "error";
+type Status = "idle" | "loading" | "success" | "fallback" | "error";
 
 const EMAIL = "marsugil@gmail.com";
 const PHONE = "07 67 67 77 42";
@@ -57,9 +57,11 @@ function ContactModal() {
   const { isOpen, close } = useContactModal();
   const [status, setStatus] = React.useState<Status>("idle");
   const [error, setError] = React.useState<string | null>(null);
+  const [mailtoHref, setMailtoHref] = React.useState<string>(`mailto:${EMAIL}`);
   const dialogRef = React.useRef<HTMLDivElement>(null);
   const restoreRef = React.useRef<HTMLElement | null>(null);
   const successRef = React.useRef<HTMLHeadingElement>(null);
+  const fallbackRef = React.useRef<HTMLHeadingElement>(null);
 
   // Gestion du focus clavier : focus initial, piège (trap), restauration à la fermeture
   React.useEffect(() => {
@@ -101,9 +103,10 @@ function ContactModal() {
     };
   }, [isOpen]);
 
-  // Donne le focus au message de succès quand il apparaît (annonce lecteur d'écran)
+  // Donne le focus au message de fin quand il apparaît (annonce lecteur d'écran)
   React.useEffect(() => {
     if (status === "success") successRef.current?.focus();
+    if (status === "fallback") fallbackRef.current?.focus();
   }, [status]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -111,7 +114,23 @@ function ContactModal() {
     setStatus("loading");
     setError(null);
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+
+    // mailto pré-rempli — sert de repli si le formulaire n'est pas (encore) actif
+    const mailSubject = `Demande via le site — ${data.subject || "Projet"}`;
+    const mailBody = [
+      `Nom : ${data.name || ""}`,
+      data.company ? `Entreprise : ${data.company}` : "",
+      data.phone ? `Téléphone : ${data.phone}` : "",
+      data.email ? `Email : ${data.email}` : "",
+      "",
+      data.message || "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    setMailtoHref(
+      `mailto:${EMAIL}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`,
+    );
 
     if (data.website) {
       setStatus("success");
@@ -128,8 +147,14 @@ function ContactModal() {
         const j = await r.json().catch(() => ({}));
         throw new Error(j.error || "Erreur d'envoi");
       }
-      setStatus("success");
-      form.reset();
+      const j = (await r.json().catch(() => ({}))) as { delivered?: boolean };
+      if (j.delivered) {
+        setStatus("success");
+        form.reset();
+      } else {
+        // Aucun fournisseur d'e-mail configuré côté serveur → repli honnête
+        setStatus("fallback");
+      }
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Erreur inconnue");
@@ -183,7 +208,7 @@ function ContactModal() {
             <button
               onClick={close}
               aria-label="Fermer le formulaire"
-              className="absolute right-4 top-4 grid h-9 w-9 cursor-pointer place-items-center rounded-full text-text-2 transition-colors hover:bg-white/5 hover:text-text-1"
+              className="absolute right-3 top-3 grid h-11 w-11 cursor-pointer place-items-center rounded-full text-text-2 transition-colors hover:bg-white/5 hover:text-text-1"
             >
               <X className="h-4 w-4" />
             </button>
@@ -216,6 +241,49 @@ function ContactModal() {
                 <button
                   onClick={close}
                   className="mt-8 cursor-pointer rounded-full bg-white px-5 py-2 text-sm font-medium text-void-0"
+                >
+                  Fermer
+                </button>
+              </div>
+            ) : status === "fallback" ? (
+              <div role="status" aria-live="polite" className="flex flex-col items-center py-6 text-center">
+                <div className="grid h-14 w-14 place-items-center rounded-full border border-white/15">
+                  <Mail className="h-6 w-6 text-warm-2" />
+                </div>
+                <h3 ref={fallbackRef} tabIndex={-1} className="t-h3 mt-6 text-text-1 outline-none">
+                  Dernière étape
+                </h3>
+                <p className="body-md mt-3 max-w-sm">
+                  Pour que votre message me parvienne tout de suite, terminez l&apos;envoi
+                  depuis votre messagerie — tout est déjà pré-rempli.
+                </p>
+                <a
+                  href={mailtoHref}
+                  className="mt-7 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-void-0 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                  style={{ background: "var(--grad-warm)" }}
+                >
+                  <Mail className="h-4 w-4" />
+                  Terminer par e-mail
+                </a>
+                <p className="body-md mt-5 text-[14px]">
+                  Ou directement{" "}
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="text-text-1 underline decoration-white/30 underline-offset-2"
+                  >
+                    {EMAIL}
+                  </a>{" "}
+                  ·{" "}
+                  <a
+                    href={`tel:${PHONE_HREF}`}
+                    className="whitespace-nowrap text-text-1 underline decoration-white/30 underline-offset-2"
+                  >
+                    {PHONE}
+                  </a>
+                </p>
+                <button
+                  onClick={close}
+                  className="mt-7 cursor-pointer text-sm text-text-2 transition-colors hover:text-text-1"
                 >
                   Fermer
                 </button>

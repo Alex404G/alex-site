@@ -58,7 +58,7 @@ export function Nav() {
                 key={l.href}
                 href={l.href}
                 className={
-                  "rounded-full px-3 py-1.5 text-sm transition-colors " +
+                  "rounded-full px-4 py-2 text-sm transition-colors " +
                   (active
                     ? "bg-white/[0.07] text-text-1"
                     : "text-text-2 hover:bg-white/5 hover:text-text-1")
@@ -73,7 +73,7 @@ export function Nav() {
         {/* Contact (modal global) */}
         <button
           onClick={open}
-          className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-void-0 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-void-0 transition-all hover:scale-[1.02] active:scale-[0.98]"
         >
           <span>Contact</span>
           <span

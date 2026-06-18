@@ -56,7 +56,7 @@ export function MagneticButton({
       onMouseLeave={reset}
       style={{ x, y, ...style }}
       whileHover={reduce ? undefined : { scale: 1.025 }}
-      whileTap={{ scale: 0.97 }}
+      whileTap={reduce ? undefined : { scale: 0.97 }}
       transition={{ type: "spring", stiffness: 320, damping: 22 }}
       className={className}
       {...rest}
