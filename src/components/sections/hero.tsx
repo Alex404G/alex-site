@@ -1,11 +1,20 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useContactModal } from "@/components/contact-modal";
 import { MagneticButton } from "@/components/magnetic-button";
 import { ArrowDown } from "lucide-react";
 import { easings } from "@/lib/utils";
+
+// Les trois prestations, chacune avec sa pastille de thème — le hero vend
+// l'ensemble, les pages détaillent.
+const OFFERS = [
+  { href: "/creation-site-web", label: "Sites web", grad: "var(--grad-warm)" },
+  { href: "/visibilite-en-ligne", label: "Visibilité en ligne", grad: "var(--grad-visi)" },
+  { href: "/automatisations", label: "Automatisations & IA", grad: "var(--grad-signature)" },
+];
 
 export function Hero() {
   const { open } = useContactModal();
@@ -43,6 +52,15 @@ export function Hero() {
           aria-hidden
           style={{ y: gridY }}
           className="bg-grid absolute inset-0 opacity-[0.35]"
+        />
+        {/* Échos discrets des deux autres thèmes — le hero représente les 3 offres */}
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 26% 22% at 10% 78%, rgba(43,201,138,0.07), transparent 70%), radial-gradient(ellipse 26% 22% at 90% 18%, rgba(139,92,246,0.08), transparent 70%)",
+          }}
         />
         {/* Vignettage central pour la lisibilité du titre */}
         <div
@@ -93,17 +111,15 @@ export function Hero() {
           Plus de clients, une meilleure place sur Google, et une image à la hauteur de votre travail.
         </motion.p>
 
-        {/* Corps */}
+        {/* Corps — les trois prestations en une phrase, deux lignes max */}
         <motion.p
-          className="body-md mt-5 max-w-xl text-[15.5px]"
+          className="body-md mt-5 max-w-2xl text-[15px]"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.85 }}
         >
-          Je conçois votre site sur-mesure, rapide et pensé pour convertir,
-          et je vous rends <em className="not-italic text-text-1">visible en ligne</em> :
-          SEO local, avis Google, fiche Google Business, Google &amp; Meta Ads.
-          Et j&apos;automatise ce qui vous prend du temps.
+          Sites web sur-mesure, visibilité en ligne (SEO local, avis, Google &amp; Meta Ads)
+          et automatisations IA : je construis ce qui fait grandir votre activité.
         </motion.p>
 
         {/* CTAs */}
@@ -131,6 +147,29 @@ export function Hero() {
             Voir les offres
             <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
           </a>
+        </motion.div>
+
+        {/* Les trois offres, chacune sous sa couleur */}
+        <motion.div
+          className="mt-11 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.25 }}
+        >
+          {OFFERS.map((o) => (
+            <Link
+              key={o.href}
+              href={o.href}
+              className="group inline-flex items-center gap-2 py-1 text-sm text-text-2 transition-colors hover:text-text-1"
+            >
+              <span
+                aria-hidden
+                className="h-1.5 w-1.5 rounded-full transition-transform group-hover:scale-125"
+                style={{ background: o.grad }}
+              />
+              {o.label}
+            </Link>
+          ))}
         </motion.div>
       </motion.div>
 

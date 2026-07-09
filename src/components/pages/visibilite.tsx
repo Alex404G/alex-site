@@ -16,6 +16,7 @@ import {
 import { useContactModal } from "@/components/contact-modal";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { PageHero } from "@/components/page-hero";
+import { SectionGlow } from "@/components/section-glow";
 import { easings } from "@/lib/utils";
 
 const LEVERS = [
@@ -115,6 +116,8 @@ export function VisibilitePage() {
         </div>
       </section>
 
+      <SectionGlow theme="visi" />
+
       {/* Où vos clients vous cherchent — section distinctive de la page Visibilité */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
         <div className="max-w-2xl">
@@ -152,6 +155,8 @@ export function VisibilitePage() {
           })}
         </div>
       </section>
+
+      <SectionGlow theme="visi" />
 
       {/* Approche */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">

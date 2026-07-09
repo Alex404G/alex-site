@@ -39,14 +39,14 @@ export function CtaFinal() {
               "radial-gradient(ellipse at center, transparent 0%, rgba(2,3,10,0.55) 60%, rgba(2,3,10,0.95) 100%)",
           }}
         />
-        {/* Transition douce depuis le noir : l'aurora commence à poindre
-            AVANT le titre, puis s'installe progressivement. */}
+        {/* Transition douce depuis le noir : l'aurora est déjà perceptible
+            au-dessus du titre, et s'installe progressivement. */}
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 h-[38vh] min-h-[220px]"
+          className="absolute inset-x-0 top-0 h-[26vh] min-h-[160px]"
           style={{
             background:
-              "linear-gradient(to bottom, var(--void-0) 0%, rgba(2,3,10,0.9) 26%, rgba(2,3,10,0.62) 52%, rgba(2,3,10,0.3) 76%, transparent 100%)",
+              "linear-gradient(to bottom, var(--void-0) 0%, rgba(2,3,10,0.82) 30%, rgba(2,3,10,0.5) 58%, rgba(2,3,10,0.22) 80%, transparent 100%)",
           }}
         />
       </div>

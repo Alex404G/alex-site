@@ -18,6 +18,7 @@ import {
 import { useContactModal } from "@/components/contact-modal";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { PageHero } from "@/components/page-hero";
+import { SectionGlow } from "@/components/section-glow";
 import { easings } from "@/lib/utils";
 
 // Bento : 2 arguments vedettes (avec tuile), 4 compacts (icône inline) —
@@ -144,6 +145,8 @@ export function CreationPage() {
         </div>
       </section>
 
+      <SectionGlow />
+
       {/* Comparatif — section distinctive de la page Création */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
         <div className="max-w-3xl">
@@ -208,6 +211,8 @@ export function CreationPage() {
           </motion.div>
         </div>
       </section>
+
+      <SectionGlow />
 
       {/* Process */}
       <section ref={stepsRef} className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
