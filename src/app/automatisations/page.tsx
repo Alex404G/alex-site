@@ -54,7 +54,7 @@ export default function AutomatisationsPage() {
           kicker="Automatisations & IA"
           title="L'IA, intégrée à votre métier."
           sub="Je ne vends pas d'outils : je construis votre solution."
-          body="J'étudie comment vous travaillez, puis je conçois l'agent ou l'automatisation qui vous enlève les tâches répétitives. Branché sur vos données, vos outils, votre vocabulaire."
+          body="J'étudie comment vous travaillez, puis je conçois l'agent ou l'automatisation qui vous enlève les tâches répétitives, sur vos données et vos outils."
           cta="Discuter d'une automatisation"
         />
 

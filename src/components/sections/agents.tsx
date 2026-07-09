@@ -92,15 +92,26 @@ export function AgentsSection() {
         <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 md:grid-cols-[0.85fr_1.4fr]">
           {/* Gauche — numéro détouré, rail de progression */}
           <div className="hidden select-none flex-col gap-8 md:flex" aria-hidden>
-            <div
-              className="font-display font-black leading-none tracking-[-0.05em] text-transparent transition-all duration-500"
-              style={{
-                fontSize: "clamp(110px, 11vw, 168px)",
-                WebkitTextStroke: `1.5px rgba(${rgb}, 0.9)`,
-                filter: `drop-shadow(0 0 26px rgba(${rgb}, 0.5)) drop-shadow(0 0 70px rgba(${rgb}, 0.28))`,
-              }}
-            >
-              {String(idx + 1).padStart(2, "0")}
+            <div className="relative">
+              {/* Halo derrière le numéro — le vrai glow, visible */}
+              <div
+                aria-hidden
+                className="absolute left-1/2 top-1/2 -z-10 h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-500"
+                style={{
+                  background: `radial-gradient(ellipse at center, rgba(${rgb}, 0.28), transparent 65%)`,
+                  filter: "blur(28px)",
+                }}
+              />
+              <div
+                className="font-display font-black leading-none tracking-[-0.05em] text-transparent transition-all duration-500"
+                style={{
+                  fontSize: "clamp(110px, 11vw, 168px)",
+                  WebkitTextStroke: `2px rgba(${rgb}, 1)`,
+                  filter: `drop-shadow(0 0 12px rgba(${rgb}, 0.85)) drop-shadow(0 0 38px rgba(${rgb}, 0.5))`,
+                }}
+              >
+                {String(idx + 1).padStart(2, "0")}
+              </div>
             </div>
             <div className="flex items-center gap-1.5">
               {AGENTS.map((a, i) => (

@@ -79,8 +79,8 @@ export function CreationPage() {
         theme="warm"
         kicker="Création de sites web"
         title="Un site qui vend."
-        sub="Conçu sur-mesure pour votre activité, jamais un template recyclé."
-        body="Je conçois et développe votre site de A à Z : identité, design premium, performance, et une structure pensée pour transformer vos visiteurs en clients, optimisée pour Google dès le départ."
+        sub="Sur-mesure pour votre activité, jamais un template recyclé."
+        body="Je conçois et développe votre site de A à Z : identité, design premium, performance, et une structure pensée pour transformer vos visiteurs en clients."
         cta="Discuter de votre site"
       />
 

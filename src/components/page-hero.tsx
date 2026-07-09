@@ -56,9 +56,9 @@ export function PageHero({
   const t = THEMES[theme];
 
   return (
-    // Groupe centré sur les deux axes : le bloc kicker→CTA forme une seule
-    // masse visuelle, posée au centre de l'écran (pt pour dégager la nav).
-    <section className="relative mx-auto flex min-h-[88svh] max-w-5xl flex-col items-center justify-center px-6 pb-14 pt-28 text-center">
+    // Groupe centré sur les deux axes : la première vue est pleine hauteur,
+    // le bloc kicker→CTA est posé au centre entre la barre de nav et le bas.
+    <section className="relative mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-6 pb-16 pt-20 text-center">
       <motion.span
         className="kicker"
         initial={{ opacity: 0, y: 12 }}
@@ -76,7 +76,7 @@ export function PageHero({
         <span className={t.gradientText}>{title}</span>
       </motion.h1>
       <motion.p
-        className="t-lede mt-6 mx-auto max-w-2xl"
+        className="t-lede mt-6 mx-auto max-w-3xl"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.3 }}
@@ -84,7 +84,7 @@ export function PageHero({
         {sub}
       </motion.p>
       <motion.p
-        className="body-md mt-5 mx-auto max-w-xl text-[15.5px]"
+        className="body-md mt-5 mx-auto max-w-2xl text-[15px]"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.45 }}

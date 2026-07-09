@@ -77,7 +77,7 @@ export function VisibilitePage() {
         kicker="Visibilité en ligne"
         title="Soyez trouvé."
         sub="Là où vos clients cherchent : Google et les réseaux."
-        body="SEO local, fiche Google Business, avis Google, Google & Meta Ads : je travaille votre présence pour attirer des clients qualifiés et installer une image solide, durablement."
+        body="SEO local, fiche Google Business, avis, Google & Meta Ads : je travaille votre présence pour attirer des clients qualifiés, durablement."
         cta="Booster ma visibilité"
       />
 
