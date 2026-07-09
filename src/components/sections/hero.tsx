@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useContactModal } from "@/components/contact-modal";
 import { MagneticButton } from "@/components/magnetic-button";
 import { ArrowDown } from "lucide-react";
@@ -10,21 +10,23 @@ import { easings } from "@/lib/utils";
 export function Hero() {
   const { open } = useContactModal();
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
   // Parallaxe de profondeur — la scène vit quand on défile
-  const glowY = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const gridY = useTransform(scrollYProgress, [0, 1], [0, 70]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  // (neutralisée si l'utilisateur préfère réduire les animations)
+  const glowYRaw = useTransform(scrollYProgress, [0, 1], [0, 180]);
+  const gridYRaw = useTransform(scrollYProgress, [0, 1], [0, 70]);
+  const contentYRaw = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const glowY = reduce ? 0 : glowYRaw;
+  const gridY = reduce ? 0 : gridYRaw;
+  const contentY = reduce ? 0 : contentYRaw;
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
-  const lines = [
-    ["Votre", "site,"],
-    ["votre", "visibilité."],
-  ];
+  const lines = ["Votre site,", "votre visibilité."];
 
   return (
     <section
@@ -66,49 +68,37 @@ export function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="mx-auto flex w-full max-w-5xl flex-col items-center px-6 text-center"
       >
-        {/* Headline — dégradé chaud */}
+        {/* Headline — dégradé chaud CONTINU par ligne (pas de sweep par mot) */}
         <h1 className="t-display">
-          {lines.map((line, lineIdx) => (
-            <span key={lineIdx} className="block">
-              {line.map((word, i) => {
-                const idx = lineIdx * 4 + i;
-                return (
-                  <motion.span
-                    key={i}
-                    className="inline-block"
-                    initial={{ opacity: 0, y: 34, filter: "blur(12px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{
-                      duration: 1,
-                      ease: easings.outQuart,
-                      delay: 0.25 + idx * 0.09,
-                    }}
-                  >
-                    <span className="text-gradient-warm">{word}</span>
-                    {i < line.length - 1 && <span>&nbsp;</span>}
-                  </motion.span>
-                );
-              })}
-            </span>
+          {lines.map((line, i) => (
+            <motion.span
+              key={i}
+              className="block"
+              initial={{ opacity: 0, y: 34, filter: "blur(12px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 1, ease: easings.outQuart, delay: 0.25 + i * 0.14 }}
+            >
+              <span className="text-gradient-warm">{line}</span>
+            </motion.span>
           ))}
         </h1>
 
         {/* Sous-titre */}
         <motion.p
-          className="t-h2 mt-8 max-w-3xl text-text-1"
+          className="t-lede mt-7 max-w-2xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.7 }}
+          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.65 }}
         >
           Plus de clients, une meilleure place sur Google, et une image à la hauteur de votre travail.
         </motion.p>
 
         {/* Corps */}
         <motion.p
-          className="body-md mt-8 max-w-xl text-[15.5px]"
+          className="body-md mt-5 max-w-xl text-[15.5px]"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.9 }}
+          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.85 }}
         >
           Je conçois votre site sur-mesure, rapide et pensé pour convertir,
           et je vous rends <em className="not-italic text-text-1">visible en ligne</em> :
@@ -118,7 +108,7 @@ export function Hero() {
 
         {/* CTAs */}
         <motion.div
-          className="mt-10 flex flex-col items-center gap-3 sm:flex-row"
+          className="mt-9 flex flex-col items-center gap-3 sm:flex-row"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.1 }}

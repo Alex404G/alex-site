@@ -32,30 +32,30 @@ export function Footer() {
               <span
                 aria-hidden
                 className="h-1.5 w-1.5 translate-y-[-2px] rounded-full"
-                style={{ background: "var(--grad-warm)" }}
+                style={{ background: "var(--accent-grad)" }}
               />
             </Link>
             <p className="body-md mt-4 max-w-xs text-[15px]">
               Création de sites web sur-mesure et visibilité en ligne. Plus de clients,
               une image à la hauteur.
             </p>
-            <div className="mt-5 space-y-1.5 text-sm">
+            <div className="mt-4 text-sm">
               <a
                 href="mailto:marsugil@gmail.com"
-                className="block text-text-2 transition-colors hover:text-text-1"
+                className="block py-1.5 text-text-2 transition-colors hover:text-text-1"
               >
                 marsugil@gmail.com
               </a>
               <a
                 href="tel:+33767677742"
-                className="block text-text-2 transition-colors hover:text-text-1"
+                className="block py-1.5 text-text-2 transition-colors hover:text-text-1"
               >
                 07 67 67 77 42
               </a>
             </div>
             <button
               onClick={open}
-              className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-void-0 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-void-0 transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
               Discuter du projet
             </button>
@@ -67,7 +67,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {NAV.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-text-2 transition-colors hover:text-text-1">
+                  <Link href={l.href} className="inline-block py-1.5 text-sm text-text-2 transition-colors hover:text-text-1">
                     {l.label}
                   </Link>
                 </li>
@@ -81,7 +81,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {LEGAL.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-text-2 transition-colors hover:text-text-1">
+                  <Link href={l.href} className="inline-block py-1.5 text-sm text-text-2 transition-colors hover:text-text-1">
                     {l.label}
                   </Link>
                 </li>
@@ -89,7 +89,7 @@ export function Footer() {
               <li>
                 <button
                   onClick={open}
-                  className="cursor-pointer text-sm text-text-2 transition-colors hover:text-text-1"
+                  className="inline-block cursor-pointer py-1.5 text-sm text-text-2 transition-colors hover:text-text-1"
                 >
                   Contact
                 </button>

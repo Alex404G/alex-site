@@ -13,6 +13,15 @@ const SIG_RGB: Record<1 | 2 | 3 | 4, string> = {
   4: "184, 69, 232",
 };
 
+// Versions éclaircies pour le TEXTE des labels (AA sur void, les pleines
+// couleurs restant pour icônes, stats et glows).
+const LABEL_RGB: Record<1 | 2 | 3 | 4, string> = {
+  1: "138, 155, 255",
+  2: "150, 162, 255",
+  3: "167, 139, 250",
+  4: "212, 139, 240",
+};
+
 /**
  * Dossier d'agents — un écran épinglé, un agent à la fois.
  * Le scroll fait défiler les fiches : index géant détouré à gauche,
@@ -87,7 +96,8 @@ export function AgentsSection() {
               className="font-display font-black leading-none tracking-[-0.05em] text-transparent transition-all duration-500"
               style={{
                 fontSize: "clamp(110px, 11vw, 168px)",
-                WebkitTextStroke: `1.5px rgba(${rgb}, 0.85)`,
+                WebkitTextStroke: `1.5px rgba(${rgb}, 0.9)`,
+                filter: `drop-shadow(0 0 26px rgba(${rgb}, 0.5)) drop-shadow(0 0 70px rgba(${rgb}, 0.28))`,
               }}
             >
               {String(idx + 1).padStart(2, "0")}
@@ -122,7 +132,7 @@ export function AgentsSection() {
               >
                 <span
                   className="font-mono text-[11px] font-medium uppercase tracking-[0.18em]"
-                  style={{ color: `rgb(${rgb})` }}
+                  style={{ color: `rgb(${LABEL_RGB[agent.sig]})` }}
                 >
                   {agent.category}
                 </span>

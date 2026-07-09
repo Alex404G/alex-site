@@ -6,6 +6,7 @@ import { ContactModalProvider } from "@/components/contact-modal";
 import { Footer } from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
 import { CallTracker } from "@/components/call-tracker";
+import { RouteTheme } from "@/components/route-theme";
 import { SITE_URL } from "@/lib/site";
 import { ORG_ID } from "@/lib/seo";
 import { satoshi, generalSans, jetbrainsMono } from "./fonts";
@@ -93,6 +94,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      data-theme="warm"
       className={`antialiased ${satoshi.variable} ${generalSans.variable} ${jetbrainsMono.variable}`}
     >
       <head>
@@ -109,6 +111,7 @@ export default function RootLayout({
           Aller au contenu
         </a>
         <ContactModalProvider>
+          <RouteTheme />
           <SmoothScroll />
           {children}
           <Footer />

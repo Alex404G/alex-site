@@ -135,19 +135,19 @@ function ContactModal() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-title"
-            className="glass-strong relative w-full max-w-[520px] rounded-3xl p-8 md:p-10"
+            className="glass-strong relative max-h-[calc(100dvh-2rem)] w-full max-w-[520px] overflow-y-auto overscroll-contain rounded-3xl p-8 md:p-10"
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.97 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Glow accent (chaud) */}
+            {/* Glow accent — suit le thème de la page (via --accent-glow) */}
             <div
               aria-hidden
               className="pointer-events-none absolute -top-24 left-1/2 h-48 w-[120%] -translate-x-1/2 rounded-full opacity-50"
               style={{
                 background:
-                  "radial-gradient(closest-side, rgba(255,154,77,0.45), transparent 70%)",
+                  "radial-gradient(closest-side, var(--accent-glow), transparent 70%)",
                 filter: "blur(40px)",
               }}
             />
@@ -176,8 +176,8 @@ function ContactModal() {
                 className="glass group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5 hover:border-white/20"
               >
                 <span
-                  className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-void-0"
-                  style={{ background: "var(--grad-warm)" }}
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-xl"
+                  style={{ background: "var(--accent-grad)", color: "var(--accent-ink)" }}
                 >
                   <Phone className="h-5 w-5" strokeWidth={2} />
                 </span>
@@ -197,8 +197,8 @@ function ContactModal() {
                   className="group flex min-w-0 flex-1 items-center gap-4"
                 >
                   <span
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-void-0"
-                    style={{ background: "var(--grad-warm)" }}
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-xl"
+                    style={{ background: "var(--accent-grad)", color: "var(--accent-ink)" }}
                   >
                     <Mail className="h-5 w-5" strokeWidth={2} />
                   </span>
@@ -215,7 +215,7 @@ function ContactModal() {
                   aria-label={copied ? "Adresse copiée" : "Copier l'adresse e-mail"}
                   className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl border border-white/10 text-text-2 transition-colors hover:border-white/25 hover:text-text-1"
                 >
-                  {copied ? <Check className="h-4 w-4 text-visi-2" /> : <Copy className="h-4 w-4" />}
+                  {copied ? <Check className="h-4 w-4" style={{ color: "var(--accent)" }} /> : <Copy className="h-4 w-4" />}
                 </button>
               </div>
             </div>

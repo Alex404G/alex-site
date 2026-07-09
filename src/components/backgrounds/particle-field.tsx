@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 /**
  * Subtle drifting particles — tiny white specks with a slow upward float.
- * ~180 particles, low opacity. Pauses if offscreen via IntersectionObserver in parent.
+ * Boucle suspendue quand l'onglet est masqué ; densité réduite sur mobile.
  */
 export function ParticleField({ count = 180 }: { count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,6 +18,11 @@ export function ParticleField({ count = 180 }: { count?: number }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Moitié moins de particules sous 768px (budget GPU/batterie mobile)
+    const effectiveCount = window.matchMedia("(max-width: 767px)").matches
+      ? Math.round(count / 2)
+      : count;
+
     let raf = 0;
     let w = (canvas.width = window.innerWidth * window.devicePixelRatio);
     let h = (canvas.height = window.innerHeight * window.devicePixelRatio);
@@ -29,7 +34,7 @@ export function ParticleField({ count = 180 }: { count?: number }) {
     window.addEventListener("resize", onResize);
 
     type P = { x: number; y: number; r: number; vy: number; a: number };
-    const particles: P[] = Array.from({ length: count }, () => ({
+    const particles: P[] = Array.from({ length: effectiveCount }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
       r: (Math.random() * 1.2 + 0.3) * window.devicePixelRatio,
@@ -54,9 +59,20 @@ export function ParticleField({ count = 180 }: { count?: number }) {
     };
     raf = requestAnimationFrame(loop);
 
+    // Suspend la boucle quand l'onglet n'est pas visible (batterie)
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        raf = requestAnimationFrame(loop);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [count]);
 

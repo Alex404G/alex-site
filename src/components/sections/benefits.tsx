@@ -76,7 +76,7 @@ const PILLARS: Pillar[] = [
         source: "BrightLocal, 2024",
       },
       {
-        value: "× 2,7",
+        value: "×2,7",
         label: "de chances qu'un client choisisse une entreprise à la fiche Google complète",
         source: "Google",
       },
@@ -89,7 +89,7 @@ const PILLARS: Pillar[] = [
 export function BenefitsSection() {
   return (
     <section id="benefices" className="relative w-full py-32 md:py-40">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -162,7 +162,7 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
           </div>
 
           <div
-            className={`mt-8 font-display font-black leading-[0.88] tracking-[-0.045em] whitespace-nowrap ${
+            className={`mt-8 font-display font-black leading-[0.88] tracking-[-0.045em] whitespace-nowrap tabular-nums ${
               pillar.big.raw
                 ? "text-[clamp(48px,7.2vw,108px)]"
                 : "text-[clamp(72px,11vw,168px)]"

@@ -45,24 +45,27 @@ export function ProcessSection() {
 
   return (
     <section id="processus" className="relative w-full py-32 md:py-40">
-      <div className="mx-auto max-w-3xl px-6">
+      {/* Header sur l'axe commun des sections de l'accueil */}
+      <div className="mx-auto max-w-6xl px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-xl"
+          className="max-w-2xl"
         >
           <span className="kicker">Processus</span>
           <h2 className="t-h1 mt-3">
             Du cadrage à la <span className="text-gradient-warm">visibilité.</span>
           </h2>
           <p className="body-lg mt-5">
-            Un seul interlocuteur — design, développement, mise en ligne, visibilité.
+            Un seul interlocuteur : design, développement, mise en ligne, visibilité.
             Vous savez toujours à qui parler, et le site reste le vôtre.
           </p>
         </motion.div>
+      </div>
 
+      <div className="mx-auto max-w-3xl px-6">
         {/* Timeline verticale — rail qui se remplit au scroll */}
         <div ref={ref} className="relative mt-16">
           {/* Rail */}
@@ -102,7 +105,7 @@ export function ProcessSection() {
                   />
                 </span>
 
-                <span className="font-mono text-xs font-medium tracking-[0.18em] text-text-2">
+                <span className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-text-2">
                   {s.n} · {s.duration}
                 </span>
                 <h3 className="mt-2 font-display text-xl font-medium leading-tight md:text-2xl">

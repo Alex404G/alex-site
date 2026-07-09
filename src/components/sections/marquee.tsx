@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { MARQUEE_TAGS } from "@/lib/agents";
 import { motion } from "framer-motion";
 
@@ -9,9 +10,22 @@ const ROW_B = MARQUEE_TAGS.slice(18, 35);
 const ROW_C = MARQUEE_TAGS.slice(35);
 
 export function MarqueeSection() {
+  // L'animation CSS ne tourne que quand la section est à l'écran (coût GPU nul sinon)
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(true);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), {
+      rootMargin: "120px",
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <section className="relative w-full overflow-hidden py-32">
-      <div className="mx-auto max-w-6xl px-6 text-center">
+    <section ref={sectionRef} className="relative w-full overflow-hidden py-32">
+      <div className="mx-auto max-w-6xl px-6 text-center md:px-8">
         <motion.h3
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -33,9 +47,9 @@ export function MarqueeSection() {
       </div>
 
       <div className="relative mt-14 space-y-4">
-        <Row tags={ROW_A} dir="left"  duration={48} />
-        <Row tags={ROW_B} dir="right" duration={56} />
-        <Row tags={ROW_C} dir="left"  duration={64} />
+        <Row tags={ROW_A} dir="left"  duration={48} running={inView} />
+        <Row tags={ROW_B} dir="right" duration={56} running={inView} />
+        <Row tags={ROW_C} dir="left"  duration={64} running={inView} />
 
         {/* Edge masks */}
         <div
@@ -55,22 +69,27 @@ function Row({
   tags,
   dir,
   duration,
+  running,
 }: {
   tags: string[];
   dir: "left" | "right";
   duration: number;
+  running: boolean;
 }) {
   const doubled = [...tags, ...tags];
   return (
     <div className="relative overflow-hidden">
       <div
         className={`marquee-track ${dir === "left" ? "marquee-left" : "marquee-right"}`}
-        style={{ animationDuration: `${duration}s` }}
+        style={{
+          animationDuration: `${duration}s`,
+          animationPlayState: running ? undefined : "paused",
+        }}
       >
         {doubled.map((t, i) => (
           <span
             key={i}
-            className="mr-3 flex-shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-text-1 backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/[0.06]"
+            className="mr-3 flex-shrink-0 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm text-text-1"
           >
             <span className="font-mono text-[10px] text-text-3 mr-2">·</span>
             {t}

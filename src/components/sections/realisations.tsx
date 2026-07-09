@@ -1,18 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Utensils, HardHat, Camera, Scale, Store, Leaf } from "lucide-react";
-import { SpotlightCard } from "@/components/spotlight-card";
 import { useContactModal } from "@/components/contact-modal";
 import { easings } from "@/lib/utils";
 
+// Liste éditoriale (pas de cartes) : index mono, métier en display,
+// promesse en regard. Une grammaire propre à cette section.
 const SECTORS = [
-  { icon: Utensils, title: "Restaurants & cafés", line: "Carte, réservation, avis Google — donner faim avant la première bouchée." },
-  { icon: HardHat, title: "Artisans & BTP", line: "Réalisations en photos, devis en un clic, confiance immédiate." },
-  { icon: Camera, title: "Photographes & créatifs", line: "Un portfolio qui met le travail en valeur et déclenche la prise de contact." },
-  { icon: Scale, title: "Professions libérales", line: "Sérieux, clarté, prise de rendez-vous — pour avocats, santé, conseil." },
-  { icon: Store, title: "Commerces & boutiques", line: "Être trouvé en local, afficher horaires et nouveautés, attirer en boutique." },
-  { icon: Leaf, title: "Coachs & bien-être", line: "Une présence qui inspire confiance et remplit l'agenda." },
+  { title: "Restaurants & cafés", line: "Carte, réservation, avis Google : donner faim avant la première bouchée." },
+  { title: "Artisans & BTP", line: "Réalisations en photos, devis en un clic, confiance immédiate." },
+  { title: "Photographes & créatifs", line: "Un portfolio qui met le travail en valeur et déclenche la prise de contact." },
+  { title: "Professions libérales", line: "Sérieux, clarté, prise de rendez-vous : avocats, santé, conseil." },
+  { title: "Commerces & boutiques", line: "Être trouvé en local, afficher horaires et nouveautés, attirer en boutique." },
+  { title: "Coachs & bien-être", line: "Une présence qui inspire confiance et remplit l'agenda." },
 ];
 
 export function RealisationsSection() {
@@ -32,37 +32,32 @@ export function RealisationsSection() {
           Un site pensé pour <span className="text-gradient-warm">votre métier.</span>
         </h2>
         <p className="body-lg mt-5">
-          Chaque activité a ses codes. Voici les terrains où j&apos;interviens — votre projet
-          restera unique.
+          Chaque activité a ses codes. Voici les terrains où j&apos;interviens, et votre
+          projet restera unique.
         </p>
       </motion.div>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {SECTORS.map((s, i) => {
-          const Icon = s.icon;
-          return (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, ease: easings.outQuart, delay: (i % 3) * 0.08 }}
-            >
-              <SpotlightCard glow="warm" className="h-full">
-                <div className="p-7">
-                  <span
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-void-0"
-                    style={{ background: "var(--grad-warm)" }}
-                  >
-                    <Icon className="h-5 w-5" strokeWidth={2} />
-                  </span>
-                  <h3 className="t-h3 mt-5 text-text-1">{s.title}</h3>
-                  <p className="body-md mt-2 text-[15px]">{s.line}</p>
-                </div>
-              </SpotlightCard>
-            </motion.div>
-          );
-        })}
+      <div className="mt-14 border-t border-white/[0.07]">
+        {SECTORS.map((s, i) => (
+          <motion.div
+            key={s.title}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, ease: easings.outQuart, delay: i * 0.05 }}
+            className="group flex items-baseline gap-5 border-b border-white/[0.07] py-6 transition-all duration-300 hover:pl-3 md:gap-8 md:py-7"
+          >
+            <span className="kicker w-8 shrink-0 text-warm-2/80">
+              0{i + 1}
+            </span>
+            <div className="flex flex-1 flex-col gap-1.5 md:flex-row md:items-baseline md:justify-between md:gap-8">
+              <h3 className="font-display text-xl font-bold tracking-[-0.02em] text-text-1 transition-colors group-hover:text-white md:text-2xl">
+                {s.title}
+              </h3>
+              <p className="body-md max-w-md text-[15px] md:text-right">{s.line}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
 
       <motion.p
@@ -75,8 +70,8 @@ export function RealisationsSection() {
         Vous voulez voir des exemples concrets ?{" "}
         <button onClick={open} className="cursor-pointer text-warm-2 underline-offset-4 hover:underline">
           Demandez-les en message
-        </button>{" "}
-        — je vous montre des projets adaptés à votre secteur.
+        </button>
+        , je vous montre des projets adaptés à votre secteur.
       </motion.p>
     </section>
   );

@@ -20,6 +20,9 @@
 
   /* Signature gradient */
   --grad-signature: linear-gradient(135deg, #3D5CFF 0%, #5B6BFF 35%, #8B5CF6 70%, #B845E8 100%);
+  /* Variante assombrie pour FONDS DE BOUTON uniquement : blanc ≥5:1 sur tous
+     les stops (le dégradé clair reste pour les usages décoratifs). */
+  --grad-signature-btn: linear-gradient(135deg, #2E46E0 0%, #4A55E8 35%, #7C3AED 70%, #A32BD4 100%);
   --grad-signature-soft: linear-gradient(135deg, rgba(61,92,255,0.18) 0%, rgba(139,92,246,0.14) 60%, rgba(184,69,232,0.10) 100%);
 
   /* Text */
@@ -97,13 +100,51 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* ==========================================================
+   Accent par route — data-theme posé sur <html> (RouteTheme).
+   Sélection, focus et micro-surfaces suivent le thème de la page.
+   ========================================================== */
+:root,
+html[data-theme="warm"] {
+  --accent: var(--warm-2);
+  --accent-ink: var(--void-0);
+  --accent-grad: var(--grad-warm);
+  --accent-selection: rgba(255, 154, 77, 0.3);
+  --accent-glow: rgba(255, 154, 77, 0.45);
+}
+html[data-theme="visi"] {
+  --accent: var(--visi-2);
+  --accent-ink: var(--void-0);
+  --accent-grad: var(--grad-visi);
+  --accent-selection: rgba(43, 201, 138, 0.3);
+  --accent-glow: rgba(95, 227, 161, 0.4);
+}
+html[data-theme="sig"] {
+  --accent: var(--sig-3);
+  --accent-ink: #ffffff;
+  --accent-grad: var(--grad-signature);
+  --accent-selection: rgba(139, 92, 246, 0.35);
+  --accent-glow: rgba(139, 92, 246, 0.45);
+}
+
 ::selection {
-  background: rgba(139, 92, 246, 0.35);
+  background: var(--accent-selection);
   color: #ffffff;
 }
 
-/* Hide scrollbar but keep scrolling */
-::-webkit-scrollbar { width: 0; height: 0; }
+/* Scrollbar fine et thémée (repère de position conservé, cohérent cross-browser) */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
 
 /* ==========================================================
    Utility classes
@@ -177,6 +218,7 @@ body {
   letter-spacing: -0.04em;
   line-height: 0.94;
   font-size: clamp(48px, 6.8vw, 106px);
+  text-wrap: balance;
 }
 
 .t-h1 {
@@ -185,6 +227,7 @@ body {
   letter-spacing: -0.03em;
   line-height: 1.04;
   font-size: clamp(36px, 4.2vw, 60px);
+  text-wrap: balance;
 }
 
 .t-h2 {
@@ -193,6 +236,19 @@ body {
   letter-spacing: -0.025em;
   line-height: 1.1;
   font-size: clamp(24px, 2.4vw, 36px);
+  text-wrap: balance;
+}
+
+/* Lede — le sous-titre de hero : une voix intermédiaire entre display et body,
+   pour que le titre reste seul à « crier ». */
+.t-lede {
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  font-size: clamp(19px, 1.7vw, 24px);
+  color: #c9cedd;
+  text-wrap: balance;
 }
 
 .t-h3 {
@@ -207,12 +263,14 @@ body {
   font-size: 18px;
   line-height: 1.6;
   color: var(--text-2);
+  text-wrap: pretty;
 }
 
 .body-md {
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-2);
+  text-wrap: pretty;
 }
 
 /* Grain noise overlay */
@@ -337,9 +395,15 @@ body {
 /* Focus rings */
 :focus-visible {
   /* L'outline suit le border-radius de l'élément sur les navigateurs modernes —
-     pas de border-radius forcé ici (ça déformerait les boutons ronds au focus). */
-  outline: 2px solid var(--sig-3);
+     pas de border-radius forcé ici (ça déformerait les boutons ronds au focus).
+     La couleur suit le thème de la page (--accent, posé par data-theme). */
+  outline: 2px solid var(--accent, var(--warm-2));
   outline-offset: 3px;
+}
+
+/* Pause du marquee au survol (lisibilité) */
+.marquee-track:hover {
+  animation-play-state: paused;
 }
 
 /* prefers-reduced-motion */

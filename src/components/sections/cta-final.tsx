@@ -39,19 +39,19 @@ export function CtaFinal() {
               "radial-gradient(ellipse at center, transparent 0%, rgba(2,3,10,0.55) 60%, rgba(2,3,10,0.95) 100%)",
           }}
         />
-        {/* Transition longue et douce depuis le noir : le shader n'apparaît
-            qu'à mi-écran, en fondu progressif multi-paliers. */}
+        {/* Transition douce depuis le noir : l'aurora commence à poindre
+            AVANT le titre, puis s'installe progressivement. */}
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 h-[52vh] min-h-[300px]"
+          className="absolute inset-x-0 top-0 h-[38vh] min-h-[220px]"
           style={{
             background:
-              "linear-gradient(to bottom, var(--void-0) 0%, var(--void-0) 14%, rgba(2,3,10,0.94) 36%, rgba(2,3,10,0.7) 60%, rgba(2,3,10,0.35) 80%, transparent 100%)",
+              "linear-gradient(to bottom, var(--void-0) 0%, rgba(2,3,10,0.9) 26%, rgba(2,3,10,0.62) 52%, rgba(2,3,10,0.3) 76%, transparent 100%)",
           }}
         />
       </div>
 
-      <div className="mx-auto max-w-5xl px-6 text-center">
+      <div className="mx-auto max-w-5xl px-6 text-center md:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

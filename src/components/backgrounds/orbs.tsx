@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 type OrbProps = {
@@ -15,8 +15,10 @@ type OrbProps = {
 
 function Orb({ color, size, x, y, blur = 120, opacity = 0.55, parallax = 0.5 }: OrbProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll();
-  const ty = useTransform(scrollYProgress, [0, 1], [0, 400 * parallax]);
+  const tyRaw = useTransform(scrollYProgress, [0, 1], [0, 400 * parallax]);
+  const ty = reduce ? 0 : tyRaw;
 
   return (
     <motion.div

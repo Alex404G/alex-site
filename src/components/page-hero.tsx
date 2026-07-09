@@ -26,7 +26,8 @@ const THEMES: Record<
   },
   sig: {
     gradientText: "text-gradient-sig",
-    grad: "var(--grad-signature)",
+    // Variante bouton assombrie : blanc AA sur tous les stops
+    grad: "var(--grad-signature-btn)",
     shadow: "0 20px 60px -12px rgba(139,92,246,0.55)",
     ink: "text-white",
   },
@@ -75,7 +76,7 @@ export function PageHero({
         <span className={t.gradientText}>{title}</span>
       </motion.h1>
       <motion.p
-        className="t-h2 mt-6 mx-auto max-w-3xl text-text-1"
+        className="t-lede mt-6 mx-auto max-w-2xl"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.3 }}

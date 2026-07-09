@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { MessageSquarePlus } from "lucide-react";
 import { useContactModal } from "./contact-modal";
@@ -10,12 +11,16 @@ export function StickyCta() {
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [600, 800], [0, 1]);
   const y = useTransform(scrollY, [600, 800], [16, 0]);
+  // Tant que le bouton est invisible, il ne doit être ni cliquable ni focusable
+  const pointerEvents = useTransform(opacity, (v) => (v < 0.2 ? "none" : "auto"));
+  const [active, setActive] = useState(false);
+  useMotionValueEvent(scrollY, "change", (v) => setActive(v > 650));
   const pathname = usePathname();
   const onAuto = pathname.startsWith("/automatisations");
   const onVisi = pathname.startsWith("/visibilite");
 
   const grad = onAuto
-    ? "var(--grad-signature)"
+    ? "var(--grad-signature-btn)"
     : onVisi
       ? "var(--grad-visi)"
       : "var(--grad-warm)";
@@ -28,8 +33,10 @@ export function StickyCta() {
 
   return (
     <motion.button
-      style={{ opacity, y }}
+      style={{ opacity, y, pointerEvents }}
       onClick={open}
+      tabIndex={active ? 0 : -1}
+      aria-hidden={!active}
       aria-label="Ouvrir le contact"
       className="group fixed bottom-6 right-6 z-40 hidden cursor-pointer items-center gap-2 rounded-full px-5 py-3 text-sm font-medium md:inline-flex"
       whileHover={{ scale: 1.03 }}

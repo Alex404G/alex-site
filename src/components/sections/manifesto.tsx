@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 // Each line: [{ text, accent? }] — accent flag marks the highlighted (gradient) words
@@ -29,6 +29,7 @@ const LINES: Token[][] = [
 
 export function Manifesto() {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 85%", "end 55%"],
@@ -50,10 +51,10 @@ export function Manifesto() {
       ref={ref}
       className="relative flex min-h-[85svh] w-full items-center justify-center px-6 py-24"
     >
-      {/* Travelling bloom */}
+      {/* Travelling bloom (statique en reduced-motion) */}
       <motion.div
         aria-hidden
-        style={{ x: bloomX, scale: bloomScale, opacity: bloomOpacity }}
+        style={reduce ? { opacity: 0.35 } : { x: bloomX, scale: bloomScale, opacity: bloomOpacity }}
         className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-[80%] max-w-[900px]"
       >
         <div
@@ -103,6 +104,7 @@ export function Manifesto() {
                       flatIdx={flatIdx}
                       total={totalWords}
                       scrollYProgress={scrollYProgress}
+                      reduce={!!reduce}
                     />
                   );
                 })}
@@ -114,7 +116,7 @@ export function Manifesto() {
         {/* Tracer line under the phrase */}
         <div className="relative mx-auto mt-12 h-px w-[60%] max-w-md overflow-hidden bg-white/8">
           <motion.div
-            style={{ width: tracerWidth, background: "var(--grad-warm)" }}
+            style={{ width: reduce ? "100%" : tracerWidth, background: "var(--grad-warm)" }}
             className="absolute inset-y-0 left-0"
           />
         </div>
@@ -128,25 +130,27 @@ function Word({
   flatIdx,
   total,
   scrollYProgress,
+  reduce,
 }: {
   token: Token;
   flatIdx: number;
   total: number;
   scrollYProgress: import("framer-motion").MotionValue<number>;
+  reduce: boolean;
 }) {
   const span = 0.7 / total;
   const start = 0.05 + flatIdx * span;
   const end = start + span * 2.4;
 
+  // opacity + y uniquement : le blur par mot était un travail de paint coûteux
+  // recalculé à chaque frame de scroll (13 filtres simultanés) pour un gain minime.
   const opacity = useTransform(scrollYProgress, [start, end], [0.12, 1]);
-  const blur = useTransform(scrollYProgress, [start, end], [10, 0]);
   const y = useTransform(scrollYProgress, [start, end], [16, 0]);
-  const filter = useTransform(blur, (b) => `blur(${b}px)`);
 
   return (
     <>
       <motion.span
-        style={{ opacity, filter, y }}
+        style={reduce ? undefined : { opacity, y }}
         className={`inline-block ${token.accent ? "text-gradient-warm" : "text-text-1"}`}
       >
         {token.text}

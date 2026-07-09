@@ -20,13 +20,18 @@ import { SpotlightCard } from "@/components/spotlight-card";
 import { PageHero } from "@/components/page-hero";
 import { easings } from "@/lib/utils";
 
+// Bento : 2 arguments vedettes (avec tuile), 4 compacts (icône inline) —
+// une hiérarchie, pas 6 cartes identiques.
+const FEATURED = [
+  { icon: Sparkles, title: "Design premium sur-mesure", desc: "Une identité unique, dessinée pour votre activité : couleurs, typographies et mise en page dérivées de votre métier, pas d'un template recyclé." },
+  { icon: MousePointerClick, title: "Optimisé conversion", desc: "Parcours clairs, appels à l'action au bon endroit, formulaire réduit à l'essentiel : des visiteurs qui deviennent des clients." },
+];
+
 const FEATURES = [
-  { icon: Sparkles, title: "Design premium sur-mesure", desc: "Une identité unique, pas un template recyclé. Chaque écran est dessiné pour votre activité." },
-  { icon: Gauge, title: "Performance & rapidité", desc: "Un site léger qui charge vite — essentiel pour le confort et le référencement." },
+  { icon: Gauge, title: "Performance & rapidité", desc: "Un site léger qui charge vite, pour le confort et le référencement." },
   { icon: Smartphone, title: "Mobile irréprochable", desc: "Pensé mobile d'abord : la majorité de vos visiteurs vient du téléphone." },
-  { icon: MousePointerClick, title: "Optimisé conversion", desc: "Parcours clairs, appels à l'action efficaces : des visiteurs qui deviennent clients." },
-  { icon: Search, title: "SEO intégré dès le départ", desc: "Structure, contenus et techniques propres pour être bien placé sur Google." },
-  { icon: Wrench, title: "Évolutif & maintenu", desc: "Un site qui grandit avec vous, simple à faire évoluer dans le temps." },
+  { icon: Search, title: "SEO intégré dès le départ", desc: "Structure et contenus propres pour être bien placé sur Google." },
+  { icon: Wrench, title: "Évolutif & maintenu", desc: "Un site qui grandit avec vous, simple à faire évoluer." },
 ];
 
 const COMPARE = [
@@ -84,8 +89,9 @@ export function CreationPage() {
           <span className="kicker">Ce qui est inclus</span>
           <h2 className="t-h1 mt-4 text-text-1">Tout ce qu&apos;un site doit faire.</h2>
         </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((f, i) => {
+        {/* Rangée vedette — les deux arguments qui vendent */}
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {FEATURED.map((f, i) => {
             const Icon = f.icon;
             return (
               <motion.div
@@ -93,20 +99,45 @@ export function CreationPage() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, ease: easings.outQuart, delay: (i % 3) * 0.08 }}
+                transition={{ duration: 0.6, ease: easings.outQuart, delay: i * 0.1 }}
               >
                 <SpotlightCard glow="warm" className="h-full">
-                  <div className="p-7">
+                  <div className="p-8 md:p-9">
                     <span
                       className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-void-0"
                       style={{ background: "var(--grad-warm)" }}
                     >
                       <Icon className="h-5 w-5" strokeWidth={2} />
                     </span>
-                    <h3 className="t-h3 mt-5 text-text-1">{f.title}</h3>
-                    <p className="body-md mt-2 text-[15px]">{f.desc}</p>
+                    <h3 className="t-h3 mt-6 !text-[22px] font-bold text-text-1">{f.title}</h3>
+                    <p className="body-md mt-3 text-[15px]">{f.desc}</p>
                   </div>
                 </SpotlightCard>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Rangée compacte — le socle, sans tuiles */}
+        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {FEATURES.map((f, i) => {
+            const Icon = f.icon;
+            return (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, ease: easings.outQuart, delay: 0.1 + i * 0.06 }}
+                className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Icon className="h-4.5 w-4.5 shrink-0 text-warm-2" strokeWidth={1.8} />
+                  <h3 className="font-display text-[16px] font-bold tracking-[-0.01em] text-text-1">
+                    {f.title}
+                  </h3>
+                </div>
+                <p className="body-md mt-2.5 text-[14px]">{f.desc}</p>
               </motion.div>
             );
           })}
