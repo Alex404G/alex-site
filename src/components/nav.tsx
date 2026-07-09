@@ -18,8 +18,17 @@ export function Nav() {
   const { open } = useContactModal();
   const pathname = usePathname();
   const onAuto = pathname.startsWith("/automatisations");
-  const accent = onAuto ? "var(--grad-signature)" : "var(--grad-warm)";
-  const dotShadow = onAuto ? "0 0 10px rgba(139,92,246,0.7)" : "0 0 10px rgba(255,122,77,0.7)";
+  const onVisi = pathname.startsWith("/visibilite");
+  const accent = onAuto
+    ? "var(--grad-signature)"
+    : onVisi
+      ? "var(--grad-visi)"
+      : "var(--grad-warm)";
+  const dotShadow = onAuto
+    ? "0 0 10px rgba(139,92,246,0.7)"
+    : onVisi
+      ? "0 0 10px rgba(43,201,138,0.7)"
+      : "0 0 10px rgba(255,122,77,0.7)";
 
   return (
     <motion.header

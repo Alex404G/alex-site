@@ -15,7 +15,7 @@ const SITE = {
   url: SITE_URL,
   title: "Alexandre GIL — Création de sites web & visibilité en ligne",
   description:
-    "Création de sites web premium sur-mesure et visibilité en ligne : SEO local, avis Google, fiche Google Business, Google & Meta Ads. Automatisations et IA en bonus.",
+    "Création de sites web premium sur-mesure et visibilité en ligne : SEO local, avis Google, fiche Google Business, Google & Meta Ads, et automatisations IA conçues sur votre métier.",
 };
 
 export const metadata: Metadata = {

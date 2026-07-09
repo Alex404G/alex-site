@@ -29,26 +29,37 @@ export default function ConfidentialitePage() {
         <section className="mt-10 space-y-3">
           <h2 className="t-h3 text-text-1">Données collectées</h2>
           <p className="body-md text-[15px]">
-            Via le formulaire de contact : votre nom, votre adresse e-mail, et — si vous les
-            renseignez — votre entreprise, votre téléphone et le contenu de votre message.
-            Aucune donnée n&apos;est collectée à votre insu.
+            Ce site ne comporte pas de formulaire : vous me contactez directement par
+            e-mail ou par téléphone. Les seules données traitées sont celles que vous
+            choisissez de transmettre dans votre message ou votre appel. Aucune donnée
+            n&apos;est collectée à votre insu.
           </p>
         </section>
 
         <section className="mt-10 space-y-3">
           <h2 className="t-h3 text-text-1">Finalité et base légale</h2>
           <p className="body-md text-[15px]">
-            Ces données servent uniquement à répondre à votre demande. La base légale est votre
-            consentement, recueilli au moment de l&apos;envoi du formulaire.
+            Ces données servent uniquement à répondre à votre demande. La base légale est
+            l&apos;exécution de mesures précontractuelles prises à votre initiative
+            (art. 6.1.b du RGPD).
           </p>
         </section>
 
         <section className="mt-10 space-y-3">
           <h2 className="t-h3 text-text-1">Destinataires et conservation</h2>
           <p className="body-md text-[15px]">
-            Vos messages sont acheminés par le service d&apos;e-mail Resend et reçus directement par
-            Alexandre Gil. Ils sont conservés le temps nécessaire au traitement de votre demande,
+            Vos messages sont reçus directement par Alexandre Gil, sans intermédiaire
+            commercial. Ils sont conservés le temps nécessaire au traitement de votre demande,
             puis au maximum 3 ans après le dernier échange, conformément aux recommandations de la CNIL.
+          </p>
+        </section>
+
+        <section className="mt-10 space-y-3">
+          <h2 className="t-h3 text-text-1">Mesure d&apos;audience</h2>
+          <p className="body-md text-[15px]">
+            Le site utilise une mesure d&apos;audience anonyme (Vercel Analytics), sans cookie
+            et sans identifiant permettant de reconnaître un visiteur. Aucune donnée
+            personnelle n&apos;est traitée à ce titre.
           </p>
         </section>
 

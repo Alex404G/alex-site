@@ -96,7 +96,7 @@ export function AgentsSection() {
             <span>
               {String(idx).padStart(2, "0")} / {String(AGENTS.length).padStart(2, "0")}
             </span>
-            <span>Scrolle pour explorer →</span>
+            <span>Faites défiler →</span>
           </div>
         </div>
       </div>

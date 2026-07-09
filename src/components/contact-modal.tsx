@@ -2,9 +2,8 @@
 
 import * as React from "react";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
-import { X, Loader2, Check, Mail } from "lucide-react";
+import { X, Check, Mail, Phone, Copy, ArrowUpRight } from "lucide-react";
 import { track } from "@vercel/analytics";
-import { cn } from "@/lib/utils";
 
 type ContactCtx = {
   isOpen: boolean;
@@ -48,40 +47,36 @@ export function useContactModal() {
   return ctx;
 }
 
-type Status = "idle" | "loading" | "success" | "fallback" | "error";
-
 const EMAIL = "marsugil@gmail.com";
 const PHONE = "07 67 67 77 42";
 const PHONE_HREF = "+33767677742";
+const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent("Projet — site / visibilité")}`;
 
+/**
+ * Contact direct — un appel ou un mail, sans formulaire intermédiaire.
+ * Le numéro et l'adresse sont cliquables ; l'adresse se copie en un clic.
+ */
 function ContactModal() {
   const { isOpen, close } = useContactModal();
-  const [status, setStatus] = React.useState<Status>("idle");
-  const [error, setError] = React.useState<string | null>(null);
-  const [mailtoHref, setMailtoHref] = React.useState<string>(`mailto:${EMAIL}`);
+  const [copied, setCopied] = React.useState(false);
   const dialogRef = React.useRef<HTMLDivElement>(null);
   const restoreRef = React.useRef<HTMLElement | null>(null);
-  const successRef = React.useRef<HTMLHeadingElement>(null);
-  const fallbackRef = React.useRef<HTMLHeadingElement>(null);
 
   // Gestion du focus clavier : focus initial, piège (trap), restauration à la fermeture
   React.useEffect(() => {
     if (!isOpen) return;
     restoreRef.current = (document.activeElement as HTMLElement) ?? null;
-    setStatus("idle");
-    setError(null);
+    setCopied(false);
 
     const focusFirst = setTimeout(() => {
-      const el = dialogRef.current?.querySelector<HTMLElement>(
-        'input:not([tabindex="-1"]),select,textarea,button,a[href]',
-      );
+      const el = dialogRef.current?.querySelector<HTMLElement>("a[href],button");
       el?.focus();
     }, 60);
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Tab" || !dialogRef.current) return;
       const nodes = dialogRef.current.querySelectorAll<HTMLElement>(
-        'a[href],button:not([disabled]),input:not([disabled]):not([tabindex="-1"]),select:not([disabled]),textarea:not([disabled])',
+        "a[href],button:not([disabled])",
       );
       const list = Array.from(nodes).filter((el) => el.offsetParent !== null);
       if (!list.length) return;
@@ -104,64 +99,13 @@ function ContactModal() {
     };
   }, [isOpen]);
 
-  // Donne le focus au message de fin quand il apparaît (annonce lecteur d'écran)
-  React.useEffect(() => {
-    if (status === "success") successRef.current?.focus();
-    if (status === "fallback") fallbackRef.current?.focus();
-  }, [status]);
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("loading");
-    setError(null);
-    const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
-
-    // mailto pré-rempli — sert de repli si le formulaire n'est pas (encore) actif
-    const mailSubject = `Demande via le site — ${data.subject || "Projet"}`;
-    const mailBody = [
-      `Nom : ${data.name || ""}`,
-      data.company ? `Entreprise : ${data.company}` : "",
-      data.phone ? `Téléphone : ${data.phone}` : "",
-      data.email ? `Email : ${data.email}` : "",
-      "",
-      data.message || "",
-    ]
-      .filter(Boolean)
-      .join("\n");
-    setMailtoHref(
-      `mailto:${EMAIL}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`,
-    );
-
-    if (data.website) {
-      setStatus("success");
-      return;
-    }
-
+  async function copyEmail() {
     try {
-      const r = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!r.ok) {
-        const j = await r.json().catch(() => ({}));
-        throw new Error(j.error || "Erreur d'envoi");
-      }
-      const j = (await r.json().catch(() => ({}))) as { delivered?: boolean };
-      if (j.delivered) {
-        setStatus("success");
-        track("lead_submit", { subject: data.subject || "Projet" });
-        form.reset();
-      } else {
-        // Aucun fournisseur d'e-mail configuré côté serveur → repli honnête
-        setStatus("fallback");
-        track("lead_fallback");
-      }
-    } catch (err) {
-      setStatus("error");
-      setError(err instanceof Error ? err.message : "Erreur inconnue");
-    }
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      track("email_copy");
+      setTimeout(() => setCopied(false), 1800);
+    } catch {}
   }
 
   return (
@@ -191,7 +135,7 @@ function ContactModal() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-title"
-            className="glass-strong relative w-full max-w-[560px] rounded-3xl p-8 md:p-10"
+            className="glass-strong relative w-full max-w-[520px] rounded-3xl p-8 md:p-10"
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.97 }}
@@ -210,229 +154,82 @@ function ContactModal() {
 
             <button
               onClick={close}
-              aria-label="Fermer le formulaire"
+              aria-label="Fermer"
               className="absolute right-3 top-3 grid h-11 w-11 cursor-pointer place-items-center rounded-full text-text-2 transition-colors hover:bg-white/5 hover:text-text-1"
             >
               <X className="h-4 w-4" />
             </button>
 
-            {status === "success" ? (
-              <div role="status" aria-live="polite" className="flex flex-col items-center py-8 text-center">
-                <div className="grid h-14 w-14 place-items-center rounded-full" style={{ background: "var(--grad-warm)" }}>
-                  <Check className="h-6 w-6 text-void-0" strokeWidth={3} />
-                </div>
-                <h3 ref={successRef} tabIndex={-1} className="t-h3 mt-6 text-text-1 outline-none">
-                  Message envoyé
-                </h3>
-                <p className="body-md mt-3 max-w-sm">
-                  Je vous réponds dans la journée. Si c&apos;est urgent, par mail direct{" "}
-                  <a
-                    href={`mailto:${EMAIL}`}
-                    className="text-text-1 underline decoration-white/30 underline-offset-2"
-                  >
-                    {EMAIL}
-                  </a>{" "}
-                  ou au{" "}
-                  <a
-                    href={`tel:${PHONE_HREF}`}
-                    className="whitespace-nowrap text-text-1 underline decoration-white/30 underline-offset-2"
-                  >
-                    {PHONE}
-                  </a>
-                  .
-                </p>
-                <button
-                  onClick={close}
-                  className="mt-8 cursor-pointer rounded-full bg-white px-5 py-2 text-sm font-medium text-void-0"
-                >
-                  Fermer
-                </button>
-              </div>
-            ) : status === "fallback" ? (
-              <div role="status" aria-live="polite" className="flex flex-col items-center py-6 text-center">
-                <div className="grid h-14 w-14 place-items-center rounded-full border border-white/15">
-                  <Mail className="h-6 w-6 text-warm-2" />
-                </div>
-                <h3 ref={fallbackRef} tabIndex={-1} className="t-h3 mt-6 text-text-1 outline-none">
-                  Dernière étape
-                </h3>
-                <p className="body-md mt-3 max-w-sm">
-                  Pour que votre message me parvienne tout de suite, terminez l&apos;envoi
-                  depuis votre messagerie — tout est déjà pré-rempli.
-                </p>
-                <a
-                  href={mailtoHref}
-                  className="mt-7 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-void-0 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            <span className="kicker">Contact</span>
+            <h3 id="contact-title" className="t-h2 mt-2 text-text-1">
+              On en parle ?
+            </h3>
+            <p className="body-md mt-3">
+              Un appel ou un mail, et je vous réponds dans la journée avec une
+              première idée concrète.
+            </p>
+
+            <div className="mt-7 flex flex-col gap-3">
+              {/* Téléphone */}
+              <a
+                href={`tel:${PHONE_HREF}`}
+                className="glass group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5 hover:border-white/20"
+              >
+                <span
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-void-0"
                   style={{ background: "var(--grad-warm)" }}
                 >
-                  <Mail className="h-4 w-4" />
-                  Terminer par e-mail
-                </a>
-                <p className="body-md mt-5 text-[14px]">
-                  Ou directement{" "}
-                  <a
-                    href={`mailto:${EMAIL}`}
-                    className="text-text-1 underline decoration-white/30 underline-offset-2"
-                  >
-                    {EMAIL}
-                  </a>{" "}
-                  ·{" "}
-                  <a
-                    href={`tel:${PHONE_HREF}`}
-                    className="whitespace-nowrap text-text-1 underline decoration-white/30 underline-offset-2"
-                  >
+                  <Phone className="h-5 w-5" strokeWidth={2} />
+                </span>
+                <span className="flex flex-col">
+                  <span className="kicker text-[10px]">Téléphone</span>
+                  <span className="font-display text-xl font-bold tracking-tight text-text-1">
                     {PHONE}
-                  </a>
-                </p>
-                <button
-                  onClick={close}
-                  className="mt-7 cursor-pointer text-sm text-text-2 transition-colors hover:text-text-1"
+                  </span>
+                </span>
+                <ArrowUpRight className="ml-auto h-4 w-4 text-text-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-text-1" />
+              </a>
+
+              {/* Mail */}
+              <div className="glass flex items-center gap-4 rounded-2xl p-5">
+                <a
+                  href={MAILTO}
+                  className="group flex min-w-0 flex-1 items-center gap-4"
                 >
-                  Fermer
-                </button>
-              </div>
-            ) : (
-              <>
-                <span className="kicker">Discuter du projet</span>
-                <h3 id="contact-title" className="t-h2 mt-2 text-text-1">
-                  On en parle ?
-                </h3>
-                <p className="body-md mt-3">
-                  Dites-moi votre activité et ce que vous voulez accomplir en ligne.
-                  Je vous réponds dans la journée.
-                </p>
-
-                <form onSubmit={onSubmit} className="mt-7 flex flex-col gap-4">
-                  {/* Honeypot */}
-                  <input
-                    type="text"
-                    name="website"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    className="absolute -left-[9999px] h-0 w-0 opacity-0"
-                    aria-hidden
-                  />
-
-                  <Field label="Nom" name="name" required />
-                  <Field label="Email" name="email" type="email" required />
-                  <div className="grid grid-cols-2 gap-3">
-                    <Field label="Entreprise" name="company" />
-                    <Field label="Téléphone" name="phone" type="tel" />
-                  </div>
-
-                  <label className="flex flex-col gap-1.5 text-sm">
-                    <span className="text-text-2">Sujet</span>
-                    <select
-                      name="subject"
-                      defaultValue="Site web"
-                      required
-                      className="cursor-pointer rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-text-1 outline-none transition-colors focus:border-white/25"
-                    >
-                      <option className="bg-void-2">Site web</option>
-                      <option className="bg-void-2">Visibilité en ligne</option>
-                      <option className="bg-void-2">Refonte de site</option>
-                      <option className="bg-void-2">Automatisation / IA</option>
-                      <option className="bg-void-2">Autre</option>
-                    </select>
-                  </label>
-
-                  <label className="flex flex-col gap-1.5 text-sm">
-                    <span className="text-text-2">Message</span>
-                    <textarea
-                      name="message"
-                      required
-                      maxLength={1000}
-                      rows={4}
-                      className="resize-none rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-text-1 outline-none transition-colors focus:border-white/25"
-                      placeholder="Votre activité et ce que vous voulez accomplir en ligne, en deux lignes."
-                    />
-                  </label>
-
-                  {status === "error" && (
-                    <p role="alert" className="text-sm text-red-300">{error}</p>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className={cn(
-                      "group mt-2 inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all",
-                      "text-void-0 hover:scale-[1.01] active:scale-[0.99]",
-                      "disabled:opacity-60 disabled:hover:scale-100",
-                    )}
+                  <span
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-void-0"
                     style={{ background: "var(--grad-warm)" }}
                   >
-                    {status === "loading" ? (
-                      <>
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        Envoi…
-                      </>
-                    ) : (
-                      <>
-                        <Mail className="h-4 w-4" />
-                        Envoyer
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-center text-xs text-text-3">
-                    En envoyant ce message, vous acceptez que vos données soient utilisées pour
-                    traiter votre demande. Voir la{" "}
-                    <a href="/confidentialite" className="text-text-2 underline decoration-white/20 underline-offset-2 hover:text-text-1">
-                      politique de confidentialité
-                    </a>
-                    .
-                  </p>
-
-                  <p className="text-center text-xs text-text-3">
-                    Ou directement{" "}
-                    <a
-                      href={`mailto:${EMAIL}`}
-                      className="text-text-2 underline decoration-white/20 underline-offset-2 hover:text-text-1"
-                    >
+                    <Mail className="h-5 w-5" strokeWidth={2} />
+                  </span>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="kicker text-[10px]">Mail</span>
+                    <span className="truncate font-display text-lg font-bold tracking-tight text-text-1 group-hover:underline group-hover:decoration-white/30 group-hover:underline-offset-4">
                       {EMAIL}
-                    </a>{" "}
-                    ·{" "}
-                    <a
-                      href={`tel:${PHONE_HREF}`}
-                      className="whitespace-nowrap text-text-2 underline decoration-white/20 underline-offset-2 hover:text-text-1"
-                    >
-                      {PHONE}
-                    </a>
-                  </p>
-                </form>
-              </>
-            )}
+                    </span>
+                  </span>
+                </a>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  aria-label={copied ? "Adresse copiée" : "Copier l'adresse e-mail"}
+                  className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl border border-white/10 text-text-2 transition-colors hover:border-white/25 hover:text-text-1"
+                >
+                  {copied ? <Check className="h-4 w-4 text-visi-2" /> : <Copy className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+
+            <p aria-live="polite" className="sr-only">
+              {copied ? "Adresse e-mail copiée" : ""}
+            </p>
+
+            <p className="mt-6 text-center text-xs leading-relaxed text-text-3">
+              RDV physique possible dans le sud de la France, sinon par écrit ou en visio.
+            </p>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = "text",
-  required = false,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-}) {
-  return (
-    <label className="flex flex-col gap-1.5 text-sm">
-      <span className="text-text-2">
-        {label}
-        {required && <span className="ml-1 text-text-3">*</span>}
-      </span>
-      <input
-        type={type}
-        name={name}
-        required={required}
-        className="rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-text-1 outline-none transition-colors placeholder:text-text-3 focus:border-white/25"
-      />
-    </label>
   );
 }

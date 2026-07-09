@@ -60,6 +60,11 @@
   --color-warm-3: var(--warm-3);
   --color-warm-4: var(--warm-4);
 
+  --color-visi-1: var(--visi-1);
+  --color-visi-2: var(--visi-2);
+  --color-visi-3: var(--visi-3);
+  --color-visi-4: var(--visi-4);
+
   --color-text-1: var(--text-1);
   --color-text-2: var(--text-2);
   --color-text-3: var(--text-3);
@@ -253,6 +258,13 @@ body {
   --warm-3: #FF6F61;
   --warm-4: #F0476B;
   --grad-warm: linear-gradient(135deg, #FFC178 0%, #FF9A4D 35%, #FF6F61 70%, #F0476B 100%);
+
+  /* DA émeraude — Visibilité en ligne (3e thème : chaud / émeraude / violet) */
+  --visi-1: #A8F0C6;
+  --visi-2: #5FE3A1;
+  --visi-3: #2BC98A;
+  --visi-4: #0FA76F;
+  --grad-visi: linear-gradient(135deg, #A8F0C6 0%, #5FE3A1 35%, #2BC98A 70%, #0FA76F 100%);
 }
 
 .text-gradient-warm {
@@ -279,6 +291,39 @@ body {
     0 0 0 1px rgba(255, 255, 255, 0.05),
     0 30px 100px -20px rgba(255, 122, 77, 0.40),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.text-gradient-visi {
+  background: linear-gradient(
+    115deg,
+    #5FE3A1 0%,
+    #C4F5DB 24%,
+    #FFFFFF 46%,
+    #FFFFFF 54%,
+    #9BEBC4 74%,
+    #2BC98A 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 220% 220%;
+  animation: none;
+  filter: drop-shadow(0 0 28px rgba(47, 201, 138, 0.30))
+          drop-shadow(0 4px 18px rgba(2, 3, 10, 0.55));
+}
+
+.glow-visi {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 30px 100px -20px rgba(43, 201, 138, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Lueur émeraude de fond (page Visibilité) */
+.visi-bloom {
+  background:
+    radial-gradient(ellipse 55% 45% at 22% 12%, rgba(95, 227, 161, 0.16), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 78%, rgba(15, 167, 111, 0.14), transparent 60%);
 }
 
 /* Lueur chaude de fond (remplace l'aurora violette sur ces pages) */

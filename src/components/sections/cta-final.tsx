@@ -1,22 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MessageSquarePlus, Copy, Check } from "lucide-react";
+import { Mail, Phone, Copy, Check, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
-import { useContactModal } from "@/components/contact-modal";
+import { track } from "@vercel/analytics";
 import { MeshShader } from "@/components/backgrounds/mesh-shader";
 
 const EMAIL = "marsugil@gmail.com";
+const PHONE = "07 67 67 77 42";
+const PHONE_HREF = "+33767677742";
 
 export function CtaFinal() {
-  const { open } = useContactModal();
   const [copied, setCopied] = useState(false);
-  const [phoneReveal, setPhoneReveal] = useState(false);
 
   async function copyEmail() {
     try {
       await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
+      track("email_copy");
       setTimeout(() => setCopied(false), 1800);
     } catch {}
   }
@@ -69,14 +70,39 @@ export function CtaFinal() {
           en visio, comme vous préférez.
         </motion.p>
 
-        {/* Three contact cards */}
+        {/* Deux cartes de contact direct — téléphone et mail */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-14 grid gap-4 sm:grid-cols-3"
+          className="mx-auto mt-14 grid max-w-2xl gap-4 sm:grid-cols-2"
         >
+          {/* Téléphone */}
+          <a
+            href={`tel:${PHONE_HREF}`}
+            className="glass group relative flex flex-col items-start gap-3 rounded-2xl p-6 text-left transition-all hover:-translate-y-1"
+          >
+            <div className="flex w-full items-center justify-between">
+              <div
+                className="grid h-10 w-10 place-items-center rounded-xl"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(139,92,246,0.35), rgba(139,92,246,0.1))",
+                  border: "1px solid rgba(139,92,246,0.3)",
+                }}
+              >
+                <Phone className="h-4 w-4 text-white" strokeWidth={1.75} />
+              </div>
+              <ArrowUpRight className="h-4 w-4 text-text-3 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-text-1" />
+            </div>
+            <span className="kicker">Téléphone</span>
+            <span className="font-display text-lg font-bold tracking-tight text-text-1">
+              {PHONE}
+            </span>
+            <span className="text-xs text-text-3">Le plus direct pour en parler</span>
+          </a>
+
           {/* Mail */}
           <button
             type="button"
@@ -99,80 +125,9 @@ export function CtaFinal() {
               </span>
             </div>
             <span className="kicker">Mail</span>
-            <span className="font-mono text-sm text-text-1 break-all">
-              {EMAIL}
-            </span>
+            <span className="font-mono text-sm text-text-1 break-all">{EMAIL}</span>
             <span className="text-xs text-text-3">
-              {copied ? "Copié !" : "Cliquez pour copier"}
-            </span>
-          </button>
-
-          {/* Phone (reveal-on-click anti-scrape) */}
-          <button
-            type="button"
-            onClick={() => setPhoneReveal(true)}
-            className="glass group relative flex cursor-pointer flex-col items-start gap-3 rounded-2xl p-6 text-left transition-all hover:-translate-y-1"
-            disabled={phoneReveal}
-          >
-            <div
-              className="grid h-10 w-10 place-items-center rounded-xl"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(139,92,246,0.35), rgba(139,92,246,0.1))",
-                border: "1px solid rgba(139,92,246,0.3)",
-              }}
-            >
-              <Phone className="h-4 w-4 text-white" strokeWidth={1.75} />
-            </div>
-            <span className="kicker">Téléphone</span>
-            <span className="font-mono text-sm text-text-1">
-              {phoneReveal ? (
-                <a
-                  href="tel:+33000000000"
-                  className="underline decoration-white/30 underline-offset-2"
-                >
-                  +33 ● ● ● ● ●
-                </a>
-              ) : (
-                "+33 ● ● ● ● ●"
-              )}
-            </span>
-            <span className="text-xs text-text-3">
-              {phoneReveal
-                ? "Numéro communiqué en RDV ou par mail"
-                : "Cliquez pour afficher"}
-            </span>
-          </button>
-
-          {/* Form */}
-          <button
-            type="button"
-            onClick={open}
-            className="group relative flex cursor-pointer flex-col items-start gap-3 overflow-hidden rounded-2xl p-6 text-left transition-all hover:-translate-y-1"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(184,69,232,0.18), rgba(91,107,255,0.12))",
-              border: "1px solid rgba(184,69,232,0.35)",
-              boxShadow:
-                "inset 0 1px 0 rgba(255,255,255,0.08), 0 30px 70px -25px rgba(184,69,232,0.55)",
-            }}
-          >
-            <div
-              className="grid h-10 w-10 place-items-center rounded-xl"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(184,69,232,0.55), rgba(184,69,232,0.2))",
-                border: "1px solid rgba(184,69,232,0.45)",
-              }}
-            >
-              <MessageSquarePlus className="h-4 w-4 text-white" strokeWidth={1.75} />
-            </div>
-            <span className="kicker">Formulaire</span>
-            <span className="font-display text-base font-medium text-text-1">
-              Envoyer un message →
-            </span>
-            <span className="text-xs text-text-3">
-              Réponse dans la journée
+              {copied ? "Copié !" : "Cliquez pour copier · réponse dans la journée"}
             </span>
           </button>
         </motion.div>

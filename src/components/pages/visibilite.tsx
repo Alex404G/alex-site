@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useContactModal } from "@/components/contact-modal";
 import { SpotlightCard } from "@/components/spotlight-card";
+import { PageHero } from "@/components/page-hero";
 import { easings } from "@/lib/utils";
 
 const LEVERS = [
@@ -58,7 +59,7 @@ export function VisibilitePage() {
     <main id="main" className="relative overflow-hidden">
       {/* Fond chaud éditorial (pas d'aurora) */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
-        <div className="warm-bloom absolute inset-0" />
+        <div className="visi-bloom absolute inset-0" />
         <div className="bg-grid absolute inset-0 opacity-40" />
         <div
           className="absolute inset-0"
@@ -69,58 +70,15 @@ export function VisibilitePage() {
         />
       </div>
 
-      {/* Hero */}
-      <section className="relative mx-auto max-w-5xl px-6 pt-40 pb-16 text-center md:pt-52 md:pb-24">
-        <motion.span
-          className="kicker"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: easings.outQuart }}
-        >
-          Visibilité en ligne
-        </motion.span>
-        <motion.h1
-          className="t-display mt-6"
-          initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.9, ease: easings.outQuart, delay: 0.1 }}
-        >
-          <span className="text-gradient-warm">Soyez trouvé.</span>
-        </motion.h1>
-        <motion.p
-          className="t-h2 mt-7 mx-auto max-w-3xl text-text-1"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.3 }}
-        >
-          Là où vos clients cherchent : Google et les réseaux.
-        </motion.p>
-        <motion.p
-          className="body-md mt-6 mx-auto max-w-xl text-[15.5px]"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.45 }}
-        >
-          SEO local, fiche Google Business, avis Google, Google &amp; Meta Ads :
-          je travaille votre présence pour attirer des clients qualifiés et
-          installer une image solide, durablement.
-        </motion.p>
-        <motion.div
-          className="mt-10 flex justify-center"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.6 }}
-        >
-          <button
-            onClick={open}
-            className="group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-void-0 transition-all hover:scale-[1.02] active:scale-[0.98]"
-            style={{ background: "var(--grad-warm)", boxShadow: "0 20px 60px -12px rgba(255,122,77,0.55)" }}
-          >
-            Booster ma visibilité
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </button>
-        </motion.div>
-      </section>
+      {/* Hero — disposition commune aux trois pages de service */}
+      <PageHero
+        theme="visi"
+        kicker="Visibilité en ligne"
+        title="Soyez trouvé."
+        sub="Là où vos clients cherchent : Google et les réseaux."
+        body="SEO local, fiche Google Business, avis Google, Google & Meta Ads : je travaille votre présence pour attirer des clients qualifiés et installer une image solide, durablement."
+        cta="Booster ma visibilité"
+      />
 
       {/* Leviers */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
@@ -139,11 +97,11 @@ export function VisibilitePage() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, ease: easings.outQuart, delay: (i % 3) * 0.08 }}
               >
-                <SpotlightCard glow="warm" className="h-full">
+                <SpotlightCard glow="visi" className="h-full">
                   <div className="p-7">
                     <span
                       className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-void-0"
-                      style={{ background: "var(--grad-warm)" }}
+                      style={{ background: "var(--grad-visi)" }}
                     >
                       <Icon className="h-5 w-5" strokeWidth={2} />
                     </span>
@@ -181,7 +139,7 @@ export function VisibilitePage() {
                 <div className="flex items-center gap-3">
                   <span
                     className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-void-0"
-                    style={{ background: "var(--grad-warm)" }}
+                    style={{ background: "var(--grad-visi)" }}
                   >
                     <Icon className="h-5 w-5" strokeWidth={2} />
                   </span>
@@ -214,7 +172,7 @@ export function VisibilitePage() {
               <span
                 className="font-mono text-2xl font-bold"
                 style={{
-                  background: "var(--grad-warm)",
+                  background: "var(--grad-visi)",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -236,7 +194,7 @@ export function VisibilitePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7, ease: easings.outQuart }}
-          className="glow-warm rounded-3xl border border-white/[0.08] bg-white/[0.03] p-12 md:p-16"
+          className="glow-visi rounded-3xl border border-white/[0.08] bg-white/[0.03] p-12 md:p-16"
         >
           <h2 className="t-h1 text-text-1">Prêt à être vu ?</h2>
           <p className="body-lg mt-4 mx-auto max-w-xl">
@@ -245,7 +203,7 @@ export function VisibilitePage() {
           <button
             onClick={open}
             className="group mt-9 inline-flex cursor-pointer items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-void-0 transition-all hover:scale-[1.02] active:scale-[0.98]"
-            style={{ background: "var(--grad-warm)", boxShadow: "0 20px 60px -12px rgba(255,122,77,0.55)" }}
+            style={{ background: "var(--grad-visi)", boxShadow: "0 20px 60px -12px rgba(43,201,138,0.5)" }}
           >
             Discuter du projet
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -254,7 +212,7 @@ export function VisibilitePage() {
             La visibilité amène le trafic, le site le transforme en clients.{" "}
             <Link
               href="/creation-site-web"
-              className="inline-flex items-center gap-1 text-warm-2 underline decoration-white/20 underline-offset-2 transition-colors hover:text-text-1"
+              className="inline-flex items-center gap-1 text-visi-2 underline decoration-white/20 underline-offset-2 transition-colors hover:text-text-1"
             >
               Voir la création de site
               <ArrowUpRight className="h-3.5 w-3.5" />

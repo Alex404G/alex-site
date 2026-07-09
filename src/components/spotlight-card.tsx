@@ -6,9 +6,15 @@ import { motion } from "framer-motion";
 type Props = {
   children: ReactNode;
   className?: string;
-  /** teinte de la lueur : chaud (défaut) ou signature violette */
-  glow?: "warm" | "sig";
+  /** teinte de la lueur : chaud (défaut), émeraude ou signature violette */
+  glow?: "warm" | "visi" | "sig";
 };
+
+const GLOWS = {
+  warm: { ring: "rgba(255,154,77,0.45)", halo: "rgba(255,122,77,0.16)" },
+  visi: { ring: "rgba(95,227,161,0.45)", halo: "rgba(43,201,138,0.15)" },
+  sig: { ring: "rgba(139,92,246,0.45)", halo: "rgba(139,92,246,0.16)" },
+} as const;
 
 /**
  * Carte "vivante" — élévation à ressort + bord lumineux + halo doux au survol.
@@ -16,8 +22,7 @@ type Props = {
  * réponse au visiteur (hover), aucune boucle autonome.
  */
 export function SpotlightCard({ children, className = "", glow = "warm" }: Props) {
-  const ring = glow === "warm" ? "rgba(255,154,77,0.45)" : "rgba(139,92,246,0.45)";
-  const halo = glow === "warm" ? "rgba(255,122,77,0.16)" : "rgba(139,92,246,0.16)";
+  const { ring, halo } = GLOWS[glow];
 
   return (
     <motion.div

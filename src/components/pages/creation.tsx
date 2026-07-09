@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useContactModal } from "@/components/contact-modal";
 import { SpotlightCard } from "@/components/spotlight-card";
+import { PageHero } from "@/components/page-hero";
 import { easings } from "@/lib/utils";
 
 const FEATURES = [
@@ -60,58 +61,15 @@ export function CreationPage() {
         />
       </div>
 
-      {/* Hero */}
-      <section className="relative mx-auto max-w-5xl px-6 pt-40 pb-16 text-center md:pt-52 md:pb-24">
-        <motion.span
-          className="kicker"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: easings.outQuart }}
-        >
-          Création de sites web
-        </motion.span>
-        <motion.h1
-          className="t-display mt-6"
-          initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.9, ease: easings.outQuart, delay: 0.1 }}
-        >
-          <span className="text-gradient-warm">Un site qui vend.</span>
-        </motion.h1>
-        <motion.p
-          className="t-h2 mt-7 mx-auto max-w-3xl text-text-1"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.3 }}
-        >
-          Conçu sur-mesure pour votre activité, jamais un template recyclé.
-        </motion.p>
-        <motion.p
-          className="body-md mt-6 mx-auto max-w-xl text-[15.5px]"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.45 }}
-        >
-          Je conçois et développe votre site de A à Z : identité, design premium,
-          performance, et une structure pensée pour transformer vos visiteurs en
-          clients — optimisée pour Google dès le départ.
-        </motion.p>
-        <motion.div
-          className="mt-10 flex justify-center"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.6 }}
-        >
-          <button
-            onClick={open}
-            className="group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-void-0 transition-all hover:scale-[1.02] active:scale-[0.98]"
-            style={{ background: "var(--grad-warm)", boxShadow: "0 20px 60px -12px rgba(255,122,77,0.55)" }}
-          >
-            Discuter de votre site
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </button>
-        </motion.div>
-      </section>
+      {/* Hero — disposition commune aux trois pages de service */}
+      <PageHero
+        theme="warm"
+        kicker="Création de sites web"
+        title="Un site qui vend."
+        sub="Conçu sur-mesure pour votre activité, jamais un template recyclé."
+        body="Je conçois et développe votre site de A à Z : identité, design premium, performance, et une structure pensée pour transformer vos visiteurs en clients, optimisée pour Google dès le départ."
+        cta="Discuter de votre site"
+      />
 
       {/* Inclus / features */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">

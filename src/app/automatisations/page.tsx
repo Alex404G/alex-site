@@ -7,6 +7,7 @@ import { BackgroundOrbs } from "@/components/backgrounds/orbs";
 import { ParticleField } from "@/components/backgrounds/particle-field";
 import { CenterVignette } from "@/components/backgrounds/center-vignette";
 import { StickyCta } from "@/components/sticky-cta";
+import { PageHero } from "@/components/page-hero";
 import { JsonLd, serviceLd, breadcrumbLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -48,19 +49,14 @@ export default function AutomatisationsPage() {
       <StickyCta />
 
       <main id="main" className="relative">
-        <header className="relative mx-auto max-w-5xl px-6 pt-40 pb-6 text-center md:pt-48">
-          <span className="kicker">Bonus · Automatisations &amp; IA</span>
-          <h1 className="t-h1 mt-6">
-            <span className="text-gradient-sig">Automatisations &amp; IA.</span>
-          </h1>
-          <p className="t-h2 mt-6 mx-auto max-w-3xl text-text-1">
-            Faites travailler la machine à votre place.
-          </p>
-          <p className="body-md mt-6 mx-auto max-w-xl">
-            Agents IA, automatisations de tâches et outils internes — conçus exclusivement
-            sur votre métier, vos données, votre vocabulaire.
-          </p>
-        </header>
+        <PageHero
+          theme="sig"
+          kicker="Automatisations & IA"
+          title="Faites travailler la machine."
+          sub="Agents IA, automatisations et outils internes, conçus sur votre métier."
+          body="Tri de mails, factures, veille, documents : ce qui vous prend des heures peut tourner tout seul. Chaque outil est construit sur vos données et votre vocabulaire, pas sur un template."
+          cta="Discuter d'une automatisation"
+        />
 
         <AgentsSection />
         <MarqueeSection />

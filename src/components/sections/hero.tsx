@@ -113,7 +113,7 @@ export function Hero() {
           Je conçois votre site sur-mesure, rapide et pensé pour convertir,
           et je vous rends <em className="not-italic text-text-1">visible en ligne</em> :
           SEO local, avis Google, fiche Google Business, Google &amp; Meta Ads.
-          Les automatisations et l&apos;IA, en bonus.
+          Et j&apos;automatise ce qui vous prend du temps.
         </motion.p>
 
         {/* CTAs */}

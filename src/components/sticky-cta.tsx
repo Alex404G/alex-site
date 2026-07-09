@@ -12,18 +12,25 @@ export function StickyCta() {
   const y = useTransform(scrollY, [600, 800], [16, 0]);
   const pathname = usePathname();
   const onAuto = pathname.startsWith("/automatisations");
+  const onVisi = pathname.startsWith("/visibilite");
 
-  const grad = onAuto ? "var(--grad-signature)" : "var(--grad-warm)";
+  const grad = onAuto
+    ? "var(--grad-signature)"
+    : onVisi
+      ? "var(--grad-visi)"
+      : "var(--grad-warm)";
   const shadow = onAuto
     ? "0 20px 60px -15px rgba(184,69,232,0.6), inset 0 1px 0 rgba(255,255,255,0.2)"
-    : "0 20px 60px -15px rgba(255,122,77,0.55), inset 0 1px 0 rgba(255,255,255,0.25)";
+    : onVisi
+      ? "0 20px 60px -15px rgba(43,201,138,0.5), inset 0 1px 0 rgba(255,255,255,0.25)"
+      : "0 20px 60px -15px rgba(255,122,77,0.55), inset 0 1px 0 rgba(255,255,255,0.25)";
   const ink = onAuto ? "text-white" : "text-void-0";
 
   return (
     <motion.button
       style={{ opacity, y }}
       onClick={open}
-      aria-label="Ouvrir le formulaire de contact"
+      aria-label="Ouvrir le contact"
       className="group fixed bottom-6 right-6 z-40 hidden cursor-pointer items-center gap-2 rounded-full px-5 py-3 text-sm font-medium md:inline-flex"
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
