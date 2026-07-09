@@ -88,7 +88,7 @@ const PILLARS: Pillar[] = [
 
 export function BenefitsSection() {
   return (
-    <section id="benefices" className="relative w-full py-32 md:py-40">
+    <section id="benefices" className="relative w-full py-24 md:py-28">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -108,7 +108,9 @@ export function BenefitsSection() {
           </p>
         </motion.div>
 
-        <div className="mt-20 flex flex-col gap-10">
+        {/* Une rangée de trois cartes compactes — l'impact vient des chiffres,
+            pas de la place occupée. */}
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {PILLARS.map((p, i) => (
             <PillarCard key={p.label} pillar={p} index={i} />
           ))}
@@ -128,96 +130,85 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
       ref={ref}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-15%" }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="glass relative overflow-hidden rounded-3xl p-8 md:p-12"
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.7, delay: index * 0.1 }}
+      className="glass relative flex h-full flex-col overflow-hidden rounded-3xl p-7"
       style={{
-        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.06), 0 30px 80px -30px rgba(${pillar.rgb}, 0.4)`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.06), 0 24px 60px -28px rgba(${pillar.rgb}, 0.35)`,
       }}
     >
-      {/* Glow */}
+      {/* Glow d'angle, discret */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-20 right-0 h-80 w-80 rounded-full opacity-50"
+        className="pointer-events-none absolute -top-16 right-0 h-56 w-56 rounded-full opacity-40"
         style={{
-          background: `radial-gradient(closest-side, rgba(${pillar.rgb}, 0.35), transparent 70%)`,
-          filter: "blur(30px)",
+          background: `radial-gradient(closest-side, rgba(${pillar.rgb}, 0.3), transparent 70%)`,
+          filter: "blur(28px)",
         }}
       />
 
-      <div className="relative grid gap-10 md:grid-cols-[1.05fr_1fr]">
-        {/* Left — big stat */}
-        <div>
-          <div className="flex items-center gap-4">
-            <div
-              className="grid h-12 w-12 place-items-center rounded-2xl"
-              style={{
-                background: `linear-gradient(135deg, rgba(${pillar.rgb}, 0.35), rgba(${pillar.rgb}, 0.1))`,
-                border: `1px solid rgba(${pillar.rgb}, 0.3)`,
-              }}
-            >
-              <Icon className="h-5 w-5 text-white" strokeWidth={1.75} />
-            </div>
-            <span className="kicker">{String(index + 1).padStart(2, "0")} · {pillar.label}</span>
-          </div>
-
+      <div className="relative flex h-full flex-col">
+        <div className="flex items-center gap-3">
           <div
-            className={`mt-8 font-display font-black leading-[0.88] tracking-[-0.045em] whitespace-nowrap tabular-nums ${
-              pillar.big.raw
-                ? "text-[clamp(48px,7.2vw,108px)]"
-                : "text-[clamp(72px,11vw,168px)]"
-            }`}
+            className="grid h-10 w-10 place-items-center rounded-xl"
             style={{
-              color: `rgb(${pillar.rgb})`,
-              textShadow: `0 0 80px rgba(${pillar.rgb}, 0.35)`,
+              background: `linear-gradient(135deg, rgba(${pillar.rgb}, 0.35), rgba(${pillar.rgb}, 0.1))`,
+              border: `1px solid rgba(${pillar.rgb}, 0.3)`,
             }}
           >
-            {pillar.big.raw ? (
-              <span>{pillar.big.raw}</span>
-            ) : (
-              <>
-                {pillar.big.prefix}
-                {inView ? (
-                  <CountUp
-                    end={pillar.big.end}
-                    duration={1.8}
-                    decimals={pillar.big.decimals ?? 0}
-                  />
-                ) : (
-                  "0"
-                )}
-                {pillar.big.suffix}
-              </>
-            )}
+            <Icon className="h-4.5 w-4.5 text-white" strokeWidth={1.75} />
           </div>
-
-          <p className="mt-6 max-w-md text-lg leading-snug text-text-1">
-            {pillar.bigLabel}
-          </p>
-          <p className="kicker mt-3 text-[10px]">{pillar.bigSource}</p>
+          <span className="kicker text-[11px]">{pillar.label}</span>
         </div>
 
-        {/* Right — supporting stats + narration */}
-        <div className="flex flex-col gap-7">
+        <div
+          className="mt-6 font-display font-black leading-none tracking-[-0.04em] whitespace-nowrap tabular-nums text-[clamp(52px,4.4vw,72px)]"
+          style={{
+            color: `rgb(${pillar.rgb})`,
+            textShadow: `0 0 50px rgba(${pillar.rgb}, 0.3)`,
+          }}
+        >
+          {pillar.big.raw ? (
+            <span>{pillar.big.raw}</span>
+          ) : (
+            <>
+              {pillar.big.prefix}
+              {inView ? (
+                <CountUp end={pillar.big.end} duration={1.8} decimals={pillar.big.decimals ?? 0} />
+              ) : (
+                "0"
+              )}
+              {pillar.big.suffix}
+            </>
+          )}
+        </div>
+
+        <p className="mt-3 text-[15px] leading-snug text-text-1">{pillar.bigLabel}</p>
+        <p className="kicker mt-2 text-[10px]">{pillar.bigSource}</p>
+
+        <div className="my-6 h-px w-full bg-white/[0.08]" />
+
+        <div className="flex flex-col gap-4">
           {pillar.stats.map((s) => (
             <div
               key={s.label}
-              className="border-l-2 pl-5"
-              style={{ borderColor: `rgba(${pillar.rgb}, 0.7)` }}
+              className="border-l-2 pl-4"
+              style={{ borderColor: `rgba(${pillar.rgb}, 0.6)` }}
             >
-              <div
-                className="font-display text-3xl font-bold leading-tight tracking-tight"
+              <span
+                className="font-display text-xl font-bold leading-tight tracking-tight"
                 style={{ color: `rgb(${pillar.rgb})` }}
               >
                 {s.value}
-              </div>
-              <p className="mt-1 text-[15px] leading-snug text-text-1">{s.label}</p>
-              <p className="kicker mt-1.5 text-[10px]">{s.source}</p>
+              </span>
+              <p className="mt-0.5 text-[13.5px] leading-snug text-text-2">{s.label}</p>
             </div>
           ))}
-
-          <p className="body-md mt-2 italic">&laquo;&nbsp;{pillar.narration}&nbsp;&raquo;</p>
         </div>
+
+        <p className="mt-auto pt-6 text-[13.5px] italic leading-relaxed text-text-2">
+          &laquo;&nbsp;{pillar.narration}&nbsp;&raquo;
+        </p>
       </div>
     </motion.article>
   );
