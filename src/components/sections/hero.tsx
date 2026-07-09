@@ -36,10 +36,10 @@ export function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   // Titre généraliste : la home vend les trois offres, pas seulement le site.
-  // Ligne 1 neutre, ligne 2 en dégradé tri-thème (chaud → émeraude → violet).
+  // Ligne 1 neutre, ligne 2 en dégradé chaud (la couleur de marque).
   const lines: { text: string; cls: string }[] = [
     { text: "Une présence en ligne", cls: "text-text-1" },
-    { text: "qui travaille pour vous.", cls: "text-gradient-tri" },
+    { text: "qui travaille pour vous.", cls: "text-gradient-warm" },
   ];
 
   return (

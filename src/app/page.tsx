@@ -3,7 +3,6 @@ import { Hero } from "@/components/sections/hero";
 import { Pillars } from "@/components/sections/pillars";
 import { Manifesto } from "@/components/sections/manifesto";
 import { BenefitsSection } from "@/components/sections/benefits";
-import { ProcessSection } from "@/components/sections/process";
 import { CtaWarm } from "@/components/sections/cta-warm";
 import { StickyCta } from "@/components/sticky-cta";
 import { SectionGlow } from "@/components/section-glow";
@@ -27,8 +26,6 @@ export default function Home() {
         <Manifesto />
         <SectionGlow />
         <BenefitsSection />
-        <SectionGlow />
-        <ProcessSection />
         <CtaWarm />
       </main>
     </>
