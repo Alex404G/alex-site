@@ -100,7 +100,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.7 }}
         >
-          Plus de clients. Mieux trouvé sur Google. Une image à la hauteur.
+          Plus de clients, une meilleure place sur Google, et une image à la hauteur de votre travail.
         </motion.p>
 
         {/* Corps */}
@@ -110,7 +110,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.9 }}
         >
-          Je conçois votre site sur-mesure — rapide, moderne, pensé pour convertir —
+          Je conçois votre site sur-mesure, rapide et pensé pour convertir,
           et je vous rends <em className="not-italic text-text-1">visible en ligne</em> :
           SEO local, avis Google, fiche Google Business, Google &amp; Meta Ads.
           Les automatisations et l&apos;IA, en bonus.

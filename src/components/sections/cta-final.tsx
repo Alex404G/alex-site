@@ -66,7 +66,7 @@ export function CtaFinal() {
           className="body-lg mt-8 max-w-2xl mx-auto"
         >
           RDV physique possible dans le sud de la France. Sinon, par écrit ou
-          en visio — comme tu veux.
+          en visio, comme vous préférez.
         </motion.p>
 
         {/* Three contact cards */}
@@ -103,7 +103,7 @@ export function CtaFinal() {
               {EMAIL}
             </span>
             <span className="text-xs text-text-3">
-              {copied ? "Copié !" : "Clique pour copier"}
+              {copied ? "Copié !" : "Cliquez pour copier"}
             </span>
           </button>
 
@@ -140,7 +140,7 @@ export function CtaFinal() {
             <span className="text-xs text-text-3">
               {phoneReveal
                 ? "Numéro communiqué en RDV ou par mail"
-                : "Clique pour afficher"}
+                : "Cliquez pour afficher"}
             </span>
           </button>
 
@@ -177,28 +177,6 @@ export function CtaFinal() {
           </button>
         </motion.div>
       </div>
-
-      {/* Footer */}
-      <footer className="mt-32 border-t border-white/5">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-6 py-10 text-sm text-text-3 md:flex-row md:items-center">
-          <div className="flex items-center gap-3">
-            <span className="font-display text-base font-bold tracking-[-0.02em] text-text-1">
-              Alexandre GIL
-            </span>
-            <span
-              aria-hidden
-              className="h-1.5 w-1.5 rounded-full"
-              style={{
-                background: "var(--grad-signature)",
-                boxShadow: "0 0 10px rgba(139,92,246,0.7)",
-              }}
-            />
-            <span className="hidden md:inline">·</span>
-            <span>Auto-entrepreneur · Languedoc, France</span>
-          </div>
-          <span>© {new Date().getFullYear()} · Tous droits réservés.</span>
-        </div>
-      </footer>
     </section>
   );
 }

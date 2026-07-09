@@ -51,8 +51,8 @@ export function AgentsSection() {
               <span className="text-gradient-sig">un agent peut le faire.</span>
             </h2>
             <p className="body-md mt-2 max-w-xl">
-              Quelques exemples. Il en existe des milliers — chacun se conçoit
-              sur ton métier réel, pas sur un template.
+              Quelques exemples. Il en existe des milliers, chacun conçu
+              sur votre métier réel, pas sur un template.
             </p>
           </motion.div>
         </div>

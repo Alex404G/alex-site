@@ -37,7 +37,7 @@ export function Pillars() {
       >
         <span className="kicker">Deux piliers, une seule mission</span>
         <h2 className="t-h1 mt-4 text-text-1">
-          Un site qui vend, une visibilité qui dure.
+          Attirer des visiteurs, les convertir en clients.
         </h2>
         <p className="body-lg mt-5">
           Le site et la visibilité avancent ensemble : l&apos;un convertit, l&apos;autre amène le trafic.

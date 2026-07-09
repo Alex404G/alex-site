@@ -72,7 +72,7 @@ export function CreationPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.3 }}
         >
-          Sur-mesure, rapide, moderne. Jamais un template.
+          Conçu sur-mesure pour votre activité, jamais un template recyclé.
         </motion.p>
         <motion.p
           className="body-md mt-6 mx-auto max-w-xl text-[15.5px]"

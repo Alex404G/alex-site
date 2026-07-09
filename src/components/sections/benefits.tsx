@@ -99,8 +99,8 @@ export function BenefitsSection() {
         >
           <span className="kicker">Bénéfices</span>
           <h2 className="t-h1 mt-3">
-            Plus visible. Plus convaincant.{" "}
-            <span className="text-gradient-warm">Plus de clients.</span>
+            Ce que ça vous{" "}
+            <span className="text-gradient-warm">rapporte.</span>
           </h2>
           <p className="body-lg mt-5 max-w-xl">
             Trois leviers, des chiffres sourcés. Un site et une visibilité ne sont

@@ -19,8 +19,8 @@ export const AGENTS: AgentCard[] = [
   {
     id: "strat-1",
     category: "STRATÉGIE",
-    title: "Assistant IA connecté à ton SI",
-    hook: "Comme ChatGPT, mais il connaît vraiment ta boîte.",
+    title: "Assistant IA connecté à votre SI",
+    hook: "Comme ChatGPT, mais il connaît vraiment votre boîte.",
     utility:
       "Chat connecté à Microsoft 365 ou Google Workspace, 15+ outils métier, mémoire long-terme, agents verticaux.",
     statValue: "−50%",
@@ -61,7 +61,7 @@ export const AGENTS: AgentCard[] = [
     title: "Chatbot service client 24/7",
     hook: "Dans ton ton, sur tes données, en continu.",
     utility:
-      "FAQ contextuelle, recherche dans tes docs, escalade humaine fluide quand c'est nécessaire.",
+      "FAQ contextuelle, recherche dans vos docs, escalade humaine fluide quand c'est nécessaire.",
     statValue: "60%",
     statLabel: "des tickets résolus sans humain",
     icon: "MessageSquare",
@@ -113,7 +113,7 @@ export const AGENTS: AgentCard[] = [
     title: "Génération de documents",
     hook: "Word, Excel, PDF — à la voix.",
     utility:
-      "Templates métier branchés sur tes données. Tu dictes le brief, le doc est dans le bon dossier.",
+      "Templates métier branchés sur vos données. Vous dictez le brief, le doc est dans le bon dossier.",
     statValue: "30 min → 1 min",
     statLabel: "par document",
     icon: "FileText",
@@ -139,7 +139,7 @@ export const AGENTS: AgentCard[] = [
     title: "Sélection auto de CV",
     hook: "Le bon profil ne passe plus à travers.",
     utility:
-      "Scoring multi-critères sur tes vrais besoins. Shortlist auto, justification claire par candidat.",
+      "Scoring multi-critères sur vos vrais besoins. Shortlist auto, justification claire par candidat.",
     statValue: "5 sec",
     statLabel: "par CV vs 5 min à la main",
     icon: "FileSearch",
