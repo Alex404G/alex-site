@@ -1,21 +1,25 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL as BASE } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  const routes: { path: string; priority: number }[] = [
-    { path: "/", priority: 1 },
-    { path: "/creation-site-web", priority: 0.9 },
-    { path: "/visibilite-en-ligne", priority: 0.9 },
-    { path: "/automatisations", priority: 0.7 },
-    { path: "/mentions-legales", priority: 0.2 },
-    { path: "/confidentialite", priority: 0.2 },
-  ];
+// seo.md §5.11 / §833 : Google IGNORE <priority> et <changefreq>. Un <lastmod>
+// remis à « aujourd'hui » à chaque build devient non fiable et Google l'ignore
+// aussi. On ne liste que des URL canoniques, 200, indexables, avec un lastmod
+// HONNÊTE (date de la dernière modification réelle de contenu, mise à jour à la
+// main quand le contenu change vraiment).
+const LAST_CONTENT_UPDATE = "2026-07-08";
 
-  return routes.map((r) => ({
-    url: `${BASE}${r.path}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: r.priority,
+const ROUTES = [
+  "/",
+  "/creation-site-web",
+  "/visibilite-en-ligne",
+  "/automatisations",
+  "/mentions-legales",
+  "/confidentialite",
+];
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return ROUTES.map((path) => ({
+    url: `${BASE}${path}`,
+    lastModified: LAST_CONTENT_UPDATE,
   }));
 }

@@ -7,17 +7,40 @@ import { BackgroundOrbs } from "@/components/backgrounds/orbs";
 import { ParticleField } from "@/components/backgrounds/particle-field";
 import { CenterVignette } from "@/components/backgrounds/center-vignette";
 import { StickyCta } from "@/components/sticky-cta";
+import { JsonLd, serviceLd, breadcrumbLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Automatisations & IA sur-mesure — Alexandre GIL",
   description:
     "Agents IA, automatisations de tâches et outils internes sur-mesure, conçus sur votre métier et vos données.",
   alternates: { canonical: "/automatisations" },
+  openGraph: {
+    title: "Automatisations & IA sur-mesure — Alexandre GIL",
+    description:
+      "Agents IA, automatisations de tâches et outils internes sur-mesure, conçus sur votre métier et vos données.",
+    type: "website",
+    locale: "fr_FR",
+  },
 };
 
 export default function AutomatisationsPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          serviceLd({
+            name: "Automatisations et IA sur-mesure",
+            serviceType: "Automatisation et intelligence artificielle",
+            description:
+              "Agents IA, automatisations de tâches et outils internes sur-mesure, conçus sur votre métier, vos données et votre vocabulaire.",
+            path: "/automatisations",
+          }),
+          breadcrumbLd([
+            { name: "Accueil", path: "/" },
+            { name: "Automatisations & IA", path: "/automatisations" },
+          ]),
+        ]}
+      />
       <ParticleField count={140} />
       <BackgroundOrbs />
       <CenterVignette />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
 import { StickyCta } from "@/components/sticky-cta";
 import { CreationPage } from "@/components/pages/creation";
+import { JsonLd, serviceLd, breadcrumbLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Création de site web sur-mesure — Alexandre GIL",
@@ -20,6 +21,21 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
+      <JsonLd
+        data={[
+          serviceLd({
+            name: "Création de site web sur-mesure",
+            serviceType: "Création de site web",
+            description:
+              "Conception et développement de sites web premium sur-mesure : identité, design, performance, mobile, optimisation conversion et SEO.",
+            path: "/creation-site-web",
+          }),
+          breadcrumbLd([
+            { name: "Accueil", path: "/" },
+            { name: "Création de site web", path: "/creation-site-web" },
+          ]),
+        ]}
+      />
       <Nav />
       <StickyCta />
       <CreationPage />

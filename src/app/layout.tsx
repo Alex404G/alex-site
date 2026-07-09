@@ -5,6 +5,7 @@ import { GrainOverlay } from "@/components/grain-overlay";
 import { ContactModalProvider } from "@/components/contact-modal";
 import { Footer } from "@/components/footer";
 import { SITE_URL } from "@/lib/site";
+import { ORG_ID } from "@/lib/seo";
 
 const SITE = {
   name: "Alexandre GIL",
@@ -40,30 +41,46 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: SITE.name,
-  description: SITE.description,
-  url: SITE.url,
-  areaServed: "FR",
-  email: "marsugil@gmail.com",
-  telephone: "+33767677742",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "8 rue des Sœurs de Cauvigny",
-    postalCode: "34300",
-    addressLocality: "Agde",
-    addressCountry: "FR",
-  },
-  founder: { "@type": "Person", name: "Alexandre Gil" },
-  knowsAbout: [
-    "Création de site web",
-    "Référencement local (SEO)",
-    "Fiche Google Business",
-    "Avis Google",
-    "Google Ads",
-    "Meta Ads",
-    "Automatisation",
-    "Intelligence artificielle",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.description,
+      inLanguage: "fr-FR",
+      publisher: { "@id": ORG_ID },
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": ORG_ID,
+      name: SITE.name,
+      description: SITE.description,
+      url: SITE.url,
+      image: `${SITE.url}/opengraph-image`,
+      areaServed: { "@type": "Country", name: "France" },
+      email: "marsugil@gmail.com",
+      telephone: "+33767677742",
+      priceRange: "€€",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "8 rue des Sœurs de Cauvigny",
+        postalCode: "34300",
+        addressLocality: "Agde",
+        addressCountry: "FR",
+      },
+      founder: { "@type": "Person", name: "Alexandre Gil" },
+      knowsAbout: [
+        "Création de site web",
+        "Référencement local (SEO)",
+        "Fiche Google Business",
+        "Avis Google",
+        "Google Ads",
+        "Meta Ads",
+        "Automatisation",
+        "Intelligence artificielle",
+      ],
+    },
   ],
 };
 
