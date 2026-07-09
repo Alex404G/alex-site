@@ -35,7 +35,12 @@ export function Hero() {
   const contentY = reduce ? 0 : contentYRaw;
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
-  const lines = ["Votre site,", "votre visibilité."];
+  // Titre généraliste : la home vend les trois offres, pas seulement le site.
+  // Ligne 1 neutre, ligne 2 en dégradé tri-thème (chaud → émeraude → violet).
+  const lines: { text: string; cls: string }[] = [
+    { text: "Une présence en ligne", cls: "text-text-1" },
+    { text: "qui travaille pour vous.", cls: "text-gradient-tri" },
+  ];
 
   return (
     <section
@@ -84,31 +89,42 @@ export function Hero() {
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="mx-auto flex w-full max-w-5xl flex-col items-center px-6 text-center"
+        className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 pt-24 text-center"
       >
-        {/* Headline — dégradé chaud CONTINU par ligne (pas de sweep par mot) */}
-        <h1 className="t-display">
+        {/* Kicker — pour qui */}
+        <motion.span
+          className="kicker"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: easings.outQuart, delay: 0.15 }}
+        >
+          Pour artisans, commerces &amp; TPE
+        </motion.span>
+
+        {/* Headline — ligne 1 neutre, ligne 2 tri-thème. Taille calée pour
+            qu'aucune des deux lignes ne se replie en desktop. */}
+        <h1 className="t-display mt-5 !text-[clamp(38px,5.2vw,84px)]">
           {lines.map((line, i) => (
             <motion.span
               key={i}
-              className="block"
+              className="block md:whitespace-nowrap"
               initial={{ opacity: 0, y: 34, filter: "blur(12px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 1, ease: easings.outQuart, delay: 0.25 + i * 0.14 }}
             >
-              <span className="text-gradient-warm">{line}</span>
+              <span className={line.cls}>{line.text}</span>
             </motion.span>
           ))}
         </h1>
 
-        {/* Sous-titre */}
+        {/* Sous-titre — une ligne */}
         <motion.p
-          className="t-lede mt-7 max-w-2xl"
+          className="t-lede mt-6 max-w-3xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.65 }}
         >
-          Plus de clients, une meilleure place sur Google, et une image à la hauteur de votre travail.
+          Plus de clients, une meilleure place sur Google, et du temps gagné.
         </motion.p>
 
         {/* Corps — les trois prestations en une phrase, deux lignes max */}
@@ -151,7 +167,7 @@ export function Hero() {
 
         {/* Les trois offres, chacune sous sa couleur */}
         <motion.div
-          className="mt-11 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5"
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.25 }}
@@ -173,18 +189,6 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Indicateur de scroll */}
-      <motion.div
-        aria-hidden
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.7, duration: 1 }}
-        style={{ opacity: contentOpacity }}
-      >
-        <span className="kicker text-[10px]">scroll</span>
-        <span className="block h-10 w-px bg-gradient-to-b from-white/50 to-transparent" />
-      </motion.div>
     </section>
   );
 }

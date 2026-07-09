@@ -56,9 +56,9 @@ export default async function OpengraphImage() {
             letterSpacing: "-0.04em",
           }}
         >
-          <span style={{ fontSize: 96, fontWeight: 700, lineHeight: 1.02 }}>Votre site,</span>
-          <span style={{ fontSize: 96, fontWeight: 700, lineHeight: 1.02, color: "#FF8A4D" }}>
-            votre visibilité.
+          <span style={{ fontSize: 88, fontWeight: 700, lineHeight: 1.04 }}>Une présence en ligne</span>
+          <span style={{ fontSize: 88, fontWeight: 700, lineHeight: 1.04, color: "#FF8A4D" }}>
+            qui travaille pour vous.
           </span>
         </div>
         <div style={{ display: "flex", fontSize: 34, color: "#9CA3B8", marginTop: 36 }}>

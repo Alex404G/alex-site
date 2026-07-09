@@ -344,6 +344,27 @@ html {
           drop-shadow(0 4px 18px rgba(2, 3, 10, 0.55));
 }
 
+/* Dégradé tri-thème — réservé au hero de l'accueil : les trois offres
+   (chaud, émeraude, violet) dans un seul balayage, pics blancs pour la
+   lisibilité. Nulle part ailleurs. */
+.text-gradient-tri {
+  background: linear-gradient(
+    100deg,
+    #ffb27a 0%,
+    #ffe7cf 16%,
+    #ffffff 34%,
+    #c9f5dc 48%,
+    #8febbc 58%,
+    #e4e9ff 76%,
+    #a78bfa 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 26px rgba(255, 255, 255, 0.14))
+          drop-shadow(0 4px 18px rgba(2, 3, 10, 0.55));
+}
+
 .glow-warm {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.05),
