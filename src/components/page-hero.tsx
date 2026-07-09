@@ -55,7 +55,9 @@ export function PageHero({
   const t = THEMES[theme];
 
   return (
-    <section className="relative mx-auto max-w-5xl px-6 pt-40 pb-16 text-center md:pt-52 md:pb-24">
+    // Groupe centré sur les deux axes : le bloc kicker→CTA forme une seule
+    // masse visuelle, posée au centre de l'écran (pt pour dégager la nav).
+    <section className="relative mx-auto flex min-h-[88svh] max-w-5xl flex-col items-center justify-center px-6 pb-14 pt-28 text-center">
       <motion.span
         className="kicker"
         initial={{ opacity: 0, y: 12 }}
@@ -65,7 +67,7 @@ export function PageHero({
         {kicker}
       </motion.span>
       <motion.h1
-        className="t-display mt-6"
+        className="t-display mt-5"
         initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 0.9, ease: easings.outQuart, delay: 0.1 }}
@@ -73,7 +75,7 @@ export function PageHero({
         <span className={t.gradientText}>{title}</span>
       </motion.h1>
       <motion.p
-        className="t-h2 mt-7 mx-auto max-w-3xl text-text-1"
+        className="t-h2 mt-6 mx-auto max-w-3xl text-text-1"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.3 }}
@@ -81,7 +83,7 @@ export function PageHero({
         {sub}
       </motion.p>
       <motion.p
-        className="body-md mt-6 mx-auto max-w-xl text-[15.5px]"
+        className="body-md mt-5 mx-auto max-w-xl text-[15.5px]"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.45 }}
@@ -89,7 +91,7 @@ export function PageHero({
         {body}
       </motion.p>
       <motion.div
-        className="mt-10 flex justify-center"
+        className="mt-9 flex justify-center"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.6 }}

@@ -98,10 +98,10 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-white/[0.06] pt-6 text-xs text-text-3 sm:flex-row sm:items-center">
-          <span>© {year} Alexandre Gil. Tous droits réservés.</span>
-          <span>Entrepreneur individuel · Agde, France</span>
-        </div>
+        {/* Une seule ligne légale, dans le même bloc visuel (pas de 2e bannière) */}
+        <p className="mt-12 text-xs text-text-3">
+          © {year} Alexandre Gil · Entrepreneur individuel · Agde, France · Tous droits réservés.
+        </p>
       </div>
     </footer>
   );

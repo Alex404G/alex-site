@@ -19,7 +19,7 @@ export function MarqueeSection() {
           transition={{ duration: 0.7 }}
           className="t-h2 max-w-3xl mx-auto"
         >
-          Et <span className="text-gradient-sig">des milliers d'autres</span> possibilités —
+          Et <span className="text-gradient-sig">des milliers d'autres</span> possibilités.
         </motion.h3>
         <motion.p
           initial={{ opacity: 0, y: 12 }}
@@ -28,7 +28,7 @@ export function MarqueeSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="body-md mt-4 max-w-xl mx-auto"
         >
-          Si tu peux le décrire en une phrase, on peut probablement le faire.
+          Si vous pouvez le décrire en une phrase, on peut probablement le construire.
         </motion.p>
       </div>
 

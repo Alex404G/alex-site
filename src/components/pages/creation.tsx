@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
 import Link from "next/link";
 import {
   Sparkles,
@@ -45,6 +46,12 @@ const STEPS = [
 
 export function CreationPage() {
   const { open } = useContactModal();
+  // Progression de lecture de la section méthode (barre au-dessus des 4 étapes)
+  const stepsRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: stepsProgress } = useScroll({
+    target: stepsRef,
+    offset: ["start 75%", "end 78%"],
+  });
 
   return (
     <main id="main" className="relative overflow-hidden">
@@ -108,9 +115,9 @@ export function CreationPage() {
 
       {/* Comparatif — section distinctive de la page Création */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <span className="kicker">La différence</span>
-          <h2 className="t-h1 mt-4 text-text-1">Template ou sur-mesure&nbsp;?</h2>
+          <h2 className="t-h1 mt-4 text-text-1 md:whitespace-nowrap">Template ou sur-mesure&nbsp;?</h2>
           <p className="body-md mt-4 max-w-xl text-[15px]">
             Un template coûte moins cher au départ. Il vous coûte des clients ensuite.
             Voici ce qui change concrètement.
@@ -172,12 +179,19 @@ export function CreationPage() {
       </section>
 
       {/* Process */}
-      <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+      <section ref={stepsRef} className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
         <div className="max-w-2xl">
           <span className="kicker">Comment ça se passe</span>
           <h2 className="t-h1 mt-4 text-text-1">Un cadre clair, du début à la mise en ligne.</h2>
         </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Barre de progression horizontale : se remplit au fil du scroll */}
+        <div className="mt-12 h-[2px] w-full overflow-hidden rounded-full bg-white/[0.07]">
+          <motion.div
+            className="h-full origin-left"
+            style={{ scaleX: stepsProgress, background: "var(--grad-warm)" }}
+          />
+        </div>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <motion.div
               key={s.n}

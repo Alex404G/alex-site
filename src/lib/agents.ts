@@ -46,7 +46,7 @@ export const AGENTS: AgentCard[] = [
     id: "compta-1",
     category: "COMPTA",
     title: "Lecture & tri des factures",
-    hook: "Plus jamais de « qui a payé quoi ».",
+    hook: "Plus jamais de \"qui a payé quoi\".",
     utility:
       "OCR multi-format, extraction structurée, routage automatique vers la bonne BAL et le bon dossier.",
     statValue: "2 min",
@@ -59,7 +59,7 @@ export const AGENTS: AgentCard[] = [
     id: "com-3",
     category: "COMMERCIAL",
     title: "Chatbot service client 24/7",
-    hook: "Dans ton ton, sur tes données, en continu.",
+    hook: "Votre ton, vos données, en continu.",
     utility:
       "FAQ contextuelle, recherche dans vos docs, escalade humaine fluide quand c'est nécessaire.",
     statValue: "60%",
@@ -72,7 +72,7 @@ export const AGENTS: AgentCard[] = [
     id: "ops-1",
     category: "OPS",
     title: "Tri & réponse de mails",
-    hook: "Ta boîte se classe toute seule.",
+    hook: "Votre boîte se classe toute seule.",
     utility:
       "Tri par projet, réponses brouillon, classification urgents, alertes contextuelles.",
     statValue: "~1 h/jour",
@@ -98,7 +98,7 @@ export const AGENTS: AgentCard[] = [
     id: "com-1",
     category: "COMMERCIAL",
     title: "Prospection multi-canal",
-    hook: "Mail, LinkedIn, téléphone — un seul cerveau.",
+    hook: "Mail, LinkedIn, téléphone : un seul cerveau.",
     utility:
       "Séquences personnalisées par persona, A/B test natif, suivi unifié des interactions.",
     statValue: "×3",
@@ -111,7 +111,7 @@ export const AGENTS: AgentCard[] = [
     id: "ops-3",
     category: "OPS",
     title: "Génération de documents",
-    hook: "Word, Excel, PDF — à la voix.",
+    hook: "Word, Excel, PDF, à la voix.",
     utility:
       "Templates métier branchés sur vos données. Vous dictez le brief, le doc est dans le bon dossier.",
     statValue: "30 min → 1 min",
@@ -124,7 +124,7 @@ export const AGENTS: AgentCard[] = [
     id: "mkt-2",
     category: "MARKETING",
     title: "Veille concurrence automatique",
-    hook: "Tu sais ce qu'ils font avant qu'ils l'annoncent.",
+    hook: "Vous savez ce qu'ils font avant qu'ils l'annoncent.",
     utility:
       "Scraping multi-sources (prix, posts, offres, recrutements), récap IA hebdomadaire.",
     statValue: "0 min",
@@ -150,7 +150,7 @@ export const AGENTS: AgentCard[] = [
     id: "com-2",
     category: "COMMERCIAL",
     title: "Suivi commercial automatique",
-    hook: "Tu ne perds plus un deal par oubli.",
+    hook: "Vous ne perdez plus un deal par oubli.",
     utility:
       "Relances intelligentes, alertes blocage, récap hebdo. Le pipe travaille même la nuit.",
     statValue: "+25%",

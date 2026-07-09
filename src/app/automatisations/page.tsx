@@ -13,12 +13,12 @@ import { JsonLd, serviceLd, breadcrumbLd } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Automatisations & IA sur-mesure — Alexandre GIL",
   description:
-    "Agents IA, automatisations de tâches et outils internes sur-mesure, conçus sur votre métier et vos données.",
+    "Pas d'outil sur étagère : des agents IA, automatisations et outils internes construits sur votre métier, vos données et vos outils.",
   alternates: { canonical: "/automatisations" },
   openGraph: {
     title: "Automatisations & IA sur-mesure — Alexandre GIL",
     description:
-      "Agents IA, automatisations de tâches et outils internes sur-mesure, conçus sur votre métier et vos données.",
+      "Pas d'outil sur étagère : des agents IA, automatisations et outils internes construits sur votre métier, vos données et vos outils.",
     type: "website",
     locale: "fr_FR",
   },
@@ -52,9 +52,9 @@ export default function AutomatisationsPage() {
         <PageHero
           theme="sig"
           kicker="Automatisations & IA"
-          title="Faites travailler la machine."
-          sub="Agents IA, automatisations et outils internes, conçus sur votre métier."
-          body="Tri de mails, factures, veille, documents : ce qui vous prend des heures peut tourner tout seul. Chaque outil est construit sur vos données et votre vocabulaire, pas sur un template."
+          title="L'IA, intégrée à votre métier."
+          sub="Je ne vends pas d'outils : je construis votre solution."
+          body="J'étudie comment vous travaillez, puis je conçois l'agent ou l'automatisation qui vous enlève les tâches répétitives. Branché sur vos données, vos outils, votre vocabulaire."
           cta="Discuter d'une automatisation"
         />
 

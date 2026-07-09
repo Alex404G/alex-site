@@ -39,11 +39,14 @@ export function CtaFinal() {
               "radial-gradient(ellipse at center, transparent 0%, rgba(2,3,10,0.55) 60%, rgba(2,3,10,0.95) 100%)",
           }}
         />
+        {/* Transition longue et douce depuis le noir : le shader n'apparaît
+            qu'à mi-écran, en fondu progressif multi-paliers. */}
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 h-32"
+          className="absolute inset-x-0 top-0 h-[52vh] min-h-[300px]"
           style={{
-            background: "linear-gradient(to bottom, var(--void-0), transparent)",
+            background:
+              "linear-gradient(to bottom, var(--void-0) 0%, var(--void-0) 14%, rgba(2,3,10,0.94) 36%, rgba(2,3,10,0.7) 60%, rgba(2,3,10,0.35) 80%, transparent 100%)",
           }}
         />
       </div>

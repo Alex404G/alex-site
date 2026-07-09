@@ -175,8 +175,8 @@ body {
   font-family: var(--font-display);
   font-weight: 900;
   letter-spacing: -0.04em;
-  line-height: 0.92;
-  font-size: clamp(56px, 8vw, 128px);
+  line-height: 0.94;
+  font-size: clamp(48px, 6.8vw, 106px);
 }
 
 .t-h1 {
