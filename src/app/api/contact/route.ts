@@ -5,6 +5,20 @@ import { Resend } from "resend";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+// Rate-limit mémoire : 4 envois / 10 min par IP. Suffisant pour un formulaire
+// de contact ; remis à zéro à chaque cold start (acceptable à cette échelle).
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_HITS = 4;
+const hits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  return recent.length > MAX_HITS;
+}
+
 const schema = z.object({
   name: z.string().min(1).max(120),
   email: z.string().email(),
@@ -17,6 +31,23 @@ const schema = z.object({
 
 export async function POST(req: Request) {
   try {
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("x-real-ip") ||
+      "unknown";
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Trop de tentatives. Réessayez dans quelques minutes." },
+        { status: 429 },
+      );
+    }
+
+    // Borne de taille : on refuse un corps anormalement gros avant de le parser.
+    const len = Number(req.headers.get("content-length") ?? 0);
+    if (len > 12_000) {
+      return NextResponse.json({ error: "Message trop volumineux." }, { status: 413 });
+    }
+
     const body = await req.json();
     const parsed = schema.safeParse(body);
     if (!parsed.success) {

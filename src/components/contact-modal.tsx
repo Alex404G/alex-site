@@ -3,6 +3,7 @@
 import * as React from "react";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { X, Loader2, Check, Mail } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { cn } from "@/lib/utils";
 
 type ContactCtx = {
@@ -150,10 +151,12 @@ function ContactModal() {
       const j = (await r.json().catch(() => ({}))) as { delivered?: boolean };
       if (j.delivered) {
         setStatus("success");
+        track("lead_submit", { subject: data.subject || "Projet" });
         form.reset();
       } else {
         // Aucun fournisseur d'e-mail configuré côté serveur → repli honnête
         setStatus("fallback");
+        track("lead_fallback");
       }
     } catch (err) {
       setStatus("error");

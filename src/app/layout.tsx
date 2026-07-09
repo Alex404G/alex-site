@@ -4,6 +4,8 @@ import { SmoothScroll } from "@/components/smooth-scroll";
 import { GrainOverlay } from "@/components/grain-overlay";
 import { ContactModalProvider } from "@/components/contact-modal";
 import { Footer } from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
+import { CallTracker } from "@/components/call-tracker";
 import { SITE_URL } from "@/lib/site";
 import { ORG_ID } from "@/lib/seo";
 
@@ -113,6 +115,8 @@ export default function RootLayout({
           {children}
           <Footer />
           <GrainOverlay />
+          <CallTracker />
+          <Analytics />
         </ContactModalProvider>
       </body>
     </html>
