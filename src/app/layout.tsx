@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { CallTracker } from "@/components/call-tracker";
 import { SITE_URL } from "@/lib/site";
 import { ORG_ID } from "@/lib/seo";
+import { satoshi, generalSans, jetbrainsMono } from "./fonts";
 
 const SITE = {
   name: "Alexandre GIL",
@@ -90,14 +91,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className="antialiased">
+    <html
+      lang="fr"
+      className={`antialiased ${satoshi.variable} ${generalSans.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
-        <link rel="preconnect" href="https://api.fontshare.com" />
-        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@600,500,400&f[]=jetbrains-mono@500,400&display=swap"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
