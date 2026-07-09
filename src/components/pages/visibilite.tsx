@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   MapPin,
   Store,
@@ -9,6 +10,8 @@ import {
   Share2,
   LineChart,
   ArrowRight,
+  ArrowUpRight,
+  Search,
 } from "lucide-react";
 import { useContactModal } from "@/components/contact-modal";
 import { SpotlightCard } from "@/components/spotlight-card";
@@ -21,6 +24,24 @@ const LEVERS = [
   { icon: Megaphone, title: "Google Ads", desc: "Capter la demande au bon moment, avec des campagnes maîtrisées et rentables." },
   { icon: Share2, title: "Meta Ads", desc: "Toucher de nouveaux clients sur Instagram et Facebook avec des visuels qui marquent." },
   { icon: LineChart, title: "Suivi & reporting", desc: "Des résultats lisibles : ce qui marche, ce qu'on ajuste, où va le budget." },
+];
+
+const SURFACES = [
+  {
+    icon: Search,
+    title: "Sur Google",
+    desc: "Quand ils tapent votre métier. Le SEO vous place dans les résultats, là où la plupart des gens ne dépassent jamais la première page.",
+  },
+  {
+    icon: MapPin,
+    title: "Sur la carte",
+    desc: "La fiche Google Business, les avis et Maps décident qui on appelle près de chez soi. C'est souvent le premier réflexe en local.",
+  },
+  {
+    icon: Share2,
+    title: "Sur les réseaux",
+    desc: "Instagram et Facebook. Les campagnes Meta vous mettent devant les bonnes personnes, au bon moment, même sans qu'elles vous cherchent.",
+  },
 ];
 
 const STEPS = [
@@ -136,6 +157,44 @@ export function VisibilitePage() {
         </div>
       </section>
 
+      {/* Où vos clients vous cherchent — section distinctive de la page Visibilité */}
+      <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+        <div className="max-w-2xl">
+          <span className="kicker">Trois terrains</span>
+          <h2 className="t-h1 mt-4 text-text-1">Où vos clients vous cherchent.</h2>
+          <p className="body-md mt-4 max-w-xl text-[15px]">
+            On travaille les trois, dans l&apos;ordre qui rapporte le plus à votre activité.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.06] sm:grid-cols-3">
+          {SURFACES.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <motion.div
+                key={s.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, ease: easings.outQuart, delay: i * 0.1 }}
+                className="flex flex-col bg-void-0/70 p-8"
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-void-0"
+                    style={{ background: "var(--grad-warm)" }}
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={2} />
+                  </span>
+                  <span className="kicker text-[11px]">0{i + 1}</span>
+                </div>
+                <h3 className="t-h3 mt-5 text-text-1">{s.title}</h3>
+                <p className="body-md mt-2 text-[14.5px]">{s.desc}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Approche */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
         <div className="max-w-2xl">
@@ -191,6 +250,16 @@ export function VisibilitePage() {
             Discuter du projet
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
+          <p className="body-md mt-7 text-[14px] text-text-2">
+            La visibilité amène le trafic, le site le transforme en clients.{" "}
+            <Link
+              href="/creation-site-web"
+              className="inline-flex items-center gap-1 text-warm-2 underline decoration-white/20 underline-offset-2 transition-colors hover:text-text-1"
+            >
+              Voir la création de site
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
+          </p>
         </motion.div>
       </section>
     </main>

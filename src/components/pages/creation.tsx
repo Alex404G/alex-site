@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Sparkles,
   Gauge,
@@ -9,6 +10,9 @@ import {
   Smartphone,
   Wrench,
   ArrowRight,
+  ArrowUpRight,
+  Check,
+  X,
 } from "lucide-react";
 import { useContactModal } from "@/components/contact-modal";
 import { SpotlightCard } from "@/components/spotlight-card";
@@ -21,6 +25,14 @@ const FEATURES = [
   { icon: MousePointerClick, title: "Optimisé conversion", desc: "Parcours clairs, appels à l'action efficaces : des visiteurs qui deviennent clients." },
   { icon: Search, title: "SEO intégré dès le départ", desc: "Structure, contenus et techniques propres pour être bien placé sur Google." },
   { icon: Wrench, title: "Évolutif & maintenu", desc: "Un site qui grandit avec vous, simple à faire évoluer dans le temps." },
+];
+
+const COMPARE = [
+  ["Un design vu sur des milliers d'autres sites", "Une identité qui n'existe que chez vous"],
+  ["Alourdi par des modules inutiles, souvent lent", "Léger et rapide, rien de superflu"],
+  ["Un référencement générique, mal maîtrisé", "Une structure pensée pour Google dès le départ"],
+  ["Compliqué à faire évoluer sans tout casser", "Simple à faire grandir avec votre activité"],
+  ["Vous ressemblez à vos concurrents", "Vous vous démarquez"],
 ];
 
 const STEPS = [
@@ -136,6 +148,71 @@ export function CreationPage() {
         </div>
       </section>
 
+      {/* Comparatif — section distinctive de la page Création */}
+      <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+        <div className="max-w-2xl">
+          <span className="kicker">La différence</span>
+          <h2 className="t-h1 mt-4 text-text-1">Template ou sur-mesure&nbsp;?</h2>
+          <p className="body-md mt-4 max-w-xl text-[15px]">
+            Un template coûte moins cher au départ. Il vous coûte des clients ensuite.
+            Voici ce qui change concrètement.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {/* Template */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: easings.outQuart }}
+            className="rounded-3xl border border-white/[0.07] bg-white/[0.015] p-8 md:p-9"
+          >
+            <span className="kicker text-text-3">Un template</span>
+            <ul className="mt-6 space-y-4">
+              {COMPARE.map(([tpl]) => (
+                <li key={tpl} className="flex items-start gap-3 text-[15px] text-text-2">
+                  <X className="mt-0.5 h-4 w-4 shrink-0 text-text-3" strokeWidth={2.5} />
+                  {tpl}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+          {/* Sur-mesure — mis en avant */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: easings.outQuart, delay: 0.1 }}
+            className="glow-warm rounded-3xl border border-white/[0.1] bg-white/[0.03] p-8 md:p-9"
+          >
+            <span
+              className="kicker"
+              style={{
+                background: "var(--grad-warm)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Sur-mesure
+            </span>
+            <ul className="mt-6 space-y-4">
+              {COMPARE.map(([, sur]) => (
+                <li key={sur} className="flex items-start gap-3 text-[15px] text-text-1">
+                  <span
+                    className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full"
+                    style={{ background: "var(--grad-warm)" }}
+                  >
+                    <Check className="h-3 w-3 text-void-0" strokeWidth={3} />
+                  </span>
+                  {sur}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Process */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
         <div className="max-w-2xl">
@@ -191,6 +268,16 @@ export function CreationPage() {
             Discuter du projet
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
+          <p className="body-md mt-7 text-[14px] text-text-2">
+            Un beau site attire, encore faut-il être trouvé.{" "}
+            <Link
+              href="/visibilite-en-ligne"
+              className="inline-flex items-center gap-1 text-warm-2 underline decoration-white/20 underline-offset-2 transition-colors hover:text-text-1"
+            >
+              Voir la visibilité en ligne
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
+          </p>
         </motion.div>
       </section>
     </main>
