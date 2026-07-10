@@ -16,17 +16,17 @@ export function CtaWarm() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.7, ease: easings.outQuart }}
-        className="glow-warm relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-gradient-to-b from-white/[0.045] to-white/[0.01] p-12 md:p-16"
+        className="glow-brand relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-gradient-to-b from-white/[0.045] to-white/[0.01] p-12 md:p-16"
       >
         <div
           aria-hidden
-          className="warm-bloom pointer-events-none absolute inset-0 opacity-70"
+          className="brand-bloom pointer-events-none absolute inset-0 opacity-80"
         />
         <div className="relative">
           <span className="kicker">On en parle ?</span>
           <h2 className="t-h1 mt-4 text-text-1">
             Votre site et votre visibilité,{" "}
-            <span className="text-gradient-warm">ensemble.</span>
+            <span className="text-gradient-brand">ensemble.</span>
           </h2>
           <p className="body-lg mt-5 mx-auto max-w-xl">
             Dites-moi votre activité et votre objectif. Je reviens vers vous avec une
@@ -34,10 +34,9 @@ export function CtaWarm() {
           </p>
           <MagneticButton
             onClick={open}
-            className="group mt-9 inline-flex cursor-pointer items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-void-0"
+            className="group mt-9 inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-medium text-void-0"
             style={{
-              background: "var(--grad-warm)",
-              boxShadow: "0 20px 60px -12px rgba(255,122,77,0.55)",
+              boxShadow: "0 20px 60px -12px rgba(201,206,221,0.45), inset 0 1px 0 rgba(255,255,255,0.8)",
             }}
           >
             Discuter du projet

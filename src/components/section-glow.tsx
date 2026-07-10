@@ -1,12 +1,13 @@
 // Séparateur lumineux entre sections : une ligne dégradée + un halo doux.
 // Casse le fond noir plat sans ajouter d'effet animé (zéro coût runtime).
-const RGBA: Record<"warm" | "visi" | "sig", string> = {
+const RGBA: Record<"brand" | "warm" | "visi" | "sig", string> = {
+  brand: "201, 206, 221",
   warm: "255, 154, 77",
   visi: "95, 227, 161",
   sig: "139, 92, 246",
 };
 
-export function SectionGlow({ theme = "warm" }: { theme?: "warm" | "visi" | "sig" }) {
+export function SectionGlow({ theme = "warm" }: { theme?: "brand" | "warm" | "visi" | "sig" }) {
   const rgba = RGBA[theme];
   return (
     <div aria-hidden className="relative mx-auto h-px w-full max-w-4xl px-6">

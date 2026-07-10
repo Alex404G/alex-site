@@ -23,16 +23,21 @@ export function Nav() {
 
   const onAuto = pathname.startsWith("/automatisations");
   const onVisi = pathname.startsWith("/visibilite");
+  const onCrea = pathname.startsWith("/creation");
   const accent = onAuto
     ? "var(--grad-signature)"
     : onVisi
       ? "var(--grad-visi)"
-      : "var(--grad-warm)";
+      : onCrea
+        ? "var(--grad-warm)"
+        : "var(--grad-brand)";
   const dotShadow = onAuto
     ? "0 0 10px rgba(139,92,246,0.7)"
     : onVisi
       ? "0 0 10px rgba(43,201,138,0.7)"
-      : "0 0 10px rgba(255,122,77,0.7)";
+      : onCrea
+        ? "0 0 10px rgba(255,122,77,0.7)"
+        : "0 0 10px rgba(230,234,242,0.8)";
 
   // Le menu mobile se ferme à la navigation, sur Échap, et verrouille le scroll
   useEffect(() => setMenuOpen(false), [pathname]);

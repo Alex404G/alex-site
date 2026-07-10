@@ -94,7 +94,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      data-theme="warm"
+      data-theme="brand"
       className={`antialiased ${satoshi.variable} ${generalSans.variable} ${jetbrainsMono.variable}`}
     >
       <head>

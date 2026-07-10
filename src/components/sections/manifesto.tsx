@@ -61,7 +61,7 @@ export function Manifesto() {
           className="h-full w-full"
           style={{
             background:
-              "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,122,77,0.32) 0%, rgba(255,154,77,0.18) 40%, transparent 70%)",
+              "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,206,221,0.2) 0%, rgba(142,151,173,0.12) 40%, transparent 70%)",
             filter: "blur(40px)",
           }}
         />
@@ -79,13 +79,13 @@ export function Manifesto() {
           <span
             aria-hidden
             className="block h-px w-10"
-            style={{ background: "linear-gradient(to right, transparent, rgba(255,122,77,0.7))" }}
+            style={{ background: "linear-gradient(to right, transparent, rgba(201,206,221,0.6))" }}
           />
           <span className="kicker">la méthode</span>
           <span
             aria-hidden
             className="block h-px w-10"
-            style={{ background: "linear-gradient(to left, transparent, rgba(255,122,77,0.7))" }}
+            style={{ background: "linear-gradient(to left, transparent, rgba(201,206,221,0.6))" }}
           />
         </motion.div>
 
@@ -116,7 +116,7 @@ export function Manifesto() {
         {/* Tracer line under the phrase */}
         <div className="relative mx-auto mt-12 h-px w-[60%] max-w-md overflow-hidden bg-white/8">
           <motion.div
-            style={{ width: reduce ? "100%" : tracerWidth, background: "var(--grad-warm)" }}
+            style={{ width: reduce ? "100%" : tracerWidth, background: "var(--grad-brand)" }}
             className="absolute inset-y-0 left-0"
           />
         </div>
@@ -151,7 +151,7 @@ function Word({
     <>
       <motion.span
         style={reduce ? undefined : { opacity, y }}
-        className={`inline-block ${token.accent ? "text-gradient-warm" : "text-text-1"}`}
+        className={`inline-block ${token.accent ? "text-gradient-brand" : "text-text-1"}`}
       >
         {token.text}
       </motion.span>

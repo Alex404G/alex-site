@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
 import Link from "next/link";
 import {
   MapPin,
@@ -55,6 +56,12 @@ const STEPS = [
 
 export function VisibilitePage() {
   const { open } = useContactModal();
+  // Remplissage du rail de la timeline au fil du scroll
+  const railRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: railProgress } = useScroll({
+    target: railRef,
+    offset: ["start 78%", "end 62%"],
+  });
 
   return (
     <main id="main" className="relative overflow-hidden">
@@ -164,16 +171,19 @@ export function VisibilitePage() {
           <span className="kicker">L&apos;approche</span>
           <h2 className="t-h1 mt-4 text-text-1">Des fondations, puis de l&apos;acquisition.</h2>
         </div>
-        <div className="relative mt-12 max-w-2xl">
-          {/* Rail émeraude */}
+        <div ref={railRef} className="relative mt-12 max-w-2xl">
+          {/* Rail émeraude — se remplit au fil du scroll */}
           <div
             aria-hidden
-            className="absolute bottom-2 left-[7px] top-2 w-0.5 rounded-full"
-            style={{
-              background:
-                "linear-gradient(to bottom, rgba(95,227,161,0.5), rgba(43,201,138,0.15))",
-            }}
-          />
+            className="absolute bottom-2 left-[7px] top-2 w-0.5 overflow-hidden rounded-full bg-white/10"
+          >
+            <motion.div
+              style={{ scaleY: railProgress, transformOrigin: "50% 0%" }}
+              className="h-full w-full"
+            >
+              <div className="h-full w-full" style={{ background: "var(--grad-visi)" }} />
+            </motion.div>
+          </div>
           <div className="flex flex-col gap-10">
             {STEPS.map((s, i) => (
               <motion.div

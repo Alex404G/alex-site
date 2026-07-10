@@ -36,10 +36,11 @@ export function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   // Titre généraliste : la home vend les trois offres, pas seulement le site.
-  // Ligne 1 neutre, ligne 2 en dégradé chaud (la couleur de marque).
+  // Ligne 1 neutre, ligne 2 en argent (le thème « brand » de l'accueil —
+  // les couleurs n'appartiennent qu'aux offres).
   const lines: { text: string; cls: string }[] = [
     { text: "Une présence en ligne", cls: "text-text-1" },
-    { text: "qui travaille pour vous.", cls: "text-gradient-warm" },
+    { text: "qui travaille pour vous.", cls: "text-gradient-brand" },
   ];
 
   return (
@@ -48,10 +49,10 @@ export function Hero() {
       id="hero"
       className="relative isolate flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
     >
-      {/* Fond chaud + parallaxe */}
+      {/* Fond neutre + parallaxe */}
       <div className="absolute inset-0 -z-10">
         <motion.div aria-hidden style={{ y: glowY }} className="absolute inset-0">
-          <div className="warm-bloom absolute inset-0" />
+          <div className="brand-bloom absolute inset-0" />
         </motion.div>
         <motion.div
           aria-hidden
@@ -147,14 +148,13 @@ export function Hero() {
         >
           <MagneticButton
             onClick={open}
-            className="group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-void-0"
+            className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-void-0"
             style={{
-              background: "var(--grad-warm)",
-              boxShadow: "0 20px 60px -12px rgba(255,122,77,0.55)",
+              boxShadow: "0 20px 60px -12px rgba(201,206,221,0.45), inset 0 1px 0 rgba(255,255,255,0.8)",
             }}
           >
             Discuter du projet
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-void-0/70" />
+            <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--grad-warm)" }} />
           </MagneticButton>
           <a
             href="#offres"

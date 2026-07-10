@@ -22,7 +22,7 @@ export default async function OpengraphImage() {
           padding: "90px",
           backgroundColor: "#02030A",
           backgroundImage:
-            "radial-gradient(circle at 18% 12%, rgba(255,154,77,0.38), transparent 55%), radial-gradient(circle at 92% 92%, rgba(240,71,107,0.32), transparent 55%)",
+            "radial-gradient(circle at 18% 12%, rgba(201,206,221,0.22), transparent 55%), radial-gradient(circle at 92% 92%, rgba(142,151,173,0.16), transparent 55%)",
           color: "#F4F6FB",
           fontFamily: "Satoshi",
         }}
@@ -34,7 +34,7 @@ export default async function OpengraphImage() {
               fontSize: 26,
               letterSpacing: 6,
               textTransform: "uppercase",
-              color: "#FF9A4D",
+              color: "#9CA3B8",
             }}
           >
             Alexandre Gil
@@ -57,7 +57,7 @@ export default async function OpengraphImage() {
           }}
         >
           <span style={{ fontSize: 88, fontWeight: 700, lineHeight: 1.04 }}>Une présence en ligne</span>
-          <span style={{ fontSize: 88, fontWeight: 700, lineHeight: 1.04, color: "#FF8A4D" }}>
+          <span style={{ fontSize: 88, fontWeight: 700, lineHeight: 1.04, color: "#C9CEDD" }}>
             qui travaille pour vous.
           </span>
         </div>

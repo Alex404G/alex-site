@@ -105,6 +105,13 @@ body {
    Sélection, focus et micro-surfaces suivent le thème de la page.
    ========================================================== */
 :root,
+html[data-theme="brand"] {
+  --accent: var(--brand-2);
+  --accent-ink: var(--void-0);
+  --accent-grad: var(--grad-brand);
+  --accent-selection: rgba(201, 206, 221, 0.28);
+  --accent-glow: rgba(201, 206, 221, 0.35);
+}
 html[data-theme="warm"] {
   --accent: var(--warm-2);
   --accent-ink: var(--void-0);
@@ -311,6 +318,13 @@ html {
    (distincte de la signature violette réservée aux Automatisations)
    ========================================================== */
 :root {
+  /* DA « brand » — l'accueil : argent/ivoire neutre premium. Les trois
+     couleurs (chaud/émeraude/violet) n'appartiennent qu'aux pages d'offre. */
+  --brand-1: #F4F6FB;
+  --brand-2: #C9CEDD;
+  --brand-3: #8E97AD;
+  --grad-brand: linear-gradient(135deg, #FFFFFF 0%, #D9DEE9 55%, #AEB6C8 100%);
+
   --warm-1: #FFC178;
   --warm-2: #FF9A4D;
   --warm-3: #FF6F61;
@@ -342,6 +356,37 @@ html {
   animation: none;
   filter: drop-shadow(0 0 28px rgba(255, 122, 77, 0.32))
           drop-shadow(0 4px 18px rgba(2, 3, 10, 0.55));
+}
+
+.text-gradient-brand {
+  background: linear-gradient(
+    115deg,
+    #9ca3b8 0%,
+    #e6eaf2 24%,
+    #ffffff 46%,
+    #ffffff 54%,
+    #dfe4ee 74%,
+    #aeb6c8 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 26px rgba(230, 234, 242, 0.18))
+          drop-shadow(0 4px 18px rgba(2, 3, 10, 0.55));
+}
+
+.glow-brand {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 30px 100px -20px rgba(201, 206, 221, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Lueur neutre de fond (accueil) */
+.brand-bloom {
+  background:
+    radial-gradient(ellipse 55% 45% at 22% 12%, rgba(201, 206, 221, 0.1), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 78%, rgba(142, 151, 173, 0.08), transparent 60%);
 }
 
 .glow-warm {

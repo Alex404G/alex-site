@@ -21,7 +21,7 @@ const PILLARS: Pillar[] = [
   {
     icon: TrendingUp,
     label: "Visibilité",
-    rgb: "255, 154, 77",
+    rgb: "95, 227, 161",
     big: { end: 75, suffix: " %" },
     bigLabel: "des internautes ne vont jamais au-delà de la 1re page de Google",
     bigSource: "Backlinko, 2023",
@@ -43,7 +43,7 @@ const PILLARS: Pillar[] = [
   {
     icon: MousePointerClick,
     label: "Conversion",
-    rgb: "255, 111, 97",
+    rgb: "255, 154, 77",
     big: { end: 3, prefix: "×", raw: "×3" },
     bigLabel: "de conversions pour un site qui s'affiche en moins d'une seconde",
     bigSource: "Google · web.dev",
@@ -65,7 +65,7 @@ const PILLARS: Pillar[] = [
   {
     icon: Star,
     label: "Confiance",
-    rgb: "240, 71, 107",
+    rgb: "139, 92, 246",
     big: { end: 88, suffix: " %" },
     bigLabel: "des consommateurs consultent les avis avant de choisir un commerce",
     bigSource: "BrightLocal, 2024",
@@ -100,7 +100,7 @@ export function BenefitsSection() {
           <span className="kicker">Bénéfices</span>
           <h2 className="t-h1 mt-3">
             Ce que ça vous{" "}
-            <span className="text-gradient-warm">rapporte.</span>
+            <span className="text-gradient-brand">rapporte.</span>
           </h2>
           <p className="body-lg mt-5 max-w-xl">
             Trois leviers, des chiffres sourcés. Un site et une visibilité ne sont

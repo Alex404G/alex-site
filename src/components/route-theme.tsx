@@ -15,7 +15,9 @@ export function RouteTheme() {
       ? "sig"
       : pathname.startsWith("/visibilite")
         ? "visi"
-        : "warm";
+        : pathname.startsWith("/creation")
+          ? "warm"
+          : "brand";
   }, [pathname]);
   return null;
 }
