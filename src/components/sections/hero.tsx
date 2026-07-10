@@ -38,9 +38,11 @@ export function Hero() {
   // Titre généraliste : la home vend les trois offres, pas seulement le site.
   // Ligne 1 neutre, ligne 2 en argent (le thème « brand » de l'accueil —
   // les couleurs n'appartiennent qu'aux offres).
-  const lines: { text: string; cls: string }[] = [
-    { text: "Une présence en ligne", cls: "text-text-1" },
-    { text: "qui travaille pour vous.", cls: "text-gradient-brand" },
+  // Titre : version courte sur mobile (tient à 40px sur 2 lignes propres),
+  // version longue dès sm — le desktop ne change pas.
+  const lines: { mobile: string; desktop: string; cls: string }[] = [
+    { mobile: "Une présence", desktop: "Une présence en ligne", cls: "text-text-1" },
+    { mobile: "qui travaille.", desktop: "qui travaille pour vous.", cls: "text-gradient-brand" },
   ];
 
   return (
@@ -90,7 +92,7 @@ export function Hero() {
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 pt-24 text-center"
+        className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 pt-20 text-center sm:pt-24"
       >
         {/* Kicker — pour qui */}
         <motion.span
@@ -104,7 +106,7 @@ export function Hero() {
 
         {/* Headline — ligne 1 neutre, ligne 2 tri-thème. Taille calée pour
             qu'aucune des deux lignes ne se replie en desktop. */}
-        <h1 className="t-display mt-5 !text-[clamp(27px,6.2vw,84px)]">
+        <h1 className="t-display mt-5 !text-[clamp(40px,5.2vw,84px)]">
           {lines.map((line, i) => (
             <motion.span
               key={i}
@@ -113,24 +115,28 @@ export function Hero() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 1, ease: easings.outQuart, delay: 0.25 + i * 0.14 }}
             >
-              <span className={line.cls}>{line.text}</span>
+              <span className={line.cls}>
+                <span className="sm:hidden">{line.mobile}</span>
+                <span className="hidden sm:inline">{line.desktop}</span>
+              </span>
             </motion.span>
           ))}
         </h1>
 
-        {/* Sous-titre — une ligne */}
+        {/* Sous-titre — une ligne de bénéfice concret */}
         <motion.p
-          className="t-lede mt-6 max-w-3xl"
+          className="t-lede mt-5 max-w-3xl sm:mt-6"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.65 }}
         >
-          Plus de clients, une meilleure place sur Google, et du temps gagné.
+          Plus de clients, mieux placé sur Google, du temps gagné.
         </motion.p>
 
-        {/* Corps — les trois prestations en une phrase, deux lignes max */}
+        {/* Corps — coupé sur mobile (les 3 pastilles portent déjà l'offre),
+            conservé dès sm pour le desktop et le SEO. */}
         <motion.p
-          className="body-md mt-5 max-w-2xl text-[13.5px] leading-relaxed sm:text-[15px]"
+          className="body-md mt-5 hidden max-w-2xl text-[13.5px] leading-relaxed sm:block sm:text-[15px]"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.85 }}
@@ -148,7 +154,7 @@ export function Hero() {
         >
           <MagneticButton
             onClick={open}
-            className="group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
+            className="group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white sm:w-auto"
             style={{
               background: "var(--grad-brand-btn)",
               boxShadow: "0 20px 60px -12px rgba(61,92,255,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
@@ -159,7 +165,7 @@ export function Hero() {
           </MagneticButton>
           <a
             href="#offres"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-medium text-text-1 backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/[0.06]"
+            className="group inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-medium text-text-1 backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/[0.06] sm:w-auto"
           >
             Voir les offres
             <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
@@ -168,7 +174,7 @@ export function Hero() {
 
         {/* Les trois offres, chacune sous sa couleur */}
         <motion.div
-          className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5"
+          className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 sm:mt-10"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.25 }}

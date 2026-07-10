@@ -49,7 +49,7 @@ const PILLARS = [
 
 export function Pillars() {
   return (
-    <section id="offres" className="relative mx-auto max-w-6xl px-6 py-28 md:px-8 md:py-36">
+    <section id="offres" className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28 md:px-8 md:py-36">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ export function Pillars() {
         </p>
       </motion.div>
 
-      <div className="mt-14 grid gap-6 md:grid-cols-3">
+      <div className="mt-10 grid gap-4 sm:mt-14 sm:gap-6 md:grid-cols-3">
         {PILLARS.map((p, idx) => {
           const Icon = p.icon;
           return (
@@ -79,7 +79,7 @@ export function Pillars() {
               transition={{ duration: 0.7, ease: easings.outQuart, delay: idx * 0.1 }}
             >
               <SpotlightCard glow={p.glow} className="h-full">
-                <Link href={p.href} className="relative flex h-full flex-col p-8">
+                <Link href={p.href} className="relative flex h-full flex-col p-6 sm:p-8">
                   <div className="flex items-center justify-between">
                     <span
                       className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${p.ink}`}

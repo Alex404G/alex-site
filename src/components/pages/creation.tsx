@@ -24,8 +24,20 @@ import { easings } from "@/lib/utils";
 // Bento : 2 arguments vedettes (avec tuile), 4 compacts (icône inline) —
 // une hiérarchie, pas 6 cartes identiques.
 const FEATURED = [
-  { icon: Sparkles, title: "Design premium sur-mesure", desc: "Une identité unique, dessinée pour votre activité : couleurs, typographies et mise en page dérivées de votre métier, pas d'un template recyclé." },
-  { icon: MousePointerClick, title: "Optimisé conversion", desc: "Parcours clairs, appels à l'action au bon endroit, formulaire réduit à l'essentiel : des visiteurs qui deviennent des clients." },
+  {
+    icon: Sparkles,
+    title: "Design premium sur-mesure",
+    titleMobile: "Design sur-mesure",
+    desc: "Une identité unique, dessinée pour votre activité : couleurs, typographies et mise en page dérivées de votre métier, pas d'un template recyclé.",
+    descMobile: "Une identité à vous, jamais un template.",
+  },
+  {
+    icon: MousePointerClick,
+    title: "Optimisé conversion",
+    titleMobile: "Optimisé conversion",
+    desc: "Parcours clairs, appels à l'action au bon endroit, formulaire réduit à l'essentiel : des visiteurs qui deviennent des clients.",
+    descMobile: "Des visiteurs qui deviennent des clients.",
+  },
 ];
 
 const FEATURES = [
@@ -90,8 +102,8 @@ export function CreationPage() {
           <span className="kicker">Ce qui est inclus</span>
           <h2 className="t-h1 mt-4 text-text-1">Tout ce qu&apos;un site doit faire.</h2>
         </div>
-        {/* Rangée vedette — les deux arguments qui vendent */}
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        {/* Rangée vedette — les deux arguments qui vendent, côte à côte dès le mobile */}
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-5">
           {FEATURED.map((f, i) => {
             const Icon = f.icon;
             return (
@@ -103,15 +115,21 @@ export function CreationPage() {
                 transition={{ duration: 0.6, ease: easings.outQuart, delay: i * 0.1 }}
               >
                 <SpotlightCard glow="warm" className="h-full">
-                  <div className="p-8 md:p-9">
+                  <div className="p-4 sm:p-8 md:p-9">
                     <span
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-void-0"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-void-0 sm:h-11 sm:w-11"
                       style={{ background: "var(--grad-warm)" }}
                     >
-                      <Icon className="h-5 w-5" strokeWidth={2} />
+                      <Icon className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2} />
                     </span>
-                    <h3 className="t-h3 mt-6 !text-[22px] font-bold text-text-1">{f.title}</h3>
-                    <p className="body-md mt-3 text-[15px]">{f.desc}</p>
+                    <h3 className="t-h3 mt-4 !text-[15px] font-bold leading-tight text-text-1 sm:mt-6 sm:!text-[22px]">
+                      <span className="sm:hidden">{f.titleMobile}</span>
+                      <span className="hidden sm:inline">{f.title}</span>
+                    </h3>
+                    <p className="body-md mt-2 text-[12px] leading-snug sm:mt-3 sm:text-[15px]">
+                      <span className="sm:hidden">{f.descMobile}</span>
+                      <span className="hidden sm:inline">{f.desc}</span>
+                    </p>
                   </div>
                 </SpotlightCard>
               </motion.div>

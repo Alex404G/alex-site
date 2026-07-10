@@ -52,7 +52,12 @@ export default function AutomatisationsPage() {
         <PageHero
           theme="sig"
           kicker="Automatisations & IA"
-          title="L'IA, intégrée à votre métier."
+          title={
+            <>
+              <span className="sm:hidden">L&apos;IA dans votre métier.</span>
+              <span className="hidden sm:inline">L&apos;IA, intégrée à votre métier.</span>
+            </>
+          }
           sub="Je ne vends pas d'outils : je construis votre solution."
           body="J'étudie comment vous travaillez, puis je conçois l'agent ou l'automatisation qui vous enlève les tâches répétitives, sur vos données et vos outils."
           cta="Discuter d'une automatisation"

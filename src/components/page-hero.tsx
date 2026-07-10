@@ -76,15 +76,16 @@ export function PageHero({
         <span className={t.gradientText}>{title}</span>
       </motion.h1>
       <motion.p
-        className="t-lede mt-6 mx-auto max-w-3xl"
+        className="t-lede mt-5 mx-auto max-w-3xl sm:mt-6"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.3 }}
       >
         {sub}
       </motion.p>
+      {/* Corps coupé sur mobile (titre + 1 ligne + CTA), conservé dès sm. */}
       <motion.p
-        className="body-md mt-5 mx-auto max-w-2xl text-[13.5px] leading-relaxed sm:text-[15px]"
+        className="body-md mt-5 mx-auto hidden max-w-2xl text-[13.5px] leading-relaxed sm:block sm:text-[15px]"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.45 }}
@@ -99,7 +100,7 @@ export function PageHero({
       >
         <button
           onClick={open}
-          className={`group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] ${t.ink}`}
+          className={`group inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] sm:w-auto cursor-pointer ${t.ink}`}
           style={{ background: t.grad, boxShadow: t.shadow }}
         >
           {cta}
