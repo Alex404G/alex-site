@@ -70,6 +70,19 @@ export const AGENTS: AgentCard[] = [
   // 05
   {
     id: "a-05",
+    category: "VENTES",
+    title: "Programme de fidélité pour vos clients",
+    hook: "Vos clients reviennent, sans que vous y pensiez.",
+    utility:
+      "Carte de fidélité 100% automatique : chaque achat cumule des points, le client reçoit ses récompenses et une invitation à revenir, au bon moment et dans votre ton.",
+    statValue: "5×",
+    statLabel: "moins cher de fidéliser que d'acquérir",
+    icon: "Gift",
+    sig: 1,
+  },
+  // 06
+  {
+    id: "a-06",
     category: "ACCUEIL",
     title: "Prise de RDV automatique",
     hook: "L'agenda se remplit tout seul.",
@@ -78,19 +91,6 @@ export const AGENTS: AgentCard[] = [
     statValue: "0 appel",
     statLabel: "pour caler un rendez-vous",
     icon: "CalendarCheck",
-    sig: 1,
-  },
-  // 06
-  {
-    id: "a-06",
-    category: "ADMIN",
-    title: "Documents rédigés en une phrase",
-    hook: "Vous dictez une phrase, le document est prêt.",
-    utility:
-      "Devis, courrier, contrat, attestation : vos modèles, vos prix, votre ton. Vous relisez, c'est parti.",
-    statValue: "30 min → 2 min",
-    statLabel: "par document",
-    icon: "FileText",
     sig: 3,
   },
   // 07
