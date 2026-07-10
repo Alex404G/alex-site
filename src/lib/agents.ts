@@ -12,7 +12,7 @@ export type AgentCard = {
 
 /**
  * 12 agents — pensés pour la cible réelle (artisans, commerces, TPE),
- * du plus universel au plus spécialisé. Vocabulaire client, pas jargon.
+ * du plus universel au plus malin. Vocabulaire client, pas jargon.
  */
 export const AGENTS: AgentCard[] = [
   // 01 — La douleur n°1 de l'artisan : l'appel manqué
@@ -30,96 +30,18 @@ export const AGENTS: AgentCard[] = [
   },
   // 02
   {
-    id: "adm-1",
-    category: "ADMIN",
-    title: "Devis & factures à la voix",
-    hook: "Vous dictez sur le chantier, le devis part le soir même.",
+    id: "ven-1",
+    category: "VENTES",
+    title: "Pré-diagnostic par photos",
+    hook: "Vous arrivez en connaissant déjà le chantier.",
     utility:
-      "Des modèles à votre image, branchés sur vos prix. Vous dictez, l'IA rédige, classe et envoie — vous relisez avant l'envoi.",
-    statValue: "30 min → 2 min",
-    statLabel: "par document",
-    icon: "FileText",
+      "Le client envoie ses photos, l'IA qualifie la demande : ampleur, accès, matériaux, urgence. La visite est préparée, les demandes pas sérieuses sont écartées.",
+    statValue: "5 min",
+    statLabel: "pour qualifier une demande",
+    icon: "Camera",
     sig: 1,
   },
   // 03
-  {
-    id: "ven-1",
-    category: "VENTES",
-    title: "Relances devis & impayés",
-    hook: "Les devis sans réponse et les factures en retard se relancent seuls.",
-    utility:
-      "Relances polies et progressives (J+3, J+10, J+30), par mail ou SMS, dans votre ton. Vous gardez la main avant chaque envoi.",
-    statValue: "0",
-    statLabel: "oubli de relance, jamais",
-    icon: "BellRing",
-    sig: 4,
-  },
-  // 04
-  {
-    id: "ven-2",
-    category: "VENTES",
-    title: "Génération d'avis Google",
-    hook: "L'avis 5★ devient un cadeau gagné.",
-    utility:
-      "Mécanique gamifiée multilingue + back-office terrain. Code QR, tirage pondéré, anti-fraude.",
-    statValue: "+1★",
-    statLabel: "Google = +5 à +9% CA local (Harvard)",
-    icon: "Sparkles",
-    sig: 2,
-  },
-  // 05
-  {
-    id: "acc-2",
-    category: "ACCUEIL",
-    title: "Prise de RDV & rappels SMS",
-    hook: "L'agenda se remplit seul, les lapins se font rares.",
-    utility:
-      "Le client choisit son créneau en ligne, reçoit confirmation et rappel SMS. Reports et annulations gérés sans vous.",
-    statValue: "0 appel",
-    statLabel: "pour caler un rendez-vous",
-    icon: "CalendarCheck",
-    sig: 1,
-  },
-  // 06
-  {
-    id: "adm-2",
-    category: "ADMIN",
-    title: "Tri & réponse de mails",
-    hook: "Votre boîte se classe toute seule.",
-    utility:
-      "Tri par projet, réponses brouillon, classification urgents, alertes contextuelles.",
-    statValue: "~1 h/jour",
-    statLabel: "récupérée par poste",
-    icon: "Mail",
-    sig: 3,
-  },
-  // 07
-  {
-    id: "mkt-1",
-    category: "MARKETING",
-    title: "Posts réseaux automatiques",
-    hook: "Vos photos de chantier deviennent des publications.",
-    utility:
-      "Une photo envoyée = un post rédigé dans votre ton pour Instagram, Facebook et votre fiche Google, prêt à valider.",
-    statValue: "3 réseaux",
-    statLabel: "alimentés en un envoi",
-    icon: "Share2",
-    sig: 4,
-  },
-  // 08
-  {
-    id: "cpt-1",
-    category: "COMPTA",
-    title: "Lecture & tri des factures",
-    hook: "Plus jamais de \"qui a payé quoi\".",
-    utility:
-      "OCR multi-format, extraction structurée, classement automatique dans le bon dossier, prêt pour le comptable.",
-    statValue: "2 min",
-    statLabel: "économisées par facture",
-    icon: "ScanLine",
-    sig: 2,
-  },
-  // 09
   {
     id: "pil-1",
     category: "PILOTAGE",
@@ -130,22 +52,35 @@ export const AGENTS: AgentCard[] = [
     statValue: "−50%",
     statLabel: "de journée sur les tâches répétitives",
     icon: "Brain",
+    sig: 4,
+  },
+  // 04
+  {
+    id: "ven-2",
+    category: "VENTES",
+    title: "Avis Google en pilote auto",
+    hook: "Collecter, répondre, alerter : vos étoiles bossent sans vous.",
+    utility:
+      "Collecte après chaque chantier (SMS + QR code), réponse personnalisée à chaque avis, alerte immédiate si un avis négatif tombe.",
+    statValue: "+1★",
+    statLabel: "Google = +5 à +9% CA local (Harvard)",
+    icon: "Star",
+    sig: 2,
+  },
+  // 05
+  {
+    id: "adm-1",
+    category: "ADMIN",
+    title: "Tri & réponse de mails",
+    hook: "Votre boîte se classe toute seule.",
+    utility:
+      "Tri par projet, réponses brouillon, classification urgents, alertes contextuelles.",
+    statValue: "~1 h/jour",
+    statLabel: "récupérée par poste",
+    icon: "Mail",
     sig: 3,
   },
-  // 10
-  {
-    id: "ven-3",
-    category: "VENTES",
-    title: "Chatbot site & réseaux 24/7",
-    hook: "Il répond à vos clients quand vous dormez.",
-    utility:
-      "Horaires, tarifs, délais, questions courantes : il répond dans votre ton, sur vos infos, et passe la main dès que c'est du sur-mesure.",
-    statValue: "60%",
-    statLabel: "des questions traitées sans vous",
-    icon: "MessageSquare",
-    sig: 1,
-  },
-  // 11
+  // 06
   {
     id: "pil-2",
     category: "PILOTAGE",
@@ -156,11 +91,76 @@ export const AGENTS: AgentCard[] = [
     statValue: "30 min",
     statLabel: "économisées par semaine",
     icon: "LayoutDashboard",
+    sig: 1,
+  },
+  // 07
+  {
+    id: "mkt-1",
+    category: "MARKETING",
+    title: "Site à jour par message",
+    hook: "Vous envoyez un message, votre site est à jour.",
+    utility:
+      "Nouveaux horaires, promo du moment, photo d'une réalisation : un simple message WhatsApp et la modification est en ligne, sans toucher au site.",
+    statValue: "30 s",
+    statLabel: "pour mettre le site à jour",
+    icon: "Smartphone",
+    sig: 4,
+  },
+  // 08
+  {
+    id: "acc-2",
+    category: "ACCUEIL",
+    title: "Prise de RDV & rappels SMS",
+    hook: "L'agenda se remplit seul, les lapins se font rares.",
+    utility:
+      "Le client choisit son créneau en ligne, reçoit confirmation et rappel SMS. Reports et annulations gérés sans vous.",
+    statValue: "0 appel",
+    statLabel: "pour caler un rendez-vous",
+    icon: "CalendarCheck",
+    sig: 2,
+  },
+  // 09
+  {
+    id: "mkt-2",
+    category: "MARKETING",
+    title: "Posts réseaux automatiques",
+    hook: "Vos photos de chantier deviennent des publications.",
+    utility:
+      "Une photo envoyée = un post rédigé dans votre ton pour Instagram, Facebook et votre fiche Google, prêt à valider.",
+    statValue: "3 réseaux",
+    statLabel: "alimentés en un envoi",
+    icon: "Share2",
+    sig: 3,
+  },
+  // 10
+  {
+    id: "cpt-1",
+    category: "COMPTA",
+    title: "Lecture & tri des factures",
+    hook: "Plus jamais de \"qui a payé quoi\".",
+    utility:
+      "OCR multi-format, extraction structurée, classement automatique dans le bon dossier, prêt pour le comptable.",
+    statValue: "2 min",
+    statLabel: "économisées par facture",
+    icon: "ScanLine",
+    sig: 1,
+  },
+  // 11
+  {
+    id: "ven-3",
+    category: "VENTES",
+    title: "Relances devis & impayés",
+    hook: "Les devis sans réponse et les factures en retard se relancent seuls.",
+    utility:
+      "Relances polies et progressives (J+3, J+10, J+30), par mail ou SMS, dans votre ton. Vous gardez la main avant chaque envoi.",
+    statValue: "0",
+    statLabel: "oubli de relance, jamais",
+    icon: "BellRing",
     sig: 2,
   },
   // 12
   {
-    id: "mkt-2",
+    id: "mkt-3",
     category: "MARKETING",
     title: "Rédaction d'articles SEO",
     hook: "Les articles que Google et les humains aiment.",
