@@ -11,9 +11,9 @@ import { easings } from "@/lib/utils";
 // Les trois prestations, chacune avec sa pastille de thème — le hero vend
 // l'ensemble, les pages détaillent.
 const OFFERS = [
-  { href: "/creation-site-web", label: "Sites web", grad: "var(--grad-warm)" },
-  { href: "/visibilite-en-ligne", label: "Visibilité en ligne", grad: "var(--grad-visi)" },
-  { href: "/automatisations", label: "Automatisations & IA", grad: "var(--grad-signature)" },
+  { href: "/creation-site-web", label: "Sites web", short: "Sites web", grad: "var(--grad-warm)" },
+  { href: "/visibilite-en-ligne", label: "Visibilité en ligne", short: "Visibilité", grad: "var(--grad-visi)" },
+  { href: "/automatisations", label: "Automatisations & IA", short: "Automatisations", grad: "var(--grad-signature)" },
 ];
 
 export function Hero() {
@@ -92,7 +92,7 @@ export function Hero() {
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 pt-16 text-center sm:pt-24"
+        className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 pt-24 text-center sm:pt-24"
       >
         {/* Kicker — pour qui */}
         <motion.span
@@ -106,7 +106,7 @@ export function Hero() {
 
         {/* Headline — ligne 1 neutre, ligne 2 tri-thème. Taille calée pour
             qu'aucune des deux lignes ne se replie en desktop. */}
-        <h1 className="t-display mt-5 !text-[clamp(40px,5.2vw,84px)]">
+        <h1 className="t-display mt-4 !text-[clamp(40px,5.2vw,84px)] sm:mt-5">
           {lines.map((line, i) => (
             <motion.span
               key={i}
@@ -125,7 +125,7 @@ export function Hero() {
 
         {/* Sous-titre — une ligne de bénéfice concret */}
         <motion.p
-          className="t-lede mt-5 max-w-3xl sm:mt-6"
+          className="t-lede mt-4 max-w-3xl sm:mt-6"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.65 }}
@@ -147,14 +147,14 @@ export function Hero() {
 
         {/* CTAs — côte à côte dès le mobile (taille réduite pour tenir sur une ligne) */}
         <motion.div
-          className="mt-9 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-3"
+          className="mt-8 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:mt-9 sm:gap-3"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.1 }}
         >
           <MagneticButton
             onClick={open}
-            className="group inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 py-3 text-[13px] font-medium text-white sm:px-6 sm:text-sm"
+            className="group inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-3.5 text-[13px] font-medium text-white sm:px-6 sm:text-sm"
             style={{
               background: "var(--grad-brand-btn)",
               boxShadow: "0 20px 60px -12px rgba(61,92,255,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
@@ -165,7 +165,7 @@ export function Hero() {
           </MagneticButton>
           <a
             href="#offres"
-            className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/10 bg-white/[0.03] px-4 py-3 text-[13px] font-medium text-text-1 backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/[0.06] sm:px-6 sm:text-sm"
+            className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/10 bg-white/[0.03] px-5 py-3.5 text-[13px] font-medium text-text-1 backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/[0.06] sm:px-6 sm:text-sm"
           >
             <span className="sm:hidden">Les offres</span>
             <span className="hidden sm:inline">Voir les offres</span>
@@ -175,7 +175,7 @@ export function Hero() {
 
         {/* Les trois offres, chacune sous sa couleur */}
         <motion.div
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 sm:mt-10"
+          className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2.5 sm:mt-10 sm:gap-x-7"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.25 }}
@@ -184,14 +184,15 @@ export function Hero() {
             <Link
               key={o.href}
               href={o.href}
-              className="group inline-flex items-center gap-2 py-1 text-sm text-text-2 transition-colors hover:text-text-1"
+              className="group inline-flex items-center gap-1.5 py-1 text-[13px] text-text-2 transition-colors hover:text-text-1 sm:gap-2 sm:text-sm"
             >
               <span
                 aria-hidden
-                className="h-1.5 w-1.5 rounded-full transition-transform group-hover:scale-125"
+                className="h-1.5 w-1.5 shrink-0 rounded-full transition-transform group-hover:scale-125"
                 style={{ background: o.grad }}
               />
-              {o.label}
+              <span className="sm:hidden">{o.short}</span>
+              <span className="hidden sm:inline">{o.label}</span>
             </Link>
           ))}
         </motion.div>
