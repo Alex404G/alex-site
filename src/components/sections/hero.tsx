@@ -104,7 +104,7 @@ export function Hero() {
 
         {/* Headline — ligne 1 neutre, ligne 2 tri-thème. Taille calée pour
             qu'aucune des deux lignes ne se replie en desktop. */}
-        <h1 className="t-display mt-5 !text-[clamp(38px,5.2vw,84px)]">
+        <h1 className="t-display mt-5 !text-[clamp(27px,6.2vw,84px)]">
           {lines.map((line, i) => (
             <motion.span
               key={i}
@@ -130,7 +130,7 @@ export function Hero() {
 
         {/* Corps — les trois prestations en une phrase, deux lignes max */}
         <motion.p
-          className="body-md mt-5 max-w-2xl text-[15px]"
+          className="body-md mt-5 max-w-2xl text-[13.5px] leading-relaxed sm:text-[15px]"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.85 }}

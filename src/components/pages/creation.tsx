@@ -120,7 +120,7 @@ export function CreationPage() {
         </div>
 
         {/* Rangée compacte — le socle, sans tuiles */}
-        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-5 sm:gap-5 lg:grid-cols-4">
           {FEATURES.map((f, i) => {
             const Icon = f.icon;
             return (
@@ -130,15 +130,15 @@ export function CreationPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.55, ease: easings.outQuart, delay: 0.1 + i * 0.06 }}
-                className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6"
+                className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 sm:p-6"
               >
-                <div className="flex items-center gap-2.5">
-                  <Icon className="h-4.5 w-4.5 shrink-0 text-warm-2" strokeWidth={1.8} />
-                  <h3 className="font-display text-[16px] font-bold tracking-[-0.01em] text-text-1">
+                <div className="flex items-center gap-2 sm:gap-2.5">
+                  <Icon className="h-4 w-4 shrink-0 text-warm-2 sm:h-4.5 sm:w-4.5" strokeWidth={1.8} />
+                  <h3 className="font-display text-[13.5px] font-bold tracking-[-0.01em] text-text-1 sm:text-[16px]">
                     {f.title}
                   </h3>
                 </div>
-                <p className="body-md mt-2.5 text-[14px]">{f.desc}</p>
+                <p className="body-md mt-2 text-[12.5px] sm:mt-2.5 sm:text-[14px]">{f.desc}</p>
               </motion.div>
             );
           })}
@@ -148,7 +148,7 @@ export function CreationPage() {
       <SectionGlow />
 
       {/* Comparatif — section distinctive de la page Création */}
-      <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+      <section className="relative mx-auto max-w-6xl px-6 py-12 sm:py-16 md:px-8 md:py-24">
         <div className="max-w-3xl">
           <span className="kicker">La différence</span>
           <h2 className="t-h1 mt-4 text-text-1 md:whitespace-nowrap">Template ou sur-mesure&nbsp;?</h2>
@@ -157,19 +157,19 @@ export function CreationPage() {
             Voici ce qui change concrètement.
           </p>
         </div>
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-2">
           {/* Template */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease: easings.outQuart }}
-            className="rounded-3xl border border-white/[0.07] bg-white/[0.015] p-8 md:p-9"
+            className="rounded-3xl border border-white/[0.07] bg-white/[0.015] p-5 sm:p-8 md:p-9"
           >
             <span className="kicker text-text-3">Un template</span>
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-5 space-y-2.5 sm:mt-6 sm:space-y-4">
               {COMPARE.map(([tpl]) => (
-                <li key={tpl} className="flex items-start gap-3 text-[15px] text-text-2">
+                <li key={tpl} className="flex items-start gap-3 text-[13.5px] text-text-2 sm:text-[15px]">
                   <X className="mt-0.5 h-4 w-4 shrink-0 text-text-3" strokeWidth={2.5} />
                   {tpl}
                 </li>
@@ -182,7 +182,7 @@ export function CreationPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease: easings.outQuart, delay: 0.1 }}
-            className="glow-warm rounded-3xl border border-white/[0.1] bg-white/[0.03] p-8 md:p-9"
+            className="glow-warm rounded-3xl border border-white/[0.1] bg-white/[0.03] p-5 sm:p-8 md:p-9"
           >
             <span
               className="kicker"
@@ -195,9 +195,9 @@ export function CreationPage() {
             >
               Sur-mesure
             </span>
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-5 space-y-2.5 sm:mt-6 sm:space-y-4">
               {COMPARE.map(([, sur]) => (
-                <li key={sur} className="flex items-start gap-3 text-[15px] text-text-1">
+                <li key={sur} className="flex items-start gap-3 text-[13.5px] text-text-1 sm:text-[15px]">
                   <span
                     className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full"
                     style={{ background: "var(--grad-warm)" }}

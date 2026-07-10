@@ -84,7 +84,7 @@ export function PageHero({
         {sub}
       </motion.p>
       <motion.p
-        className="body-md mt-5 mx-auto max-w-2xl text-[15px]"
+        className="body-md mt-5 mx-auto max-w-2xl text-[13.5px] leading-relaxed sm:text-[15px]"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easings.outQuart, delay: 0.45 }}

@@ -89,9 +89,17 @@ export function AgentsSection() {
                   >
                     {a.title}
                   </span>
+                  {/* Mobile : chevron = « ça s'ouvre ». Desktop : point d'état. */}
+                  <Lucide.ChevronDown
+                    aria-hidden
+                    className={`ml-auto h-4 w-4 shrink-0 transition-transform duration-300 lg:hidden ${
+                      isActive ? "rotate-180" : ""
+                    }`}
+                    style={{ color: isActive ? `rgb(${aRgb})` : "var(--text-3)" }}
+                  />
                   <span
                     aria-hidden
-                    className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full transition-all duration-300"
+                    className="ml-auto hidden h-1.5 w-1.5 shrink-0 rounded-full transition-all duration-300 lg:block"
                     style={{
                       background: isActive ? `rgb(${aRgb})` : "rgba(255,255,255,0.12)",
                       boxShadow: isActive ? `0 0 12px rgba(${aRgb}, 0.8)` : "none",
@@ -99,7 +107,7 @@ export function AgentsSection() {
                   />
                 </button>
 
-                {/* Accordéon (mobile / tablette) */}
+                {/* Accordéon (mobile / tablette) — fiche délimitée, sans répéter le titre */}
                 <AnimatePresence initial={false}>
                   {isActive && (
                     <motion.div
@@ -109,8 +117,8 @@ export function AgentsSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <div className="pb-6 pt-1">
-                        <Fiche agent={a} />
+                      <div className="pb-5 pt-1">
+                        <FicheMobile agent={a} />
                       </div>
                     </motion.div>
                   )}
@@ -217,6 +225,42 @@ function Fiche({ agent, large = false }: { agent: AgentCard; large?: boolean }) 
           {agent.statValue}
         </span>
         <span className="text-sm text-text-3">{agent.statLabel}</span>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Fiche mobile : le titre de l'agent est déjà dans la ligne au-dessus, donc
+ * on ne le répète pas. Un encadré délimité (filet coloré à gauche + surface
+ * légère) range clairement la catégorie, la phrase, l'utilité et la stat.
+ */
+function FicheMobile({ agent }: { agent: AgentCard }) {
+  const rgb = SIG_RGB[agent.sig];
+  const color = SIG_COLORS[agent.sig - 1];
+  return (
+    <div
+      className="ml-8 rounded-xl border border-white/[0.06] bg-white/[0.025] p-4"
+      style={{ borderLeftWidth: 2, borderLeftColor: `rgb(${rgb})` }}
+    >
+      <span
+        className="font-mono text-[10px] font-medium uppercase tracking-[0.16em]"
+        style={{ color: `rgb(${LABEL_RGB[agent.sig]})` }}
+      >
+        {agent.category}
+      </span>
+      <p className="mt-2 text-[13.5px] italic leading-snug text-text-2">
+        «&nbsp;{agent.hook}&nbsp;»
+      </p>
+      <p className="mt-2.5 text-[13px] leading-relaxed text-text-2">{agent.utility}</p>
+      <div className="mt-3.5 flex items-baseline gap-2 border-t border-white/[0.08] pt-3">
+        <span
+          className="font-display text-xl font-bold tracking-[-0.02em]"
+          style={{ color }}
+        >
+          {agent.statValue}
+        </span>
+        <span className="text-[12px] text-text-3">{agent.statLabel}</span>
       </div>
     </div>
   );

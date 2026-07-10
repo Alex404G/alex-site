@@ -94,7 +94,7 @@ export function VisibilitePage() {
           <span className="kicker">Les leviers</span>
           <h2 className="t-h1 mt-4 text-text-1">Tout ce qui vous rend visible.</h2>
         </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-5 lg:grid-cols-3">
           {LEVERS.map((f, i) => {
             const Icon = f.icon;
             return (
@@ -106,15 +106,15 @@ export function VisibilitePage() {
                 transition={{ duration: 0.6, ease: easings.outQuart, delay: (i % 3) * 0.08 }}
               >
                 <SpotlightCard glow="visi" className="h-full">
-                  <div className="p-7">
+                  <div className="p-4 sm:p-7">
                     <span
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-void-0"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-void-0 sm:h-11 sm:w-11"
                       style={{ background: "var(--grad-visi)" }}
                     >
-                      <Icon className="h-5 w-5" strokeWidth={2} />
+                      <Icon className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2} />
                     </span>
-                    <h3 className="t-h3 mt-5 text-text-1">{f.title}</h3>
-                    <p className="body-md mt-2 text-[15px]">{f.desc}</p>
+                    <h3 className="t-h3 mt-3.5 !text-[15.5px] text-text-1 sm:mt-5 sm:!text-[18px]">{f.title}</h3>
+                    <p className="body-md mt-1.5 text-[12.5px] sm:mt-2 sm:text-[15px]">{f.desc}</p>
                   </div>
                 </SpotlightCard>
               </motion.div>
