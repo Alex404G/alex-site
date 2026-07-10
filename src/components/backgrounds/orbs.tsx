@@ -45,7 +45,7 @@ function Orb({ color, size, x, y, blur = 120, opacity = 0.55, parallax = 0.5 }: 
  */
 export function BackgroundOrbs() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-30 overflow-hidden">
+    <div aria-hidden className="pointer-events-none fixed inset-0 -z-30 overflow-hidden opacity-80">
       {/* Section 1 / Hero — top */}
       <Orb color="#3D5CFF" size={60} x="-10%" y="-20%" blur={140} opacity={0.55} parallax={0.15} />
       <Orb color="#8B5CF6" size={50} x="60%" y="10%"  blur={130} opacity={0.5}  parallax={0.25} />
