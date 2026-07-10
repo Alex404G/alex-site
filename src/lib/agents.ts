@@ -11,18 +11,18 @@ export type AgentCard = {
 };
 
 /**
- * 12 agents — pensés pour la cible réelle (artisans, commerces, TPE),
- * du plus universel au plus malin. Vocabulaire client, pas jargon.
+ * 12 agents généralistes — compréhensibles en une phrase par n'importe quel
+ * patron, du plus universel au plus spécialisé. Simple, pas compliqué.
  */
 export const AGENTS: AgentCard[] = [
-  // 01 — La douleur n°1 de l'artisan : l'appel manqué
+  // 01
   {
-    id: "acc-1",
+    id: "a-01",
     category: "ACCUEIL",
     title: "Accueil téléphonique IA",
     hook: "Un appel manqué n'est plus un client perdu.",
     utility:
-      "Sur un toit, en service, en rendez-vous : l'IA répond, comprend la demande, envoie un SMS récapitulatif et propose un créneau de rappel.",
+      "Quand vous ne pouvez pas répondre, l'IA décroche, comprend la demande, envoie un SMS récapitulatif et propose un créneau de rappel.",
     statValue: "24/7",
     statLabel: "elle répond pendant que vous travaillez",
     icon: "PhoneCall",
@@ -30,38 +30,38 @@ export const AGENTS: AgentCard[] = [
   },
   // 02
   {
-    id: "ven-1",
-    category: "VENTES",
-    title: "Pré-diagnostic par photos",
-    hook: "Vous arrivez en connaissant déjà le chantier.",
-    utility:
-      "Le client envoie ses photos, l'IA qualifie la demande : ampleur, accès, matériaux, urgence. La visite est préparée, les demandes pas sérieuses sont écartées.",
-    statValue: "5 min",
-    statLabel: "pour qualifier une demande",
-    icon: "Camera",
-    sig: 1,
-  },
-  // 03
-  {
-    id: "pil-1",
+    id: "a-02",
     category: "PILOTAGE",
     title: "Assistant connecté à votre entreprise",
     hook: "Comme ChatGPT, mais il connaît vraiment votre boîte.",
     utility:
-      "Branché sur vos mails, devis, plannings et documents : il répond comme quelqu'un de la maison, sources à l'appui.",
+      "Branché sur vos mails, devis, plannings et documents : posez-lui n'importe quelle question, il répond comme quelqu'un de la maison.",
     statValue: "−50%",
     statLabel: "de journée sur les tâches répétitives",
     icon: "Brain",
+    sig: 1,
+  },
+  // 03
+  {
+    id: "a-03",
+    category: "ADMIN",
+    title: "Boîte mail en pilote automatique",
+    hook: "Votre boîte se classe et prépare les réponses toute seule.",
+    utility:
+      "Chaque mail est trié, les urgents remontent, et une réponse brouillon vous attend : vous relisez, vous envoyez.",
+    statValue: "~1 h/jour",
+    statLabel: "récupérée sur les mails",
+    icon: "Mail",
     sig: 4,
   },
   // 04
   {
-    id: "ven-2",
+    id: "a-04",
     category: "VENTES",
-    title: "Avis Google en pilote auto",
-    hook: "Collecter, répondre, alerter : vos étoiles bossent sans vous.",
+    title: "Machine à avis Google",
+    hook: "Chaque client content devient un avis 5 étoiles.",
     utility:
-      "Collecte après chaque chantier (SMS + QR code), réponse personnalisée à chaque avis, alerte immédiate si un avis négatif tombe.",
+      "La demande d'avis part au bon moment après chaque vente ou chantier, et chaque avis reçoit une réponse rédigée pour vous.",
     statValue: "+1★",
     statLabel: "Google = +5 à +9% CA local (Harvard)",
     icon: "Star",
@@ -69,98 +69,98 @@ export const AGENTS: AgentCard[] = [
   },
   // 05
   {
-    id: "adm-1",
-    category: "ADMIN",
-    title: "Tri & réponse de mails",
-    hook: "Votre boîte se classe toute seule.",
+    id: "a-05",
+    category: "ACCUEIL",
+    title: "Prise de RDV automatique",
+    hook: "L'agenda se remplit tout seul.",
     utility:
-      "Tri par projet, réponses brouillon, classification urgents, alertes contextuelles.",
-    statValue: "~1 h/jour",
-    statLabel: "récupérée par poste",
-    icon: "Mail",
-    sig: 3,
+      "Le client choisit son créneau en ligne, reçoit confirmation et rappel SMS. Reports et annulations gérés sans vous.",
+    statValue: "0 appel",
+    statLabel: "pour caler un rendez-vous",
+    icon: "CalendarCheck",
+    sig: 1,
   },
   // 06
   {
-    id: "pil-2",
+    id: "a-06",
+    category: "ADMIN",
+    title: "Documents rédigés en une phrase",
+    hook: "Vous dictez une phrase, le document est prêt.",
+    utility:
+      "Devis, courrier, contrat, attestation : vos modèles, vos prix, votre ton. Vous relisez, c'est parti.",
+    statValue: "30 min → 2 min",
+    statLabel: "par document",
+    icon: "FileText",
+    sig: 3,
+  },
+  // 07
+  {
+    id: "a-07",
+    category: "ADMIN",
+    title: "Compte-rendu automatique",
+    hook: "Vous parlez, il note, il résume, il liste qui fait quoi.",
+    utility:
+      "Réunion, appel ou visite : tout est transcrit, résumé clairement, et les décisions comme les tâches sont envoyées à chacun.",
+    statValue: "0 note",
+    statLabel: "à prendre, plus rien ne se perd",
+    icon: "Mic",
+    sig: 2,
+  },
+  // 08
+  {
+    id: "a-08",
+    category: "MARKETING",
+    title: "Réseaux sociaux en autopilote",
+    hook: "Une photo envoyée, un post prêt sur trois réseaux.",
+    utility:
+      "Une photo de votre travail = une publication rédigée dans votre ton pour Instagram, Facebook et votre fiche Google, prête à valider.",
+    statValue: "3 réseaux",
+    statLabel: "alimentés en un envoi",
+    icon: "Share2",
+    sig: 4,
+  },
+  // 09
+  {
+    id: "a-09",
+    category: "COMPTA",
+    title: "Paperasse lue et classée",
+    hook: "Plus jamais de \"qui a payé quoi\".",
+    utility:
+      "Factures, contrats, attestations : tout est lu, les infos extraites, chaque document classé au bon endroit, prêt pour le comptable.",
+    statValue: "2 min",
+    statLabel: "économisées par document",
+    icon: "ScanLine",
+    sig: 1,
+  },
+  // 10
+  {
+    id: "a-10",
     category: "PILOTAGE",
-    title: "Tableau de bord de pilotage",
+    title: "Tableau de bord de l'activité",
     hook: "Toute votre activité sur un écran, récap le lundi matin.",
     utility:
       "Devis en cours, encaissements, avis, réservations : tout au même endroit, avec un récap envoyé chaque semaine.",
     statValue: "30 min",
     statLabel: "économisées par semaine",
     icon: "LayoutDashboard",
-    sig: 1,
-  },
-  // 07
-  {
-    id: "mkt-1",
-    category: "MARKETING",
-    title: "Site à jour par message",
-    hook: "Vous envoyez un message, votre site est à jour.",
-    utility:
-      "Nouveaux horaires, promo du moment, photo d'une réalisation : un simple message WhatsApp et la modification est en ligne, sans toucher au site.",
-    statValue: "30 s",
-    statLabel: "pour mettre le site à jour",
-    icon: "Smartphone",
-    sig: 4,
-  },
-  // 08
-  {
-    id: "acc-2",
-    category: "ACCUEIL",
-    title: "Prise de RDV & rappels SMS",
-    hook: "L'agenda se remplit seul, les lapins se font rares.",
-    utility:
-      "Le client choisit son créneau en ligne, reçoit confirmation et rappel SMS. Reports et annulations gérés sans vous.",
-    statValue: "0 appel",
-    statLabel: "pour caler un rendez-vous",
-    icon: "CalendarCheck",
     sig: 2,
-  },
-  // 09
-  {
-    id: "mkt-2",
-    category: "MARKETING",
-    title: "Posts réseaux automatiques",
-    hook: "Vos photos de chantier deviennent des publications.",
-    utility:
-      "Une photo envoyée = un post rédigé dans votre ton pour Instagram, Facebook et votre fiche Google, prêt à valider.",
-    statValue: "3 réseaux",
-    statLabel: "alimentés en un envoi",
-    icon: "Share2",
-    sig: 3,
-  },
-  // 10
-  {
-    id: "cpt-1",
-    category: "COMPTA",
-    title: "Lecture & tri des factures",
-    hook: "Plus jamais de \"qui a payé quoi\".",
-    utility:
-      "OCR multi-format, extraction structurée, classement automatique dans le bon dossier, prêt pour le comptable.",
-    statValue: "2 min",
-    statLabel: "économisées par facture",
-    icon: "ScanLine",
-    sig: 1,
   },
   // 11
   {
-    id: "ven-3",
+    id: "a-11",
     category: "VENTES",
-    title: "Relances devis & impayés",
+    title: "Relances clients automatiques",
     hook: "Les devis sans réponse et les factures en retard se relancent seuls.",
     utility:
-      "Relances polies et progressives (J+3, J+10, J+30), par mail ou SMS, dans votre ton. Vous gardez la main avant chaque envoi.",
+      "Relances polies et progressives, par mail ou SMS, dans votre ton. Vous gardez la main avant chaque envoi.",
     statValue: "0",
     statLabel: "oubli de relance, jamais",
     icon: "BellRing",
-    sig: 2,
+    sig: 4,
   },
   // 12
   {
-    id: "mkt-3",
+    id: "a-12",
     category: "MARKETING",
     title: "Rédaction d'articles SEO",
     hook: "Les articles que Google et les humains aiment.",
@@ -169,7 +169,7 @@ export const AGENTS: AgentCard[] = [
     statValue: "2 h → 15 min",
     statLabel: "par article",
     icon: "PencilLine",
-    sig: 4,
+    sig: 3,
   },
 ];
 
