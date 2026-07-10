@@ -148,13 +148,14 @@ export function Hero() {
         >
           <MagneticButton
             onClick={open}
-            className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-void-0"
+            className="group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white"
             style={{
-              boxShadow: "0 20px 60px -12px rgba(201,206,221,0.45), inset 0 1px 0 rgba(255,255,255,0.8)",
+              background: "var(--grad-brand-btn)",
+              boxShadow: "0 20px 60px -12px rgba(61,92,255,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
             }}
           >
             Discuter du projet
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--grad-warm)" }} />
+            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-white/70" />
           </MagneticButton>
           <a
             href="#offres"

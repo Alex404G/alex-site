@@ -19,7 +19,7 @@ export default function Home() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 52% 42% at 50% 58%, rgba(201,206,221,0.045), transparent 70%)",
+              "radial-gradient(ellipse 52% 42% at 50% 58%, rgba(61,92,255,0.06), transparent 70%)",
           }}
         />
         <div className="bg-grid absolute inset-0 opacity-[0.28] [mask-image:radial-gradient(ellipse_75%_55%_at_50%_28%,black,transparent_78%)]" />

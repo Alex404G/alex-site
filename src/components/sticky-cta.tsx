@@ -26,15 +26,16 @@ export function StickyCta() {
       ? "var(--grad-visi)"
       : onCrea
         ? "var(--grad-warm)"
-        : "#ffffff";
+        : "var(--grad-brand-btn)";
   const shadow = onAuto
     ? "0 20px 60px -15px rgba(184,69,232,0.6), inset 0 1px 0 rgba(255,255,255,0.2)"
     : onVisi
       ? "0 20px 60px -15px rgba(43,201,138,0.5), inset 0 1px 0 rgba(255,255,255,0.25)"
       : onCrea
         ? "0 20px 60px -15px rgba(255,122,77,0.55), inset 0 1px 0 rgba(255,255,255,0.25)"
-        : "0 20px 60px -15px rgba(201,206,221,0.4), inset 0 1px 0 rgba(255,255,255,0.6)";
-  const ink = onAuto ? "text-white" : "text-void-0";
+        : "0 20px 60px -15px rgba(61,92,255,0.5), inset 0 1px 0 rgba(255,255,255,0.2)";
+  const onBrand = !onAuto && !onVisi && !onCrea;
+  const ink = onAuto || onBrand ? "text-white" : "text-void-0";
 
   return (
     <motion.button

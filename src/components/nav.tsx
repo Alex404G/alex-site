@@ -37,7 +37,7 @@ export function Nav() {
       ? "0 0 10px rgba(43,201,138,0.7)"
       : onCrea
         ? "0 0 10px rgba(255,122,77,0.7)"
-        : "0 0 10px rgba(230,234,242,0.8)";
+        : "0 0 10px rgba(61,92,255,0.8)";
 
   // Le menu mobile se ferme à la navigation, sur Échap, et verrouille le scroll
   useEffect(() => setMenuOpen(false), [pathname]);
