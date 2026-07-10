@@ -20,8 +20,8 @@ export default function ConfidentialitePage() {
           <p className="body-md text-[15px]">
             Alexandre Gil (Entrepreneur Individuel), 8 rue des Sœurs de Cauvigny, 34300 Agde.
             Contact :{" "}
-            <a href="mailto:marsugil@gmail.com" className="text-warm-2 underline-offset-4 hover:underline">
-              marsugil@gmail.com
+            <a href="mailto:contact@alexandregil.com" className="text-warm-2 underline-offset-4 hover:underline">
+              contact@alexandregil.com
             </a>.
           </p>
         </section>
@@ -75,8 +75,8 @@ export default function ConfidentialitePage() {
           <p className="body-md text-[15px]">
             Vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos
             données. Pour l&apos;exercer, écrivez à{" "}
-            <a href="mailto:marsugil@gmail.com" className="text-warm-2 underline-offset-4 hover:underline">
-              marsugil@gmail.com
+            <a href="mailto:contact@alexandregil.com" className="text-warm-2 underline-offset-4 hover:underline">
+              contact@alexandregil.com
             </a>. Vous pouvez également saisir la CNIL (cnil.fr).
           </p>
         </section>

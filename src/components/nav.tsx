@@ -202,7 +202,7 @@ export function Nav() {
                   <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ background: accent }} />
                 </button>
                 <p className="body-md mt-6 text-[14px]">
-                  07 67 67 77 42 · marsugil@gmail.com
+                  07 67 67 77 42 · contact@alexandregil.com
                 </p>
               </motion.div>
             </motion.nav>

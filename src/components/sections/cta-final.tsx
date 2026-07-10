@@ -6,7 +6,7 @@ import { useState } from "react";
 import { track } from "@vercel/analytics";
 import { MeshShader } from "@/components/backgrounds/mesh-shader";
 
-const EMAIL = "marsugil@gmail.com";
+const EMAIL = "contact@alexandregil.com";
 const PHONE = "07 67 67 77 42";
 const PHONE_HREF = "+33767677742";
 

@@ -57,7 +57,7 @@ export function useContactModal() {
   return ctx;
 }
 
-const EMAIL = "marsugil@gmail.com";
+const EMAIL = "contact@alexandregil.com";
 const PHONE = "07 67 67 77 42";
 const PHONE_HREF = "+33767677742";
 const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent("Projet — site / visibilité")}`;

@@ -28,8 +28,8 @@ export default function MentionsLegalesPage() {
           </p>
           <p className="body-md text-[15px]">
             Contact :{" "}
-            <a href="mailto:marsugil@gmail.com" className="text-warm-2 underline-offset-4 hover:underline">
-              marsugil@gmail.com
+            <a href="mailto:contact@alexandregil.com" className="text-warm-2 underline-offset-4 hover:underline">
+              contact@alexandregil.com
             </a>{" "}
             — 07 67 67 77 42.
           </p>

@@ -63,7 +63,7 @@ const jsonLd = {
       url: SITE.url,
       image: `${SITE.url}/opengraph-image`,
       areaServed: { "@type": "Country", name: "France" },
-      email: "marsugil@gmail.com",
+      email: "contact@alexandregil.com",
       telephone: "+33767677742",
       priceRange: "€€",
       address: {

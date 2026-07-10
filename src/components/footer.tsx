@@ -41,10 +41,10 @@ export function Footer() {
             </p>
             <div className="mt-4 text-sm">
               <a
-                href="mailto:marsugil@gmail.com"
+                href="mailto:contact@alexandregil.com"
                 className="block py-1.5 text-text-2 transition-colors hover:text-text-1"
               >
-                marsugil@gmail.com
+                contact@alexandregil.com
               </a>
               <a
                 href="tel:+33767677742"
