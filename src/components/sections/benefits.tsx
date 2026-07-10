@@ -93,8 +93,8 @@ export function BenefitsSection() {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl"
         >
           <span className="kicker">Bénéfices</span>
@@ -131,7 +131,7 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.7, delay: index * 0.1 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
       className="glass relative flex h-full flex-col overflow-hidden rounded-3xl p-7"
       style={{
         boxShadow: `inset 0 1px 0 rgba(255,255,255,0.06), 0 24px 60px -28px rgba(${pillar.rgb}, 0.35)`,

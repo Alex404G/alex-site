@@ -48,7 +48,7 @@ const SURFACES = [
 
 const STEPS = [
   { n: "01", title: "État des lieux", desc: "Audit de votre présence actuelle : Google, fiche, avis, concurrence." },
-  { n: "02", title: "Fondations", desc: "Fiche Google Business et SEO local en place — la base qui rapporte." },
+  { n: "02", title: "Fondations", desc: "Fiche Google Business et SEO local en place : la base qui rapporte." },
   { n: "03", title: "Acquisition", desc: "Avis, Google & Meta Ads pour amener un flux de clients qualifiés." },
   { n: "04", title: "Optimisation", desc: "Suivi régulier et ajustements pour faire progresser les résultats." },
 ];
@@ -158,37 +158,49 @@ export function VisibilitePage() {
 
       <SectionGlow theme="visi" />
 
-      {/* Approche */}
+      {/* Approche — timeline verticale (grammaire distincte des 4 cartes de Création) */}
       <section className="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
         <div className="max-w-2xl">
           <span className="kicker">L&apos;approche</span>
           <h2 className="t-h1 mt-4 text-text-1">Des fondations, puis de l&apos;acquisition.</h2>
         </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((s, i) => (
-            <motion.div
-              key={s.n}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, ease: easings.outQuart, delay: i * 0.08 }}
-              className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-7"
-            >
-              <span
-                className="font-mono text-2xl font-bold"
-                style={{
-                  background: "var(--grad-visi)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
+        <div className="relative mt-12 max-w-2xl">
+          {/* Rail émeraude */}
+          <div
+            aria-hidden
+            className="absolute bottom-2 left-[7px] top-2 w-0.5 rounded-full"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(95,227,161,0.5), rgba(43,201,138,0.15))",
+            }}
+          />
+          <div className="flex flex-col gap-10">
+            {STEPS.map((s, i) => (
+              <motion.div
+                key={s.n}
+                initial={{ opacity: 0, x: 18 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, ease: easings.outQuart, delay: i * 0.08 }}
+                className="relative pl-11"
               >
-                {s.n}
-              </span>
-              <h3 className="t-h3 mt-4 text-text-1">{s.title}</h3>
-              <p className="body-md mt-2 text-[15px]">{s.desc}</p>
-            </motion.div>
-          ))}
+                {/* Pastille sur le rail */}
+                <span aria-hidden className="absolute left-[8px] top-1.5 -translate-x-1/2">
+                  <span
+                    className="block h-3 w-3 rounded-full"
+                    style={{
+                      background: "var(--grad-visi)",
+                      boxShadow:
+                        "0 0 0 4px rgba(95,227,161,0.14), 0 0 18px rgba(95,227,161,0.55)",
+                    }}
+                  />
+                </span>
+                <span className="kicker text-[11px] text-visi-2">{s.n}</span>
+                <h3 className="t-h3 mt-1.5 text-text-1">{s.title}</h3>
+                <p className="body-md mt-1.5 max-w-md text-[15px]">{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

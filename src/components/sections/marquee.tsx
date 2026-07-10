@@ -29,8 +29,8 @@ export function MarqueeSection() {
         <motion.h3
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="t-h2 max-w-3xl mx-auto"
         >
           Et <span className="text-gradient-sig">des milliers d'autres</span> possibilités.
@@ -38,8 +38,8 @@ export function MarqueeSection() {
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="body-md mt-4 max-w-xl mx-auto"
         >
           Si vous pouvez le décrire en une phrase, on peut probablement le construire.

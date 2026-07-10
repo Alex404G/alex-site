@@ -56,7 +56,7 @@ export function CtaFinal() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="t-display"
         >
           <span className="text-gradient-sig">On en parle ?</span>
@@ -66,7 +66,7 @@ export function CtaFinal() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="body-lg mt-8 max-w-2xl mx-auto"
         >
           RDV physique possible dans le sud de la France. Sinon, par écrit ou
@@ -78,7 +78,7 @@ export function CtaFinal() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="mx-auto mt-14 grid max-w-2xl gap-4 sm:grid-cols-2"
         >
           {/* Téléphone */}

@@ -24,10 +24,20 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
       if (e.key === "Escape") close();
     };
     document.addEventListener("keydown", onKey);
+    // Verrouillage du scroll compatible iOS : overflow:hidden ne suffit pas
+    // sous Safari mobile (rubber-band), on fige le body et on restaure.
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
+      window.scrollTo(0, scrollY);
     };
   }, [isOpen, close]);
 
