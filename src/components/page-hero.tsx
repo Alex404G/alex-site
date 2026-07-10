@@ -58,7 +58,7 @@ export function PageHero({
   return (
     // Groupe centré sur les deux axes : la première vue est pleine hauteur,
     // le bloc kicker→CTA est posé au centre entre la barre de nav et le bas.
-    <section className="relative mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-6 pb-16 pt-20 text-center">
+    <section className="relative mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-6 pb-16 pt-16 text-center sm:pt-20">
       <motion.span
         className="kicker"
         initial={{ opacity: 0, y: 12 }}

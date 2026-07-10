@@ -2,9 +2,16 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, Copy, Check, ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
-import { MeshShader } from "@/components/backgrounds/mesh-shader";
+import dynamic from "next/dynamic";
+
+// Shader WebGL (lourd) chargé à la demande : sinon il alourdit l'arrivée sur
+// /automatisations et se voit comme un « chargement ».
+const MeshShader = dynamic(
+  () => import("@/components/backgrounds/mesh-shader").then((m) => m.MeshShader),
+  { ssr: false },
+);
 
 const EMAIL = "contact@alexandregil.com";
 const PHONE = "07 67 67 77 42";
@@ -12,6 +19,25 @@ const PHONE_HREF = "+33767677742";
 
 export function CtaFinal() {
   const [copied, setCopied] = useState(false);
+  const [showShader, setShowShader] = useState(false);
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  // Monte le shader seulement quand la section approche du viewport.
+  useEffect(() => {
+    const el = bgRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowShader(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "400px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   async function copyEmail() {
     try {
@@ -24,13 +50,32 @@ export function CtaFinal() {
 
   return (
     <section className="relative isolate w-full overflow-hidden py-32 md:py-40">
-      {/* Bottom shader */}
-      <div className="absolute inset-0 -z-10">
-        <MeshShader
-          className="relative h-full w-full"
-          speed={0.18}
-          colors={["#02030A", "#5B6BFF", "#8B5CF6", "#B845E8", "#3D5CFF"]}
+      {/* Fond bas de page */}
+      <div ref={bgRef} className="absolute inset-0 -z-10">
+        {/* Aurora statique — toujours présente, aucun flash/chargement à l'arrivée */}
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 85% 70% at 50% 58%, rgba(91,107,255,0.20), transparent 60%), radial-gradient(ellipse 60% 55% at 18% 42%, rgba(139,92,246,0.16), transparent 55%), radial-gradient(ellipse 70% 60% at 85% 78%, rgba(184,69,232,0.16), transparent 55%)",
+          }}
         />
+        {/* Shader WebGL animé — monté à la demande, en fondu par-dessus l'aurora */}
+        {showShader && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="absolute inset-0"
+          >
+            <MeshShader
+              className="relative h-full w-full"
+              speed={0.18}
+              colors={["#02030A", "#5B6BFF", "#8B5CF6", "#B845E8", "#3D5CFF"]}
+            />
+          </motion.div>
+        )}
         <div
           aria-hidden
           className="absolute inset-0"

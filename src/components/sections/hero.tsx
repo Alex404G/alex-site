@@ -92,7 +92,7 @@ export function Hero() {
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 pt-20 text-center sm:pt-24"
+        className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 pt-16 text-center sm:pt-24"
       >
         {/* Kicker — pour qui */}
         <motion.span
@@ -145,16 +145,16 @@ export function Hero() {
           et automatisations IA : je construis ce qui fait grandir votre activité.
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTAs — côte à côte dès le mobile (taille réduite pour tenir sur une ligne) */}
         <motion.div
-          className="mt-9 flex flex-col items-center gap-3 sm:flex-row"
+          className="mt-9 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-3"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easings.outQuart, delay: 1.1 }}
         >
           <MagneticButton
             onClick={open}
-            className="group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white sm:w-auto"
+            className="group inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 py-3 text-[13px] font-medium text-white sm:px-6 sm:text-sm"
             style={{
               background: "var(--grad-brand-btn)",
               boxShadow: "0 20px 60px -12px rgba(61,92,255,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
@@ -165,9 +165,10 @@ export function Hero() {
           </MagneticButton>
           <a
             href="#offres"
-            className="group inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-medium text-text-1 backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/[0.06] sm:w-auto"
+            className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/10 bg-white/[0.03] px-4 py-3 text-[13px] font-medium text-text-1 backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/[0.06] sm:px-6 sm:text-sm"
           >
-            Voir les offres
+            <span className="sm:hidden">Les offres</span>
+            <span className="hidden sm:inline">Voir les offres</span>
             <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
           </a>
         </motion.div>
