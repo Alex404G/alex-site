@@ -4,6 +4,7 @@ import { type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useContactModal } from "@/components/contact-modal";
+import { ScrollCue } from "@/components/scroll-cue";
 import { easings } from "@/lib/utils";
 
 type Theme = "warm" | "visi" | "sig";
@@ -107,6 +108,8 @@ export function PageHero({
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </button>
       </motion.div>
+
+      <ScrollCue />
     </section>
   );
 }

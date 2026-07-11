@@ -6,6 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useContactModal } from "@/components/contact-modal";
 import { MagneticButton } from "@/components/magnetic-button";
 import { ArrowDown } from "lucide-react";
+import { ScrollCue } from "@/components/scroll-cue";
 import { easings } from "@/lib/utils";
 
 // Les trois prestations, chacune avec sa pastille de thème — le hero vend
@@ -198,6 +199,7 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
+      <ScrollCue />
     </section>
   );
 }
